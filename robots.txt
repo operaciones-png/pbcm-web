@@ -1,0 +1,5 @@
+# https://pbcmcolombia.com
+User-agent: *
+Allow: /
+
+Sitemap: https://pbcmcolombia.com/sitemap.xml

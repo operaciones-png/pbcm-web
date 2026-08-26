@@ -4,12 +4,39 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>PBCM · Beneficio a las Comunidades y Medio Ambiente</title>
-<meta name="description" content="PBCM — Programa de Beneficio a las Comunidades y Medio Ambiente. Inversión social y ambiental en Colombia." />
+<meta name="description" content="PBCM, Programa de Beneficio a las Comunidades y Medio Ambiente: inversión social y ambiental concertada con las comunidades rurales de Colombia. Educación, vivienda, deporte, vías, agua y reforestación." />
+<link rel="canonical" href="https://pbcmcolombia.com/" />
+<meta name="theme-color" content="#F6F8F3" />
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml" />
+
+<!-- Como se ve el enlace cuando alguien lo comparte por WhatsApp, Facebook o
+     LinkedIn. Sin esto sale una tarjeta gris, sin imagen ni descripcion.
+     Los buscadores de redes no ejecutan JavaScript, por eso estos textos van
+     fijos en espanol y no cambian con el selector de idioma. -->
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="PBCM" />
+<meta property="og:url" content="https://pbcmcolombia.com/" />
+<meta property="og:title" content="PBCM · Sembramos bienestar en las comunidades de Colombia" />
+<meta property="og:description" content="PBCM, Programa de Beneficio a las Comunidades y Medio Ambiente: inversión social y ambiental concertada con las comunidades rurales de Colombia. Educación, vivienda, deporte, vías, agua y reforestación." />
+<meta property="og:image" content="https://pbcmcolombia.com/img/og-pbcm.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="PBCM · Community Benefit Environment" />
+<meta property="og:locale" content="es_CO" />
+<meta property="og:locale:alternate" content="en_US" />
+<meta property="og:locale:alternate" content="fr_FR" />
+<meta name="twitter:card" content="summary_large_image" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<!-- Solo los pesos que el CSS usa de verdad (600/700/800 y 400 para el cuerpo).
+     Cada peso es un archivo aparte: pedir los que no se usan es peso regalado. -->
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+<!-- La imagen del hero es lo primero grande que se ve: se pide cuanto antes -->
+<link rel="preload" as="image" href="img/hero-bg-1280.webp" fetchpriority="high"
+      imagesrcset="img/hero-bg-640.webp 640w, img/hero-bg-1024.webp 1024w, img/hero-bg-1280.webp 1280w"
+      imagesizes="100vw" />
 
 <script>document.documentElement.classList.add('js');</script>
 
@@ -647,6 +674,7 @@
       nav_programa:"El programa", nav_lineas:"Líneas de acción", nav_ambiente:"Medio ambiente", nav_comunidad:"Comunidad", nav_contacto:"Contacto",
       cta_contact:"Contáctanos",
       skip:"Saltar al contenido",
+      meta_title:"PBCM · Beneficio a las Comunidades y Medio Ambiente", meta_desc:"PBCM, Programa de Beneficio a las Comunidades y Medio Ambiente: inversión social y ambiental concertada con las comunidades rurales de Colombia. Educación, vivienda, deporte, vías, agua y reforestación.",
       a11y_menu:"Abrir el menú", a11y_prev:"Foto anterior", a11y_next:"Foto siguiente",
       a11y_gallery:"Galería de fotos", a11y_dots:"Ir a una foto", a11y_dot:"Ir a la foto %n",
       hero_eyebrow:"Beneficio a las Comunidades y Medio Ambiente",
@@ -705,6 +733,7 @@
       nav_programa:"The program", nav_lineas:"Focus areas", nav_ambiente:"Environment", nav_comunidad:"Community", nav_contacto:"Contact",
       cta_contact:"Contact us",
       skip:"Skip to content",
+      meta_title:"PBCM · Community Benefit and Environment Programme", meta_desc:"PBCM, the Community Benefit and Environment Programme: social and environmental investment agreed with rural communities in Colombia. Education, housing, sport, roads, water and reforestation.",
       a11y_menu:"Open menu", a11y_prev:"Previous photo", a11y_next:"Next photo",
       a11y_gallery:"Photo gallery", a11y_dots:"Go to a photo", a11y_dot:"Go to photo %n",
       hero_eyebrow:"Benefit to Communities and the Environment",
@@ -763,6 +792,7 @@
       nav_programa:"Le programme", nav_lineas:"Domaines d'action", nav_ambiente:"Environnement", nav_comunidad:"Communauté", nav_contacto:"Contact",
       cta_contact:"Contactez-nous",
       skip:"Aller au contenu",
+      meta_title:"PBCM · Programme de Bénéfice aux Communautés et à l’Environnement", meta_desc:"PBCM, Programme de Bénéfice aux Communautés et à l’Environnement : investissement social et environnemental concerté avec les communautés rurales de Colombie. Éducation, logement, sport, routes, eau et reforestation.",
       a11y_menu:"Ouvrir le menu", a11y_prev:"Photo précédente", a11y_next:"Photo suivante",
       a11y_gallery:"Galerie de photos", a11y_dots:"Aller à une photo", a11y_dot:"Aller à la photo %n",
       hero_eyebrow:"Bénéfice aux Communautés et à l'Environnement",
@@ -834,6 +864,9 @@
     });
     const _infg = document.querySelector('.infg-'+l) || document.querySelector('.infg-es');
     document.querySelectorAll('.infg').forEach(im => im.style.display = (im === _infg ? 'block' : 'none'));
+    if(I18N[l].meta_title) document.title = I18N[l].meta_title;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if(metaDesc && I18N[l].meta_desc) metaDesc.setAttribute('content', I18N[l].meta_desc);
     langCur.textContent = l.toUpperCase();
     const campoIdioma = document.getElementById('formLang');
     if(campoIdioma) campoIdioma.value = l;
@@ -942,6 +975,34 @@
   // Al final, cuando ya existe todo el markup (incluidos los puntos del
   // carrusel), para que la traduccion alcance tambien a las etiquetas ARIA.
   applyLang(initLang);
+</script>
+
+<!-- Datos estructurados: identifica a PBCM como organizacion sin animo de
+     lucro ante los buscadores. Los datos de contacto son los mismos que
+     aparecen en la seccion Contacto de esta pagina: si cambian alli,
+     cambiarlos aqui tambien. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NGO",
+  "name": "PBCM · Programa de Beneficio a las Comunidades y Medio Ambiente",
+  "alternateName": "Community Benefit Environment",
+  "url": "https://pbcmcolombia.com/",
+  "logo": "https://pbcmcolombia.com/img/og-pbcm.jpg",
+  "image": "https://pbcmcolombia.com/img/og-pbcm.jpg",
+  "description": "Programa de inversión social y ambiental concertada con las comunidades rurales de Colombia: educación, vivienda, deporte, infraestructura vial, agua y servicios básicos, y protección del medio ambiente.",
+  "email": "administration@pbcmcolombia.com",
+  "telephone": "+1-859-462-7602",
+  "areaServed": { "@type": "Country", "name": "Colombia" },
+  "knowsLanguage": ["es", "en", "fr"],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer support",
+    "email": "administration@pbcmcolombia.com",
+    "telephone": "+1-859-462-7602",
+    "availableLanguage": ["Spanish", "English", "French"]
+  }
+}
 </script>
 </body>
 </html>
