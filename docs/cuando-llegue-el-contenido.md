@@ -4,8 +4,9 @@ Este documento existe para que el trabajo no dependa de que alguien recuerde
 la conversación en la que se decidió. Cada bloque dice **qué llega**, **dónde
 va en el código** y **cómo se comprueba que no se rompió nada**.
 
-El contenido que hay que pedirle a PBCM, y en qué formato, está en la
-[solicitud de contenido](#la-solicitud). Lo de aquí es qué hacer una vez llegue.
+El contenido que hay que pedirle a PBCM, y en qué formato, está en
+[`solicitud-de-contenido.md`](solicitud-de-contenido.md). Lo de aquí es qué hacer
+una vez llegue.
 
 > **Antes de tocar nada:** levanta el servidor y deja pasando la prueba.
 > ```bash
@@ -534,13 +535,4 @@ Y en cuanto haya cualquiera de las tres primeras: **dar de alta `pbcmcolombia.co
 ## La solicitud
 
 Lo que hay que pedirle a PBCM, con el formato exacto de cada cosa y un mensaje
-listo para enviar, está en el documento de solicitud de contenido que preparó
-el equipo. Si se perdió el enlace, lo esencial es esto:
-
-- **3 a 5 cifras** propias, cada una con periodo y quién la confirma
-- **6 a 10 fotos** propias con permiso, en archivo original (no por WhatsApp)
-- **1 o 2 historias** con nombre, citas, foto y permiso
-- **Documentos** que ya existen: acta de constitución, estados financieros del
-  último año, informe de gestión, y si la figura legal en EE.UU. permite
-  deducir impuestos
-- **La decisión** de a quién se le pide primero
+listo para enviar, está en [`solicitud-de-contenido.md`](solicitud-de-contenido.md).
