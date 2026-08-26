@@ -191,7 +191,7 @@
   .nav-links a[aria-current]{color:var(--green)}
   .nav-links a[aria-current]::after{width:100%;background:var(--green)}
   .nav-cta{display:flex;align-items:center;gap:.8rem}
-  .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px}
+  .burger{display:none;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:none;border:0;cursor:pointer;padding:0;min-width:44px;min-height:44px}
   .burger span{width:26px;height:2.6px;background:var(--green-deep);border-radius:2px;transition:.3s}
 
   /* Language switcher */
@@ -352,7 +352,11 @@
   .car-btn:hover{background:var(--green);color:#fff;border-color:var(--green)}
   .car-btn.prev{left:-6px}.car-btn.next{right:-6px}
   .car-dots{display:flex;gap:.5rem;justify-content:center;margin-top:1.4rem;flex-wrap:wrap}
-  .car-dots button{width:9px;height:9px;padding:0;border-radius:50%;border:none;background:var(--sage);opacity:.5;cursor:pointer;transition:.25s}
+  .car-dots button{position:relative;width:9px;height:9px;padding:0;border-radius:50%;border:none;background:var(--sage);opacity:.5;cursor:pointer;transition:.25s}
+  /* El punto se ve de 9 px, pero se toca en 44: la zona sensible se
+     estira por fuera sin cambiar el dibujo ni empujar el maquetado. */
+  .car-dots button::after{content:"";position:absolute;left:50%;top:50%;
+        width:max(24px,100%);height:44px;transform:translate(-50%,-50%)}
   .car-dots button.active{opacity:1;background:var(--green);width:24px;border-radius:5px}
 
   .cta{position:relative;border-radius:30px;overflow:hidden;text-align:center;padding:clamp(3rem,6vw,4.6rem) 2rem;background:linear-gradient(135deg,#E7F1DF,#DCEBEE)}
@@ -385,7 +389,7 @@
   @keyframes check-in{from{transform:scale(.4);opacity:0}to{transform:none;opacity:1}}
 
   /* Copiar el correo: un clic en vez de seleccionar a mano en un movil. */
-  .cinfo .copiar{margin-top:.35rem;display:inline-flex;align-items:center;gap:.4rem;
+  .cinfo .copiar{margin-top:.35rem;display:inline-flex;align-items:center;justify-content:center;gap:.4rem;min-height:44px;
         background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);color:#EAF5EC;
         border-radius:100px;padding:.3rem .7rem;font-family:'Nunito',sans-serif;font-weight:700;
         font-size:.76rem;cursor:pointer;transition:background .2s var(--spring)}
@@ -425,6 +429,34 @@
   .infografia img{width:100%;height:auto;display:block}
   .infg{display:none}
   .infg-es{display:block}
+  /* Cuando la infografía no cabe, un degradado en el borde derecho avisa de
+     que continúa. Un texto solo no basta: la gente no lo lee. */
+  .infografia-caja{position:relative}
+  .infografia-caja::after{content:"";position:absolute;top:0;right:0;bottom:0;width:56px;pointer-events:none;
+        background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,255,255,.94));
+        opacity:0;transition:opacity .3s var(--spring);border-radius:0 20px 20px 0}
+  .infografia-caja.desborda::after{opacity:1}
+  .infografia-caja.al-final::after{opacity:0}
+
+  /* Visor a pantalla completa */
+  .visor{position:fixed;inset:0;z-index:200;background:rgba(10,20,16,.94);
+         -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+         display:grid;place-items:center}
+  .visor[hidden]{display:none}
+  .visor-lienzo{width:100%;height:100%;overflow:auto;display:grid;place-items:center;
+                padding:clamp(.5rem,3vw,2rem);-webkit-overflow-scrolling:touch}
+  .visor-lienzo img{max-width:none;width:auto;height:auto;border-radius:10px;
+                    box-shadow:0 30px 80px -40px rgba(0,0,0,.9)}
+  .visor-cerrar{position:absolute;z-index:2;
+        top:max(12px,env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right));
+        width:44px;height:44px;border-radius:50%;cursor:pointer;color:#fff;
+        border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.16);
+        display:grid;place-items:center;transition:background .2s var(--spring)}
+  .visor-cerrar:hover{background:rgba(255,255,255,.3)}
+  .visor-cerrar:active{transform:scale(.92);transition-duration:var(--toque)}
+  .js .visor:not([hidden]){animation:visor-in .3s var(--spring)}
+  @keyframes visor-in{from{opacity:0}to{opacity:1}}
+
   .infog-pie{display:flex;flex-wrap:wrap;gap:.4rem 1rem;justify-content:center;align-items:center;margin-top:.9rem;font-size:.84rem;color:var(--ink-soft)}
   .infog-hint{display:none;font-weight:700}
   .infog-zoom{font-weight:700}
@@ -470,6 +502,23 @@
     .car-slide img{height:300px}
     .car-btn{width:40px;height:40px;font-size:1.5rem}
   }
+  @media(pointer:coarse){
+    /* En pantalla tactil las flechas y los enlaces del menu tambien suben al
+       minimo; con raton no hace falta y ocuparian de mas. */
+    .car-btn{width:44px;height:44px}
+    .nav-links.open a{padding:.55rem 0}
+    .car-dots{gap:1.15rem}
+  }
+
+  @media(max-width:400px){
+    .brand .wm small{display:none}
+    .logo-badge{width:44px;height:44px;flex-basis:44px}
+    .lang-btn{padding:.5rem .55rem;gap:.25rem}
+    .lang-btn > svg:first-of-type{display:none}
+    .nav{gap:.5rem}
+    .wrap{padding:0 16px}
+  }
+
   @media(max-width:560px){
     .cards,.timeline,.hero-photos{grid-template-columns:1fr}
     .pillar{flex-wrap:wrap}
@@ -525,6 +574,10 @@
   <symbol id="icon-action-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
     <rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/>
     <path d="M15 6.5A2.5 2.5 0 0 0 12.5 4h-6A2.5 2.5 0 0 0 4 6.5v6A2.5 2.5 0 0 0 6.5 15"/>
+  </symbol>
+
+  <symbol id="icon-action-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6.5 6.5l11 11M17.5 6.5l-11 11"/>
   </symbol>
 
   <symbol id="icon-comm-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
@@ -732,7 +785,8 @@
 <!-- ============ ENFOQUE / INFOGRAFÍA ============ -->
 <section class="band" id="enfoque">
   <div class="wrap">
-    <figure class="infografia reveal">
+    <div class="infografia-caja reveal">
+      <figure class="infografia">
       <a class="infg infg-es" href="img/infografia.webp" target="_blank" rel="noopener">
         <img src="img/infografia.webp" alt="Infografía «Resultado de mesas con las comunidades»: premisas para aplicar los programas, cinco sectores priorizados —medio ambiente, infraestructura vial, agropecuario, fortalecimiento comunitario y salud— e inversiones de mayor y menor impacto según las comunidades." width="1280" height="856" loading="lazy" decoding="async" />
       </a>
@@ -742,7 +796,8 @@
       <a class="infg infg-fr" href="img/infografia-fr.webp" target="_blank" rel="noopener">
         <img src="img/infografia-fr.webp" alt="Infographie « Résultats des tables rondes communautaires » : principes directeurs, cinq secteurs prioritaires — environnement, infrastructure routière, agriculture, renforcement communautaire et santé — et les investissements à fort et faible impact identifiés par les communautés." width="1280" height="860" loading="lazy" decoding="async" />
       </a>
-    </figure>
+      </figure>
+    </div>
     <p class="infog-pie">
       <span class="infog-hint" data-i18n="infog_hint">Swipe to see the full infographic</span>
       <span class="infog-zoom" data-i18n="infog_zoom">Tap the image to view it full size</span>
@@ -814,6 +869,16 @@
 
 </main>
 
+<!-- ============ VISOR DE LA INFOGRAFÍA ============
+     A tamaño completo, sobre la página. Sin JavaScript el enlace abre la
+     imagen en una pestaña, que también funciona. -->
+<div class="visor" id="visor" hidden>
+  <button class="visor-cerrar" id="visorCerrar" type="button" data-i18n-aria="a11y_cerrar" aria-label="Cerrar">
+    <svg class="icn" width="22" height="22" aria-hidden="true"><use href="#icon-action-close"/></svg>
+  </button>
+  <div class="visor-lienzo" id="visorLienzo"><img id="visorImg" alt="" /></div>
+</div>
+
 <!-- ============ FOOTER ============ -->
 <footer>
   <div class="wrap">
@@ -841,6 +906,7 @@
       nav_programa:"El programa", nav_lineas:"Líneas de acción", nav_ambiente:"Medio ambiente", nav_comunidad:"Comunidad", nav_contacto:"Contacto",
       cta_contact:"Contáctanos",
       skip:"Saltar al contenido",
+      a11y_cerrar:"Cerrar la imagen",
       infog_hint:"Desliza para ver la infografía completa", infog_zoom:"Toca la imagen para verla a tamaño completo",
       err_requerido:"Este campo hace falta.", err_correo:"Revisa el correo: parece que le falta algo.",
       copiar:"Copiar", copiado:"¡Copiado!", a11y_copiar:"Copiar el correo al portapapeles",
@@ -892,6 +958,7 @@
       nav_programa:"The program", nav_lineas:"Focus areas", nav_ambiente:"Environment", nav_comunidad:"Community", nav_contacto:"Contact",
       cta_contact:"Contact us",
       skip:"Skip to content",
+      a11y_cerrar:"Close the image",
       infog_hint:"Swipe to see the full infographic", infog_zoom:"Tap the image to view it full size",
       err_requerido:"This field is required.", err_correo:"Please check the email address: something looks missing.",
       copiar:"Copy", copiado:"Copied!", a11y_copiar:"Copy the email address",
@@ -943,6 +1010,7 @@
       nav_programa:"Le programme", nav_lineas:"Domaines d'action", nav_ambiente:"Environnement", nav_comunidad:"Communauté", nav_contacto:"Contact",
       cta_contact:"Contactez-nous",
       skip:"Aller au contenu",
+      a11y_cerrar:"Fermer l’image",
       infog_hint:"Faites glisser pour voir l’infographie complète", infog_zoom:"Touchez l’image pour la voir en taille réelle",
       err_requerido:"Ce champ est obligatoire.", err_correo:"Vérifiez l’adresse e-mail : il semble manquer quelque chose.",
       copiar:"Copier", copiado:"Copié !", a11y_copiar:"Copier l’adresse e-mail",
@@ -1093,6 +1161,77 @@
       .catch(() => { nota('form_error', 'error'); medir('Contacto fallido'); })
       .finally(() => { formBtn.disabled = false; });
   });
+
+  // ---- Visor de la infografía ----
+  // El enlace de la imagen abre un visor sobre la página en vez de sacar al
+  // visitante a otra pestaña. Si el JavaScript no corre, el enlace sigue
+  // funcionando como enlace normal.
+  (function(){
+    const visor = document.getElementById('visor');
+    const lienzo = document.getElementById('visorLienzo');
+    const img = document.getElementById('visorImg');
+    const cerrarBtn = document.getElementById('visorCerrar');
+    if(!visor) return;
+    let devolverFocoA = null;
+
+    function abrir(origen){
+      devolverFocoA = document.activeElement;
+      img.src = origen.src;
+      img.alt = origen.alt;
+      visor.hidden = false;
+      document.body.style.overflow = 'hidden';
+      lienzo.scrollTop = 0; lienzo.scrollLeft = 0;
+      cerrarBtn.focus();
+      medir('Infografía ampliada', {idioma: curLang});
+    }
+    function cerrar(){
+      visor.hidden = true;
+      document.body.style.overflow = '';
+      img.removeAttribute('src');
+      // nunca dejar el foco en el boton que se acaba de ocultar
+      const destino = (devolverFocoA && devolverFocoA !== document.body)
+        ? devolverFocoA
+        : document.querySelector('.infg[style*="block"]');
+      if(destino && destino.focus) destino.focus();
+    }
+
+    document.querySelectorAll('.infg').forEach(enlace => {
+      enlace.addEventListener('click', e => {
+        const im = enlace.querySelector('img');
+        if(!im) return;
+        e.preventDefault();
+        abrir(im);
+      });
+    });
+    cerrarBtn.addEventListener('click', cerrar);
+    // tocar el fondo cierra; arrastrar la imagen para moverla, no
+    lienzo.addEventListener('click', e => { if(e.target === lienzo) cerrar(); });
+    document.addEventListener('keydown', e => { if(e.key === 'Escape' && !visor.hidden) cerrar(); });
+  })();
+
+  // ---- La infografía avisa de que continúa a la derecha ----
+  (function(){
+    const fig = document.querySelector('.infografia');
+    const caja = document.querySelector('.infografia-caja');
+    if(!fig || !caja) return;
+    const revisar = () => {
+      const desborda = fig.scrollWidth - fig.clientWidth > 4;
+      caja.classList.toggle('desborda', desborda);
+      caja.classList.toggle('al-final', desborda && fig.scrollLeft + fig.clientWidth >= fig.scrollWidth - 6);
+    };
+    fig.addEventListener('scroll', revisar, {passive: true});
+    // ResizeObserver y no el evento resize: avisa cuando cambia el tamano DEL
+    // ELEMENTO y despues de que el navegador haya recalculado, que es cuando
+    // scrollWidth ya es fiable. Con 'resize' la clase se quedaba pegada al
+    // ensanchar la ventana y el degradado aparecia sin nada que desplazar.
+    if(window.ResizeObserver) new ResizeObserver(revisar).observe(fig);
+    else addEventListener('resize', revisar);
+    // al cambiar de idioma cambia la imagen, y con ella su ancho
+    new MutationObserver(revisar).observe(fig, {attributes: true, subtree: true, attributeFilter: ['style']});
+    // y una imagen diferida no tiene ancho hasta que carga
+    fig.querySelectorAll('img').forEach(im => im.addEventListener('load', revisar));
+    revisar();
+  })();
 
   // ---- Wayfinding: la navegacion marca la seccion en la que va el visitante ----
   (function(){
