@@ -11,6 +11,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
+<script>document.documentElement.classList.add('js');</script>
+
 <style>
   :root{
     --paper:#F6F8F3;
@@ -18,7 +20,7 @@
     --paper-3:#EAF1E5;
     --ink:#1C3B54;
     --ink-soft:#5E6F73;
-    --green:#5FA33F;
+    --green:#3C7325;
     --green-deep:#123A5E;
     --sage:#9BBD8C;
     --sage-soft:#E4F0DC;
@@ -42,6 +44,17 @@
   a{color:inherit;text-decoration:none}
   img,svg{max-width:100%;display:block}
   ::selection{background:var(--sage);color:#1f3a2b}
+
+  /* Foco visible: quien navega con teclado tiene que ver donde esta */
+  :focus-visible{outline:3px solid #0F3350;outline-offset:3px;border-radius:4px}
+  .btn:focus-visible,.lang-btn:focus-visible,.car-btn:focus-visible{outline-offset:4px}
+  .nav-links a:focus-visible,.foot-col a:focus-visible{outline-offset:6px}
+
+  /* Enlace para saltar la navegacion (solo visible al enfocarlo) */
+  .skip{position:absolute;left:-9999px;top:0;z-index:100;background:#fff;color:var(--green-deep);
+        font-family:'Baloo 2',sans-serif;font-weight:600;padding:.85rem 1.3rem;
+        border-radius:0 0 14px 0;box-shadow:var(--shadow)}
+  .skip:focus{left:0}
   .wrap{width:100%;max-width:var(--max);margin:0 auto;padding:0 24px}
   .eyebrow{display:inline-flex;align-items:center;gap:.55rem;font-size:.82rem;font-weight:800;letter-spacing:.02em;color:var(--green);background:var(--sage-soft);padding:.4rem .9rem;border-radius:100px}
   .eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--green);flex:0 0 7px}
@@ -49,7 +62,7 @@
 
   .btn{display:inline-flex;align-items:center;gap:.55rem;padding:.9rem 1.6rem;border-radius:100px;font-family:'Baloo 2',sans-serif;font-weight:600;font-size:1rem;cursor:pointer;border:2px solid transparent;transition:.25s ease;white-space:nowrap}
   .btn-primary{background:var(--green);color:#fff}
-  .btn-primary:hover{background:#4C8A31;transform:translateY(-2px);box-shadow:0 16px 26px -14px rgba(95,163,63,.5)}
+  .btn-primary:hover{background:#2F5C1D;transform:translateY(-2px);box-shadow:0 16px 26px -14px rgba(60,115,37,.5)}
   .btn-ghost{background:#fff;color:var(--green-deep);border-color:var(--sage)}
   .btn-ghost:hover{background:var(--sage-soft);transform:translateY(-2px)}
   .btn-peach{background:var(--peach);color:#fff}
@@ -80,7 +93,7 @@
   .lang-menu.open{display:block}
   .lang-menu button{display:flex;align-items:center;gap:.55rem;width:100%;text-align:left;background:none;border:0;padding:.6rem .7rem;border-radius:10px;font-family:'Nunito',sans-serif;font-weight:700;font-size:.92rem;color:var(--ink);cursor:pointer}
   .lang-menu button:hover{background:var(--sage-soft);color:var(--green-deep)}
-  .lang-menu button[aria-selected="true"]{background:var(--sage-soft);color:var(--green-deep)}
+  .lang-menu button[aria-checked="true"]{background:var(--sage-soft);color:var(--green-deep)}
   .lang-menu .fl{font-size:1.05rem;line-height:1}
 
   .hero{position:relative;overflow:hidden;background:#f2f7ef;padding:clamp(2.4rem,6vw,4.5rem) 0 clamp(3rem,6vw,5rem)}
@@ -108,7 +121,7 @@
 
   .marquee{border-top:1.5px solid var(--line);border-bottom:1.5px solid var(--line);padding:1.1rem 0;overflow:hidden;background:var(--paper-3)}
   .marquee-track{display:flex;gap:2.4rem;width:max-content;animation:scroll 30s linear infinite}
-  .marquee span{font-family:'Baloo 2',sans-serif;font-weight:700;font-size:1.4rem;color:var(--sage);letter-spacing:.01em;display:flex;align-items:center;gap:2.4rem}
+  .marquee span{font-family:'Baloo 2',sans-serif;font-weight:700;font-size:1.4rem;color:#6E9160;letter-spacing:.01em;display:flex;align-items:center;gap:2.4rem}
   .marquee span::after{content:"✿";color:var(--peach);font-size:.9rem}
   @keyframes scroll{to{transform:translateX(-50%)}}
 
@@ -139,7 +152,7 @@
   .card .top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.1rem}
   .badge-ic{width:84px;height:84px;flex:0 0 84px;object-fit:contain}
   .pill-ic{width:60px;height:60px;flex:0 0 60px;object-fit:contain}
-  .card .num{font-family:'Baloo 2',sans-serif;font-weight:800;font-size:1.5rem;color:#D6DDD0}
+  .card .num{font-family:'Baloo 2',sans-serif;font-weight:800;font-size:1.5rem;color:#8A9982}
   .card h3{font-size:1.3rem;margin-bottom:.45rem;color:var(--green-deep)}
   .card p{font-size:.96rem;color:var(--ink-soft)}
 
@@ -206,7 +219,7 @@
   .field{margin-bottom:1.1rem}
   .field label{display:block;font-weight:700;font-size:.9rem;margin-bottom:.4rem;color:var(--green-deep)}
   .field input,.field textarea{width:100%;padding:.9rem 1.1rem;border:1.5px solid var(--line);border-radius:14px;font-family:inherit;font-size:1rem;background:var(--paper);color:var(--ink);transition:.2s}
-  .field input::placeholder,.field textarea::placeholder{color:#9aa89c}
+  .field input::placeholder,.field textarea::placeholder{color:#66756A}
   .field input:focus,.field textarea:focus{outline:none;border-color:var(--sage);box-shadow:0 0 0 4px rgba(134,194,154,.25)}
   .field textarea{resize:vertical;min-height:120px}
 
@@ -255,8 +268,10 @@
   @media(max-width:900px){.premisas{grid-template-columns:1fr}.sec-cards{grid-template-columns:repeat(3,1fr)}.info-inv{grid-template-columns:1fr}}
   @media(max-width:560px){.sec-cards{grid-template-columns:1fr 1fr}}
 
-  .reveal{opacity:0;transform:translateY(-38px);transition:opacity .55s ease,transform .75s cubic-bezier(.22,.9,.28,1.08)}
-  .reveal.in{opacity:1;transform:none}
+  /* Las animaciones de entrada solo se aplican si el JS esta vivo: si falla,
+     el contenido se ve igual en vez de quedarse invisible para siempre. */
+  .js .reveal{opacity:0;transform:translateY(-38px);transition:opacity .55s ease,transform .75s cubic-bezier(.22,.9,.28,1.08)}
+  .js .reveal.in{opacity:1;transform:none}
 
   @media(max-width:960px){
     .hero-grid,.prog,.env-grid{grid-template-columns:1fr}
@@ -279,10 +294,12 @@
     .chip-top{display:none}
     .brand .wm{font-size:1.25rem}
   }
-  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}.js .reveal{opacity:1;transform:none}}
 </style>
 </head>
 <body>
+
+<a class="skip" href="#contenido" data-i18n="skip">Saltar al contenido</a>
 
 <!-- ============ HEADER ============ -->
 <header id="top">
@@ -300,22 +317,24 @@
     </ul>
     <div class="nav-cta">
       <div class="lang" id="lang">
-        <button class="lang-btn" id="langBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="Idioma / Language">
+        <button class="lang-btn" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu" aria-label="Idioma / Language">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M3 12h18M12 3c2.6 2.7 2.6 15.3 0 18M12 3c-2.6 2.7-2.6 15.3 0 18" stroke="currentColor" stroke-width="1.5"/></svg>
           <span id="langCur">ES</span>
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
-        <div class="lang-menu" id="langMenu" role="listbox">
-          <button role="option" data-lang="es"><span class="fl">🇨🇴</span> Español</button>
-          <button role="option" data-lang="en"><span class="fl">🇬🇧</span> English</button>
-          <button role="option" data-lang="fr"><span class="fl">🇫🇷</span> Français</button>
+        <div class="lang-menu" id="langMenu" role="menu" aria-label="Idioma / Language">
+          <button type="button" role="menuitemradio" aria-checked="false" data-lang="es"><span class="fl" aria-hidden="true">🇨🇴</span> Español</button>
+          <button type="button" role="menuitemradio" aria-checked="false" data-lang="en"><span class="fl" aria-hidden="true">🇬🇧</span> English</button>
+          <button type="button" role="menuitemradio" aria-checked="false" data-lang="fr"><span class="fl" aria-hidden="true">🇫🇷</span> Français</button>
         </div>
       </div>
       <a href="#contacto" class="btn btn-primary" data-i18n="cta_contact">Contáctanos</a>
-      <button class="burger" id="burger" aria-label="Menú" aria-expanded="false"><span></span><span></span><span></span></button>
+      <button class="burger" id="burger" type="button" aria-controls="navLinks" aria-expanded="false" data-i18n-aria="a11y_menu" aria-label="Menú"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
+
+<main id="contenido">
 
 <!-- ============ HERO ============ -->
 <section class="hero">
@@ -537,8 +556,8 @@
       <p data-i18n="gal_p">Momentos del trabajo cercano con las comunidades de las zonas de influencia.</p>
     </div>
     <div class="carousel reveal">
-      <button class="car-btn prev" type="button" aria-label="Anterior">‹</button>
-      <div class="car-track">
+      <button class="car-btn prev" type="button" data-i18n-aria="a11y_prev" aria-label="Anterior" aria-controls="carTrack">‹</button>
+      <div class="car-track" id="carTrack" tabindex="0" role="group" data-i18n-aria="a11y_gallery" aria-label="Galería de fotos">
         <figure class="car-slide"><img src="img/foto-reunion.webp" alt="Reunión comunitaria de PBCM bajo enramada" width="760" height="570" loading="lazy" decoding="async"><figcaption data-i18n="cap1">Encuentro con la comunidad</figcaption></figure>
         <figure class="car-slide"><img src="img/comunidad-2.webp" alt="Reunión rural con la comunidad" width="578" height="441" loading="lazy" decoding="async"><figcaption data-i18n="cap2">Diálogo social</figcaption></figure>
         <figure class="car-slide"><img src="img/socializacion.webp" alt="Socialización en auditorio" width="746" height="559" loading="lazy" decoding="async"><figcaption data-i18n="cap3">Socialización</figcaption></figure>
@@ -546,8 +565,8 @@
         <figure class="car-slide"><img src="img/comunidad-3.webp" alt="Reunión de la comunidad en zona rural" width="608" height="461" loading="lazy" decoding="async"><figcaption data-i18n="cap5">Compromiso</figcaption></figure>
         <figure class="car-slide"><img src="img/foto-via.webp" alt="Vía rural inundada en zona de influencia de PBCM" width="760" height="570" loading="lazy" decoding="async"><figcaption data-i18n="cap6">En el territorio</figcaption></figure>
       </div>
-      <button class="car-btn next" type="button" aria-label="Siguiente">›</button>
-      <div class="car-dots" aria-hidden="true"></div>
+      <button class="car-btn next" type="button" data-i18n-aria="a11y_next" aria-label="Siguiente" aria-controls="carTrack">›</button>
+      <div class="car-dots" role="group" data-i18n-aria="a11y_dots" aria-label="Ir a una foto"></div>
     </div>
     <p class="note" data-i18n="gal_note">Imágenes de referencia de jornadas de socialización · reemplázalas por las fotos propias de PBCM.</p>
   </div>
@@ -590,6 +609,8 @@
   </div>
 </section>
 
+</main>
+
 <!-- ============ FOOTER ============ -->
 <footer>
   <div class="wrap">
@@ -616,6 +637,9 @@
       brand_sub:"Comunidades y Medio Ambiente",
       nav_programa:"El programa", nav_lineas:"Líneas de acción", nav_ambiente:"Medio ambiente", nav_comunidad:"Comunidad", nav_contacto:"Contacto",
       cta_contact:"Contáctanos",
+      skip:"Saltar al contenido",
+      a11y_menu:"Abrir el menú", a11y_prev:"Foto anterior", a11y_next:"Foto siguiente",
+      a11y_gallery:"Galería de fotos", a11y_dots:"Ir a una foto", a11y_dot:"Ir a la foto %n",
       hero_eyebrow:"Beneficio a las Comunidades y Medio Ambiente",
       hero_h1:"Sembramos <em>bienestar</em> en las comunidades de Colombia",
       hero_lead:"Somos PBCM, un programa de inversión social y ambiental que acompaña a las comunidades y cuida la naturaleza, con cariño y compromiso, en las zonas que más lo necesitan.",
@@ -671,6 +695,9 @@
       brand_sub:"Communities & Environment",
       nav_programa:"The program", nav_lineas:"Focus areas", nav_ambiente:"Environment", nav_comunidad:"Community", nav_contacto:"Contact",
       cta_contact:"Contact us",
+      skip:"Skip to content",
+      a11y_menu:"Open menu", a11y_prev:"Previous photo", a11y_next:"Next photo",
+      a11y_gallery:"Photo gallery", a11y_dots:"Go to a photo", a11y_dot:"Go to photo %n",
       hero_eyebrow:"Benefit to Communities and the Environment",
       hero_h1:"We sow <em>wellbeing</em> in the communities of Colombia",
       hero_lead:"We are PBCM, a social and environmental investment program that supports communities and cares for nature, with warmth and commitment, in the areas that need it most.",
@@ -726,6 +753,9 @@
       brand_sub:"Communautés et Environnement",
       nav_programa:"Le programme", nav_lineas:"Domaines d'action", nav_ambiente:"Environnement", nav_comunidad:"Communauté", nav_contacto:"Contact",
       cta_contact:"Contactez-nous",
+      skip:"Aller au contenu",
+      a11y_menu:"Ouvrir le menu", a11y_prev:"Photo précédente", a11y_next:"Photo suivante",
+      a11y_gallery:"Galerie de photos", a11y_dots:"Aller à une photo", a11y_dot:"Aller à la photo %n",
       hero_eyebrow:"Bénéfice aux Communautés et à l'Environnement",
       hero_h1:"Nous semons le <em>bien-être</em> dans les communautés de Colombie",
       hero_lead:"Nous sommes PBCM, un programme d'investissement social et environnemental qui accompagne les communautés et prend soin de la nature, avec cœur et engagement, là où on en a le plus besoin.",
@@ -779,26 +809,58 @@
     }
   };
 
+  const LANGS = ['es','en','fr'];
+  const CLAVE_IDIOMA = 'pbcm_idioma';
   let curLang = 'es';
   const langBtn = document.getElementById('langBtn'), langMenu = document.getElementById('langMenu'), langCur = document.getElementById('langCur');
-  function applyLang(l){
+  function applyLang(l, elegidoPorElVisitante){
     if(!I18N[l]) l = 'es';
     curLang = l;
     document.documentElement.lang = l;
     document.querySelectorAll('[data-i18n]').forEach(el => { const v = I18N[l][el.getAttribute('data-i18n')]; if(v != null) el.innerHTML = v; });
     document.querySelectorAll('[data-i18n-ph]').forEach(el => { const v = I18N[l][el.getAttribute('data-i18n-ph')]; if(v != null) el.setAttribute('placeholder', v); });
+    document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+      const v = I18N[l][el.getAttribute('data-i18n-aria')];
+      if(v != null) el.setAttribute('aria-label', el.dataset.n ? v.replace('%n', el.dataset.n) : v);
+    });
     const _infg = document.querySelector('.infg-'+l) || document.querySelector('.infg-es');
     document.querySelectorAll('.infg').forEach(im => im.style.display = (im === _infg ? 'block' : 'none'));
     langCur.textContent = l.toUpperCase();
-    langMenu.querySelectorAll('button').forEach(b => b.setAttribute('aria-selected', b.dataset.lang === l));
-    try{ localStorage.setItem('pbcm_lang', l); }catch(e){}
+    langMenu.querySelectorAll('button').forEach(b => b.setAttribute('aria-checked', b.dataset.lang === l));
+    if(elegidoPorElVisitante){ try{ localStorage.setItem(CLAVE_IDIOMA, l); }catch(e){} }
+  }
+  function closeLang(devolverFoco){
+    if(!langMenu.classList.contains('open')) return;
+    langMenu.classList.remove('open');
+    langBtn.setAttribute('aria-expanded', 'false');
+    if(devolverFoco) langBtn.focus();
   }
   langBtn.addEventListener('click', e => { e.stopPropagation(); const o = langMenu.classList.toggle('open'); langBtn.setAttribute('aria-expanded', o); });
-  langMenu.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { applyLang(b.dataset.lang); langMenu.classList.remove('open'); langBtn.setAttribute('aria-expanded', false); }));
-  document.addEventListener('click', () => { langMenu.classList.remove('open'); langBtn.setAttribute('aria-expanded', false); });
-  let initLang = 'en';
-  try{ const s = localStorage.getItem('pbcm_lang'); if(s && ['es','en','fr'].includes(s)) initLang = s; }catch(e){}
-  applyLang(initLang);
+  langMenu.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { applyLang(b.dataset.lang, true); closeLang(true); }));
+  document.addEventListener('click', () => closeLang(false));
+  document.addEventListener('keydown', e => {
+    if(e.key !== 'Escape') return;
+    closeLang(true);
+    if(navLinks.classList.contains('open')){
+      navLinks.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+      burger.focus();
+    }
+  });
+
+  // Idioma inicial: lo que el visitante eligio antes; si es su primera visita,
+  // el idioma de su navegador; y si no es ninguno de los tres, espanol.
+  let initLang = 'es';
+  try{
+    const guardado = localStorage.getItem(CLAVE_IDIOMA);
+    if(guardado && LANGS.includes(guardado)){
+      initLang = guardado;
+    } else {
+      const prefs = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || ''];
+      const coincide = prefs.map(x => String(x).slice(0,2).toLowerCase()).find(x => LANGS.includes(x));
+      if(coincide) initLang = coincide;
+    }
+  }catch(e){}
 
   document.getElementById('year').textContent = new Date().getFullYear();
   const header = document.getElementById('top');
@@ -822,13 +884,25 @@
     const step = () => { const g = parseFloat(getComputedStyle(track).columnGap) || 16; return slides[0].getBoundingClientRect().width + g; };
     if(prevB) prevB.addEventListener('click', () => track.scrollBy({left:-step(), behavior:'smooth'}));
     if(nextB) nextB.addEventListener('click', () => track.scrollBy({left:step(), behavior:'smooth'}));
-    slides.forEach((s,i) => { const b = document.createElement('button'); b.type='button'; b.setAttribute('aria-label','Foto '+(i+1)); b.addEventListener('click', () => s.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'})); dotsWrap.appendChild(b); });
+    slides.forEach((s,i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.dataset.n = i + 1;
+      b.setAttribute('data-i18n-aria', 'a11y_dot');
+      b.setAttribute('aria-label', 'Ir a la foto ' + (i+1));
+      b.addEventListener('click', () => s.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'}));
+      dotsWrap.appendChild(b);
+    });
     const dots = [...dotsWrap.children];
     let raf = null;
-    const sync = () => { const tr = track.getBoundingClientRect(); const c = tr.left + tr.width/2; let idx=0, best=1e9; slides.forEach((s,i) => { const r = s.getBoundingClientRect(); const sc = r.left + r.width/2; const d = Math.abs(sc-c); if(d<best){best=d; idx=i;} }); dots.forEach((d,i) => d.classList.toggle('active', i===idx)); };
+    const sync = () => { const tr = track.getBoundingClientRect(); const c = tr.left + tr.width/2; let idx=0, best=1e9; slides.forEach((s,i) => { const r = s.getBoundingClientRect(); const sc = r.left + r.width/2; const d = Math.abs(sc-c); if(d<best){best=d; idx=i;} }); dots.forEach((d,i) => { d.classList.toggle('active', i===idx); if(i===idx){ d.setAttribute('aria-current','true'); } else { d.removeAttribute('aria-current'); } }); };
     track.addEventListener('scroll', () => { if(raf) return; raf = requestAnimationFrame(() => { sync(); raf=null; }); });
     sync();
   })();
+
+  // Al final, cuando ya existe todo el markup (incluidos los puntos del
+  // carrusel), para que la traduccion alcance tambien a las etiquetas ARIA.
+  applyLang(initLang);
 </script>
 </body>
 </html>
