@@ -8,6 +8,12 @@ Sitio de la fundación **PBCM · Programa de Beneficio a las Comunidades y Medio
 Una sola página, en **Español / Inglés / Francés** (selector arriba a la derecha).
 Abre en el idioma del navegador del visitante; si elige otro, se recuerda.
 
+> ℹ️ **No es un error:** la fundación está constituida en **Estados Unidos** y
+> destina los recursos a proyectos en **Colombia**. Por eso la sección Contacto
+> muestra sede en Estados Unidos y teléfonos con prefijo +1. Los datos
+> estructurados (`application/ld+json`, al final de `index.html`) reflejan las
+> dos cosas: `address.addressCountry` es `US` y `areaServed` es Colombia.
+
 ---
 
 ## 📁 Qué hay en el repositorio
@@ -144,10 +150,6 @@ dentro. Sirve para adjuntarlo en un correo o abrirlo sin internet.
 
 ## 📌 Pendientes por confirmar con PBCM
 
-- **Datos de contacto.** La sección Contacto dice *Ubicación: USA* y dos
-  teléfonos con prefijo +1, para una fundación que opera en Colombia.
-  Confirmar si es correcto o cambiarlo (`index.html`, sección `#contacto`;
-  si cambian, actualizar también el bloque `application/ld+json` al final).
 - **Fotos del carrusel.** Son imágenes de referencia de jornadas de
   socialización, no fotos propias de PBCM. Conviene reemplazarlas.
 - **Infografía "Resultado de mesas".** El texto de la página y el JPG
