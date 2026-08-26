@@ -131,8 +131,25 @@
   .brand .wm{font-family:'Baloo 2',sans-serif;font-weight:800;font-size:1.5rem;color:var(--green-deep);line-height:1}
   .brand .wm small{display:block;font-family:'Nunito',sans-serif;font-weight:700;font-size:.58rem;letter-spacing:.11em;line-height:1.35;text-transform:uppercase;color:var(--ink-soft);margin-top:2px}
 
-  header{position:sticky;top:0;z-index:50;transition:.3s;background:rgba(246,248,243,.72)}
-  header.scrolled{background:rgba(246,248,243,.92);backdrop-filter:blur(12px);box-shadow:0 8px 30px -24px rgba(18,58,94,.35)}
+  /* La barra es un material translucido permanente y el contenido pasa por
+     debajo. Antes era translucida SIN desenfoque hasta que se hacia scroll:
+     arriba, el titular del hero se leia a traves de ella. */
+  header{position:sticky;top:0;z-index:50;background:rgba(246,248,243,.62);
+         -webkit-backdrop-filter:blur(20px) saturate(180%);backdrop-filter:blur(20px) saturate(180%);
+         border-bottom:1px solid transparent;
+         transition:background .5s var(--spring-suave),border-color .5s var(--spring-suave)}
+  header.scrolled{background:rgba(246,248,243,.8);border-bottom-color:rgba(18,58,94,.07)}
+  /* Borde de scroll en vez de sombra dura: el contenido se desvanece justo
+     donde se cruza con la barra flotante, no aparece una linea. */
+  header::after{content:"";position:absolute;inset:100% 0 auto;height:20px;pointer-events:none;
+                background:linear-gradient(rgba(246,248,243,.5),rgba(246,248,243,0));
+                opacity:0;transition:opacity .5s var(--spring-suave)}
+  header.scrolled::after{opacity:1}
+  header:has(.nav-links.open)::after{opacity:0}
+
+  /* Los menus se materializan desde el boton que los abre (transform-origin),
+     no aparecen de golpe en el centro de la pantalla. */
+  @keyframes menu-in{from{opacity:0;transform:translateY(-8px) scale(.97)}to{opacity:1;transform:none}}
   .nav{display:flex;align-items:center;justify-content:space-between;height:80px;gap:1rem}
   .nav-links{display:flex;align-items:center;gap:1.9rem;list-style:none}
   .nav-links a{font-weight:700;font-size:.94rem;color:var(--ink);position:relative;padding:.3rem 0;transition:.2s}
@@ -147,8 +164,11 @@
   .lang{position:relative}
   .lang-btn{display:inline-flex;align-items:center;gap:.35rem;background:#fff;border:1.5px solid var(--line);border-radius:100px;padding:.5rem .75rem;font-family:'Baloo 2',sans-serif;font-weight:600;font-size:.9rem;color:var(--green-deep);cursor:pointer;transition:.2s}
   .lang-btn:hover{border-color:var(--sage)}
-  .lang-menu{position:absolute;right:0;top:calc(100% + 8px);background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:.4rem;min-width:158px;display:none;z-index:60}
-  .lang-menu.open{display:block}
+  .lang-menu{position:absolute;right:0;top:calc(100% + 8px);background:rgba(255,255,255,.9);
+             -webkit-backdrop-filter:blur(24px) saturate(180%);backdrop-filter:blur(24px) saturate(180%);
+             border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:.4rem;
+             min-width:158px;display:none;z-index:60;transform-origin:top right}
+  .lang-menu.open{display:block;animation:menu-in .3s var(--spring)}
   .lang-menu button{display:flex;align-items:center;gap:.55rem;width:100%;text-align:left;background:none;border:0;padding:.6rem .7rem;border-radius:10px;font-family:'Nunito',sans-serif;font-weight:700;font-size:.92rem;color:var(--ink);cursor:pointer}
   .lang-menu button:hover{background:var(--sage-soft);color:var(--green-deep)}
   .lang-menu button[aria-checked="true"]{background:var(--sage-soft);color:var(--green-deep)}
@@ -348,7 +368,11 @@
     .cards,.timeline{grid-template-columns:1fr 1fr}
     .nav-links,.nav-cta .btn{display:none}
     .burger{display:flex}
-    .nav-links.open{display:flex;flex-direction:column;position:absolute;top:80px;left:0;right:0;background:#fff;padding:1.5rem 24px;gap:1.3rem;border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
+    .nav-links.open{display:flex;flex-direction:column;position:absolute;top:80px;left:0;right:0;
+                  background:rgba(255,255,255,.92);
+                  -webkit-backdrop-filter:blur(24px) saturate(180%);backdrop-filter:blur(24px) saturate(180%);
+                  padding:1.5rem 24px;gap:1.3rem;border-bottom:1px solid var(--line);box-shadow:var(--shadow);
+                  transform-origin:top right;animation:menu-in .38s var(--spring)}
     .nav-links.open a{font-size:1.05rem}
     .stage{margin-top:1rem}
     .car-slide img{height:300px}
@@ -362,6 +386,25 @@
     .brand .wm{font-size:1.25rem}
   }
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}.js .reveal{opacity:1;transform:none}}
+
+  /* Quien pide menos transparencia recibe superficies solidas, no un
+     desenfoque mas suave: el desenfoque es justo lo que le molesta. */
+  @media(prefers-reduced-transparency:reduce){
+    header,header.scrolled{background:var(--paper);-webkit-backdrop-filter:none;backdrop-filter:none}
+    header::after{display:none}
+    .lang-menu,.nav-links.open{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none}
+  }
+
+  /* Quien pide mas contraste recibe fondos casi solidos y bordes definidos. */
+  @media(prefers-contrast:more){
+    header,header.scrolled{background:var(--paper);-webkit-backdrop-filter:none;backdrop-filter:none;
+                           border-bottom-color:rgba(18,58,94,.35)}
+    .card,.pillar,.tstep,.sec-card,.prem-card,.contact,.lang-menu{border-color:#7C8B82}
+    .btn-ghost{border-color:var(--green-deep);color:var(--green-deep)}
+    .field input,.field textarea{border-color:#7C8B82}
+    .eyebrow{outline:1px solid rgba(60,115,37,.4);outline-offset:-1px}
+    .card .num{color:#6E7B68}
+  }
 </style>
 </head>
 <body>
