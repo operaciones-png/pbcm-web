@@ -222,6 +222,13 @@
   .field input::placeholder,.field textarea::placeholder{color:#66756A}
   .field input:focus,.field textarea:focus{outline:none;border-color:var(--sage);box-shadow:0 0 0 4px rgba(134,194,154,.25)}
   .field textarea{resize:vertical;min-height:120px}
+  /* Trampa antispam: fuera de pantalla, nunca la ve una persona */
+  .solo-robots{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .form-note{margin-top:1rem;font-size:.88rem;text-align:center;color:var(--ink-soft);min-height:1.4em}
+  .form-note[data-estado="ok"]{color:#2F5C1D;font-weight:700}
+  .form-note[data-estado="error"]{color:#9E2B16;font-weight:700}
+  .form-note a{text-decoration:underline}
+  .btn:disabled{opacity:.6;cursor:progress;transform:none;box-shadow:none}
 
   footer{background:var(--paper-3);color:var(--ink-soft);padding:3.4rem 0 2rem;margin-top:clamp(3rem,7vw,5.5rem);border-top:1px solid var(--line)}
   .foot-top{display:flex;flex-wrap:wrap;gap:2rem;justify-content:space-between;align-items:flex-start;padding-bottom:2.1rem;border-bottom:1px solid var(--line)}
@@ -598,12 +605,14 @@
         <div class="cinfo"><span class="ic">📱</span><div><small data-i18n="ci_wa">WhatsApp / Teléfono</small><a href="tel:+18594627602">+1 859 462 7602</a><a href="https://wa.me/19109646805">+1 910 964 6805</a></div></div>
         <div class="cinfo"><span class="ic">📍</span><div><small data-i18n="ci_ubi">Ubicación</small>USA</div></div>
       </div>
-      <form class="contact-form" onsubmit="return handleSubmit(event)">
-        <div class="field"><label for="nombre" data-i18n="lbl_nombre">Nombre</label><input id="nombre" type="text" data-i18n-ph="ph_nombre" placeholder="Tu nombre completo" required /></div>
-        <div class="field"><label for="correo" data-i18n="lbl_correo">Correo</label><input id="correo" type="email" data-i18n-ph="ph_correo" placeholder="tucorreo@ejemplo.com" required /></div>
-        <div class="field"><label for="mensaje" data-i18n="lbl_mensaje">Mensaje</label><textarea id="mensaje" data-i18n-ph="ph_mensaje" placeholder="Cuéntanos en qué podemos ayudarte…" required></textarea></div>
-        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center" data-i18n="btn_enviar">Enviar mensaje</button>
-        <p id="formNote" style="margin-top:1rem;font-size:.85rem;color:var(--ink-soft);text-align:center"></p>
+      <form class="contact-form" id="contactForm" name="contacto" method="POST" action="/gracias.html" data-netlify="true" netlify-honeypot="bot-field">
+        <p class="solo-robots" aria-hidden="true"><label>No llenar <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+        <input type="hidden" name="idioma" id="formLang" value="es" />
+        <div class="field"><label for="nombre" data-i18n="lbl_nombre">Nombre</label><input id="nombre" name="nombre" type="text" autocomplete="name" data-i18n-ph="ph_nombre" placeholder="Tu nombre completo" required /></div>
+        <div class="field"><label for="correo" data-i18n="lbl_correo">Correo</label><input id="correo" name="correo" type="email" autocomplete="email" data-i18n-ph="ph_correo" placeholder="tucorreo@ejemplo.com" required /></div>
+        <div class="field"><label for="mensaje" data-i18n="lbl_mensaje">Mensaje</label><textarea id="mensaje" name="mensaje" data-i18n-ph="ph_mensaje" placeholder="Cuéntanos en qué podemos ayudarte…" required></textarea></div>
+        <button type="submit" class="btn btn-primary" id="formBtn" style="width:100%;justify-content:center" data-i18n="btn_enviar">Enviar mensaje</button>
+        <p id="formNote" class="form-note" role="status" aria-live="polite"></p>
       </form>
     </div>
   </div>
@@ -685,7 +694,7 @@
       ci_correo:"Correo", ci_wa:"WhatsApp / Teléfono", ci_ubi:"Ubicación",
       lbl_nombre:"Nombre", lbl_correo:"Correo", lbl_mensaje:"Mensaje",
       ph_nombre:"Tu nombre completo", ph_correo:"tucorreo@ejemplo.com", ph_mensaje:"Cuéntanos en qué podemos ayudarte…",
-      btn_enviar:"Enviar mensaje", form_note:"¡Gracias! Este formulario es una demostración. Pronto lo conectaremos para recibir tu mensaje.",
+      btn_enviar:"Enviar mensaje", form_sending:"Enviando…", form_ok:"¡Gracias! Recibimos tu mensaje y te respondemos pronto.", form_error:"No pudimos enviar el mensaje. Escríbenos directamente a <a href=\"mailto:administration@pbcmcolombia.com\">administration@pbcmcolombia.com</a>.",
       foot_desc:"Programa de Beneficio a las Comunidades y Medio Ambiente.<br/><em>Juntos construimos un mejor mañana.</em>",
       foot_col1:"Programa", foot_col2:"Participa",
       foot_l1:"Quiénes somos", foot_l2:"Líneas de acción", foot_l3:"Medio ambiente", foot_l4:"Comunidad", foot_l5:"Cómo trabajamos", foot_l6:"Contacto",
@@ -743,7 +752,7 @@
       ci_correo:"Email", ci_wa:"WhatsApp / Phone", ci_ubi:"Location",
       lbl_nombre:"Name", lbl_correo:"Email", lbl_mensaje:"Message",
       ph_nombre:"Your full name", ph_correo:"youremail@example.com", ph_mensaje:"Tell us how we can help…",
-      btn_enviar:"Send message", form_note:"Thank you! This form is a demo. We'll connect it soon to receive your message.",
+      btn_enviar:"Send message", form_sending:"Sending…", form_ok:"Thank you! We got your message and will reply soon.", form_error:"We couldn’t send your message. Please write to us at <a href=\"mailto:administration@pbcmcolombia.com\">administration@pbcmcolombia.com</a>.",
       foot_desc:"Community Benefit and Environment Program.<br/><em>Together we build a better tomorrow.</em>",
       foot_col1:"Program", foot_col2:"Get involved",
       foot_l1:"About us", foot_l2:"Focus areas", foot_l3:"Environment", foot_l4:"Community", foot_l5:"How we work", foot_l6:"Contact",
@@ -801,7 +810,7 @@
       ci_correo:"Courriel", ci_wa:"WhatsApp / Téléphone", ci_ubi:"Localisation",
       lbl_nombre:"Nom", lbl_correo:"Courriel", lbl_mensaje:"Message",
       ph_nombre:"Votre nom complet", ph_correo:"votreemail@exemple.com", ph_mensaje:"Dites-nous comment nous pouvons aider…",
-      btn_enviar:"Envoyer le message", form_note:"Merci ! Ce formulaire est une démonstration. Nous le connecterons bientôt pour recevoir votre message.",
+      btn_enviar:"Envoyer le message", form_sending:"Envoi…", form_ok:"Merci ! Nous avons reçu votre message et vous répondrons bientôt.", form_error:"Nous n’avons pas pu envoyer votre message. Écrivez-nous à <a href=\"mailto:administration@pbcmcolombia.com\">administration@pbcmcolombia.com</a>.",
       foot_desc:"Programme de Bénéfice aux Communautés et à l'Environnement.<br/><em>Ensemble, bâtissons un avenir meilleur.</em>",
       foot_col1:"Programme", foot_col2:"Participer",
       foot_l1:"Qui sommes-nous", foot_l2:"Domaines d'action", foot_l3:"Environnement", foot_l4:"Communauté", foot_l5:"Comment nous travaillons", foot_l6:"Contact",
@@ -826,6 +835,8 @@
     const _infg = document.querySelector('.infg-'+l) || document.querySelector('.infg-es');
     document.querySelectorAll('.infg').forEach(im => im.style.display = (im === _infg ? 'block' : 'none'));
     langCur.textContent = l.toUpperCase();
+    const campoIdioma = document.getElementById('formLang');
+    if(campoIdioma) campoIdioma.value = l;
     langMenu.querySelectorAll('button').forEach(b => b.setAttribute('aria-checked', b.dataset.lang === l));
     if(elegidoPorElVisitante){ try{ localStorage.setItem(CLAVE_IDIOMA, l); }catch(e){} }
   }
@@ -873,7 +884,35 @@
   }));
   const io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .1 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-  function handleSubmit(e){ e.preventDefault(); document.getElementById('formNote').textContent = (I18N[curLang]||I18N.es).form_note; e.target.reset(); return false; }
+  // Envio del formulario. El POST lo recibe Netlify Forms (data-netlify="true")
+  // y llega al correo configurado en el panel de Netlify. Se envia sin recargar
+  // para que el visitante no pierda la pagina; si el JS falla, el submit normal
+  // del formulario lleva a /gracias.html y el mensaje se registra igual.
+  const contactForm = document.getElementById('contactForm');
+  const formNote = document.getElementById('formNote');
+  const formBtn = document.getElementById('formBtn');
+  function nota(clave, estado){
+    formNote.innerHTML = (I18N[curLang] || I18N.es)[clave] || '';
+    if(estado) formNote.dataset.estado = estado; else delete formNote.dataset.estado;
+  }
+  contactForm.addEventListener('submit', e => {
+    e.preventDefault();
+    if(!contactForm.reportValidity()) return;
+    formBtn.disabled = true;
+    nota('form_sending', '');
+    fetch(contactForm.getAttribute('action'), {
+      method: 'POST',
+      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      body: new URLSearchParams(new FormData(contactForm)).toString()
+    })
+      .then(r => {
+        if(!r.ok) throw new Error(r.status);
+        contactForm.reset();
+        nota('form_ok', 'ok');
+      })
+      .catch(() => nota('form_error', 'error'))
+      .finally(() => { formBtn.disabled = false; });
+  });
 
   // ---- Carrusel de fotos ----
   (function(){
