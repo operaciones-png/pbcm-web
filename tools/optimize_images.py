@@ -61,12 +61,6 @@ PLAN = {
     "gpt-vias.png": [168],
     "gpt-saneamiento.png": [168],
     "gpt-agua-suelos.png": [168],
-    # Iconos de sectores priorizados (se muestran a 92 px)
-    "sec-ambiente.png": [184],
-    "sec-vial.png": [184],
-    "sec-agro.png": [184],
-    "sec-comunidad.png": [184],
-    "sec-salud.png": [184],
     # Pasos del proceso
     "paso-1.jpg": [476],
     "paso-2.jpg": [472],

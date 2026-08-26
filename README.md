@@ -5,8 +5,9 @@ Sitio de la fundación **PBCM · Programa de Beneficio a las Comunidades y Medio
 
 🌐 **En vivo:** https://pbcmcolombia.com
 
-Una sola página, en **Español / Inglés / Francés** (selector arriba a la derecha).
-Abre en el idioma del navegador del visitante; si elige otro, se recuerda.
+Una sola página, en **Inglés / Español / Francés** (selector arriba a la derecha).
+**Abre siempre en inglés**, que es el idioma primario del sitio; si el visitante
+elige otro, se recuerda para sus próximas visitas.
 
 > ℹ️ **No es un error:** la fundación está constituida en **Estados Unidos** y
 > destina los recursos a proyectos en **Colombia**. Por eso la sección Contacto
@@ -31,6 +32,7 @@ Abre en el idioma del navegador del visitante; si elige otro, se recuerda.
 | `robots.txt`, `sitemap.xml` | Para los buscadores. |
 | `tools/optimize_images.py` | Genera los `.webp` a partir de `img/originales/`. |
 | `tools/build_standalone.py` | Genera una copia del sitio en **un solo archivo**, para enviar por correo o ver sin conexión. No es lo que se publica. |
+| `tools/recorta_infografia.py` | Genera las infografías que publica la página a partir de los originales de `_fuentes/`. |
 | `tools/prueba-carrusel.js` | Comprueba los números del movimiento del carrusel (`node tools/prueba-carrusel.js`). |
 
 > No hay que "compilar" nada para publicar. Lo que está en el repositorio **es** el sitio.
@@ -47,21 +49,22 @@ Es la forma más fácil de aportar. 👍
 ## ✏️ Cambiar textos
 
 Todos los textos viven en `index.html`, en el bloque `const I18N = { ... }` cerca del final.
-Está dividido en tres partes: `es:`, `en:` y `fr:`.
+Está dividido en tres partes: `en:`, `es:` y `fr:`.
 
 ```js
-es: {
-  hero_h1:"Sembramos <em>bienestar</em> en las comunidades de Colombia",
+en: {
+  hero_h1:"We sow <em>wellbeing</em> in the communities of Colombia",
   ...
 }
 ```
 
-**Regla de oro: si cambias un texto en `es:`, cámbialo también en `en:` y `fr:`.**
+**Regla de oro: si cambias un texto en `en:`, cámbialo también en `es:` y `fr:`.**
 Las tres listas deben tener exactamente las mismas claves; si a una le falta una,
 esa parte de la página se queda en blanco en ese idioma.
 
-El texto que está escrito directamente en el HTML (fuera de `I18N`) es solo el que
-se ve un instante antes de que cargue el idioma. Conviene mantenerlo igual al de `es:`.
+El texto que está escrito directamente en el HTML (fuera de `I18N`) es el que se ve
+mientras carga el JavaScript, el que lee un buscador que no ejecuta scripts, y el
+único que queda si el JavaScript falla. **Mantenlo siempre igual al de `en:`.**
 
 ---
 
@@ -185,11 +188,11 @@ dentro. Sirve para adjuntarlo en un correo o abrirlo sin internet.
 
 - **Fotos del carrusel.** Son imágenes de referencia de jornadas de
   socialización, no fotos propias de PBCM. Conviene reemplazarlas.
-- **Sección "Resultado de mesas".** El texto que muestra la página y el
-  documento original de las mesas (en `_fuentes/`, fuera del sitio) no
-  coinciden en tres puntos. Definir cuál es la versión válida. El documento
-  original **no se publica**: la página cuenta el resultado con sus propias
-  palabras.
+- **Infografía de las mesas.** La que se publica sale de los originales de
+  `_fuentes/` pasando por `tools/recorta_infografia.py`, que acorta la banda
+  de "menor impacto" para que termine tras el cuarto ítem. Si llega un
+  original de más resolución, se reemplaza en `_fuentes/` y se vuelve a
+  ejecutar el script. Los originales nunca se publican.
 
 ---
 

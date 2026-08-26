@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>PBCM · Beneficio a las Comunidades y Medio Ambiente</title>
-<meta name="description" content="PBCM, Programa de Beneficio a las Comunidades y Medio Ambiente: inversión social y ambiental concertada con las comunidades rurales de Colombia. Educación, vivienda, deporte, vías, agua y reforestación." />
+<title>PBCM · Community Benefit and Environment Programme</title>
+<meta name="description" content="PBCM, the Community Benefit and Environment Programme: social and environmental investment agreed with rural communities in Colombia. Education, housing, sport, roads, water and reforestation." />
 <link rel="canonical" href="https://pbcmcolombia.com/" />
 <meta name="theme-color" content="#F6F8F3" />
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml" />
@@ -12,18 +12,19 @@
 <!-- Como se ve el enlace cuando alguien lo comparte por WhatsApp, Facebook o
      LinkedIn. Sin esto sale una tarjeta gris, sin imagen ni descripcion.
      Los buscadores de redes no ejecutan JavaScript, por eso estos textos van
-     fijos en espanol y no cambian con el selector de idioma. -->
+     fijos en inglés, el idioma primario del sitio, y no cambian con el
+     selector de idioma. -->
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="PBCM" />
 <meta property="og:url" content="https://pbcmcolombia.com/" />
-<meta property="og:title" content="PBCM · Sembramos bienestar en las comunidades de Colombia" />
-<meta property="og:description" content="PBCM, Programa de Beneficio a las Comunidades y Medio Ambiente: inversión social y ambiental concertada con las comunidades rurales de Colombia. Educación, vivienda, deporte, vías, agua y reforestación." />
+<meta property="og:title" content="PBCM · Sowing wellbeing in the communities of Colombia" />
+<meta property="og:description" content="PBCM, the Community Benefit and Environment Programme: social and environmental investment agreed with rural communities in Colombia. Education, housing, sport, roads, water and reforestation." />
 <meta property="og:image" content="https://pbcmcolombia.com/img/og-pbcm.jpg" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:image:alt" content="PBCM · Community Benefit Environment" />
-<meta property="og:locale" content="es_CO" />
-<meta property="og:locale:alternate" content="en_US" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:locale:alternate" content="es_CO" />
 <meta property="og:locale:alternate" content="fr_FR" />
 <meta name="twitter:card" content="summary_large_image" />
 
@@ -137,7 +138,7 @@
   .lang-menu button:active{background:var(--sage-soft)}
   .car-dots button:active{transform:scale(.8)}
   .nav-links a:active,.foot-col a:active,.cinfo a:active{opacity:.6;transition-duration:var(--toque)}
-  .card:active,.pillar:active,.tstep:active,.sec-card:active{transition-duration:var(--toque)}
+  .card:active,.pillar:active,.tstep:active{transition-duration:var(--toque)}
   .btn-primary{background:var(--green);color:#fff}
   .btn-primary:hover{background:#2F5C1D;transform:translateY(-2px);box-shadow:0 16px 26px -14px rgba(60,115,37,.5)}
   .btn-ghost{background:#fff;color:var(--green-deep);border-color:var(--sage)}
@@ -265,7 +266,7 @@
   .pillar{align-items:center;overflow:hidden;padding:1.25rem 1.35rem}
   .pill-ic{align-self:flex-start;margin-top:.15rem}
   .pill-txt{flex:1;min-width:0}
-  .pill-photo{width:38%;max-width:230px;flex:0 0 auto;align-self:stretch;min-height:120px;object-fit:cover;border-radius:16px;box-shadow:0 7px 18px rgba(18,58,94,.14)}
+  .pill-photo{width:38%;max-width:230px;height:auto;flex:0 0 auto;align-self:stretch;min-height:120px;object-fit:cover;border-radius:16px;box-shadow:0 7px 18px rgba(18,58,94,.14)}
 
   .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem}
   .card{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);padding:2rem 1.7rem;transition:transform .45s var(--spring),box-shadow .45s var(--spring);box-shadow:var(--shadow-sm)}
@@ -333,7 +334,7 @@
   .tstep .node{width:46px;height:46px;border-radius:50%;background:var(--sage-soft);color:var(--green-deep);display:grid;place-items:center;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:1.05rem;flex:0 0 46px}
   .tstep h3{font-size:1.24rem;color:var(--green-deep)}
   .tstep-body p{color:var(--ink-soft);font-size:.95rem}
-  .tstep-img{width:100%;display:block;margin-top:auto}
+  .tstep-img{width:100%;height:auto;display:block;margin-top:auto}
 
   .carousel{position:relative}
   .car-track{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;padding:6px 2px 8px;scrollbar-width:none;-ms-overflow-style:none;
@@ -419,35 +420,21 @@
   .foot-col a:hover{color:var(--green);padding-left:4px}
   .foot-bottom{padding-top:1.5rem;display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;font-size:.84rem;color:var(--ink-soft)}
 
-  .premisas{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2.4rem}
-  .prem-card{background:var(--paper-2);border:1px solid var(--line);border-radius:16px;padding:1.2rem 1.3rem;display:flex;gap:.7rem;align-items:flex-start;font-weight:600;color:var(--ink);font-size:.96rem;box-shadow:var(--shadow-sm)}
-  .prem-card .ck{width:26px;height:26px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;flex:0 0 26px;margin-top:1px}
-  .info-sub{text-align:center;font-family:'Baloo 2',sans-serif;font-weight:700;color:var(--green-deep);font-size:clamp(1.25rem,2.6vw,1.55rem);line-height:1.18;letter-spacing:-.014em;margin-bottom:1.4rem}
-  .sec-cards{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-bottom:2.6rem}
-  .sec-card{background:var(--paper-2);border:1px solid var(--line);border-radius:18px;padding:1.2rem 1rem 1.4rem;text-align:center;box-shadow:var(--shadow-sm);position:relative}
-  .sec-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
-  .sec-card{transition:transform .45s var(--spring),box-shadow .45s var(--spring)}
-  .sec-card img{width:92px;height:92px;margin:0 auto .6rem;display:block}
-  .sec-card .snum{position:absolute;top:12px;left:12px;width:26px;height:26px;border-radius:50%;background:var(--green-deep);color:#fff;display:grid;place-items:center;font-family:'Baloo 2',sans-serif;font-weight:800;font-size:.85rem}
-  .sec-card b{display:block;color:var(--green-deep);font-family:'Baloo 2',sans-serif;font-size:1rem;margin-bottom:.3rem}
-  .sec-card .sd{display:block;color:var(--ink-soft);font-size:.85rem;line-height:1.5;letter-spacing:.004em}
-  .info-inv{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem}
-  .inv{border-radius:var(--radius);padding:1.8rem}
-  .inv h3{display:flex;align-items:center;gap:.6rem;font-family:'Baloo 2',sans-serif;font-size:1.08rem;margin-bottom:1.1rem}
-  .inv .sign{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:1.2rem;flex:0 0 30px;color:#fff}
-  .inv ul{list-style:none;display:grid;gap:.65rem}
-  .inv li{font-weight:600;font-size:.95rem;display:flex;gap:.5rem;align-items:flex-start}
-  .inv li::before{content:"";flex:0 0 auto;width:1.05em;height:1.05em;margin-top:.18em;background:currentColor;-webkit-mask:var(--bullet) center/contain no-repeat;mask:var(--bullet) center/contain no-repeat}
-  .inv-plus{background:var(--sage-soft);border:1px solid #cfe6d5}
-  .inv-plus h3{color:var(--green-deep)}.inv-plus .sign{background:var(--green)}
-  .inv-plus li{color:#3f6b4e}
-  .inv-plus li::before{--bullet:var(--icono-check);color:var(--green)}
-  .inv-minus{background:#eef1ee;border:1px solid #e1e6e1}
-  .inv-minus h3{color:#5c6b62}.inv-minus .sign{background:#9aa89f}
-  .inv-minus li{color:#78867e}
-  .inv-minus li::before{--bullet:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.75' stroke-linecap='round'%3E%3Cpath d='M5.5 12h13'/%3E%3C/svg%3E");color:#7C8B82}
-  @media(max-width:900px){.premisas{grid-template-columns:1fr}.sec-cards{grid-template-columns:repeat(3,1fr)}.info-inv{grid-template-columns:1fr}}
-  @media(max-width:560px){.sec-cards{grid-template-columns:1fr 1fr}}
+  .infografia{margin:0;border-radius:20px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line);background:#fff}
+  .infografia a{display:block}
+  .infografia img{width:100%;height:auto;display:block}
+  .infg{display:none}
+  .infg-es{display:block}
+  .infog-pie{display:flex;flex-wrap:wrap;gap:.4rem 1rem;justify-content:center;align-items:center;margin-top:.9rem;font-size:.84rem;color:var(--ink-soft)}
+  .infog-hint{display:none;font-weight:700}
+  .infog-zoom{font-weight:700}
+  /* En pantallas estrechas la infografia no cabe legible: se desliza en
+     horizontal dentro de su propia caja, nunca arrastrando la pagina. */
+  @media(max-width:760px){
+    .infografia{overflow-x:auto;overflow-y:hidden}
+    .infografia img{min-width:740px}
+    .infog-hint{display:inline}
+  }
 
   /* Las animaciones de entrada solo se aplican si el JS esta vivo: si falla,
      el contenido se ve igual en vez de quedarse invisible para siempre. */
@@ -459,11 +446,11 @@
 
   /* El chulo se dibuja al entrar la seccion, en vez de aparecer ya hecho:
      lee como un compromiso que se cumple. */
-  .js .env-list li .icn,.js .prem-card .ck .icn{stroke-dasharray:23;stroke-dashoffset:23;
+  .js .env-list li .icn{stroke-dasharray:23;stroke-dashoffset:23;
         transition:stroke-dashoffset .5s var(--spring-suave)}
-  .js .reveal.in .env-list li .icn,.js .reveal.in .prem-card .ck .icn{stroke-dashoffset:0}
-  .js .env-list li:nth-child(2) .icn,.js .prem-card:nth-child(2) .ck .icn{transition-delay:.1s}
-  .js .env-list li:nth-child(3) .icn,.js .prem-card:nth-child(3) .ck .icn{transition-delay:.2s}
+  .js .reveal.in .env-list li .icn{stroke-dashoffset:0}
+  .js .env-list li:nth-child(2) .icn{transition-delay:.1s}
+  .js .env-list li:nth-child(3) .icn{transition-delay:.2s}
 
   @media(max-width:960px){
     .hero-grid,.prog,.env-grid{grid-template-columns:1fr}
@@ -492,7 +479,7 @@
   }
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}
     .js .reveal{opacity:1;transform:none}
-    .js .env-list li .icn,.js .prem-card .ck .icn{stroke-dashoffset:0}
+    .js .env-list li .icn{stroke-dashoffset:0}
     .js .riel .riel-linea{transform:scaleX(1)}
     .js .riel .riel-punto{transform:scale(1)}}
 
@@ -508,7 +495,7 @@
   @media(prefers-contrast:more){
     header,header.scrolled{background:var(--paper);-webkit-backdrop-filter:none;backdrop-filter:none;
                            border-bottom-color:rgba(18,58,94,.35)}
-    .card,.pillar,.tstep,.sec-card,.prem-card,.contact,.lang-menu{border-color:#7C8B82}
+    .card,.pillar,.tstep,.contact,.lang-menu{border-color:#7C8B82}
     .btn-ghost{border-color:var(--green-deep);color:var(--green-deep)}
     .field input,.field textarea{border-color:#7C8B82}
     .eyebrow{outline:1px solid rgba(60,115,37,.4);outline-offset:-1px}
@@ -533,12 +520,6 @@
 
   <symbol id="icon-status-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
     <path d="M20 6.5L9.5 17 4 11.5"/>
-  </symbol>
-  <symbol id="icon-status-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M12 5.5v13M5.5 12h13"/>
-  </symbol>
-  <symbol id="icon-status-minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M5.5 12h13"/>
   </symbol>
 
   <symbol id="icon-action-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
@@ -579,21 +560,21 @@
   </symbol>
 </svg>
 
-<a class="skip" href="#contenido" data-i18n="skip">Saltar al contenido</a>
+<a class="skip" href="#contenido" data-i18n="skip">Skip to content</a>
 
 <!-- ============ HEADER ============ -->
 <header id="top">
   <div class="wrap nav">
     <a href="#top" class="brand" aria-label="PBCM inicio">
       <img class="logo-badge" src="img/logo-emblem.webp" alt="Logo PBCM" width="104" height="107" fetchpriority="high" />
-      <span class="wm">PBCM<small data-i18n="brand_sub">Comunidades y Medio Ambiente</small></span>
+      <span class="wm">PBCM<small data-i18n="brand_sub">Communities & Environment</small></span>
     </a>
     <ul class="nav-links" id="navLinks">
-      <li><a href="#programa" data-i18n="nav_programa">El programa</a></li>
-      <li><a href="#lineas" data-i18n="nav_lineas">Líneas de acción</a></li>
-      <li><a href="#ambiente" data-i18n="nav_ambiente">Medio ambiente</a></li>
-      <li><a href="#comunidad" data-i18n="nav_comunidad">Comunidad</a></li>
-      <li><a href="#contacto" data-i18n="nav_contacto">Contacto</a></li>
+      <li><a href="#programa" data-i18n="nav_programa">The program</a></li>
+      <li><a href="#lineas" data-i18n="nav_lineas">Focus areas</a></li>
+      <li><a href="#ambiente" data-i18n="nav_ambiente">Environment</a></li>
+      <li><a href="#comunidad" data-i18n="nav_comunidad">Community</a></li>
+      <li><a href="#contacto" data-i18n="nav_contacto">Contact</a></li>
     </ul>
     <div class="nav-cta">
       <div class="lang" id="lang">
@@ -608,8 +589,8 @@
           <button type="button" role="menuitemradio" aria-checked="false" data-lang="fr"><span class="fl" aria-hidden="true">FR</span> <span lang="fr">Français</span></button>
         </div>
       </div>
-      <a href="#contacto" class="btn btn-primary" data-i18n="cta_contact">Contáctanos</a>
-      <button class="burger" id="burger" type="button" aria-controls="navLinks" aria-expanded="false" data-i18n-aria="a11y_menu" aria-label="Menú"><span></span><span></span><span></span></button>
+      <a href="#contacto" class="btn btn-primary" data-i18n="cta_contact">Contact us</a>
+      <button class="burger" id="burger" type="button" aria-controls="navLinks" aria-expanded="false" data-i18n-aria="a11y_menu" aria-label="Open menu"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
@@ -622,19 +603,19 @@
   <div class="hero-veil"></div>
   <div class="wrap hero-grid">
     <div class="hero-copy reveal">
-      <span class="eyebrow"><span class="dot"></span> <span data-i18n="hero_eyebrow">Beneficio a las Comunidades y Medio Ambiente</span></span>
-      <h1 data-i18n="hero_h1">Sembramos <em>bienestar</em> en las comunidades de Colombia</h1>
-      <p class="lead" data-i18n="hero_lead">Somos PBCM, un programa de inversión social y ambiental que acompaña a las comunidades y cuida la naturaleza, con cariño y compromiso, en las zonas que más lo necesitan.</p>
+      <span class="eyebrow"><span class="dot"></span> <span data-i18n="hero_eyebrow">Benefit to Communities and the Environment</span></span>
+      <h1 data-i18n="hero_h1">We sow <em>wellbeing</em> in the communities of Colombia</h1>
+      <p class="lead" data-i18n="hero_lead">We are PBCM, a social and environmental investment program that supports communities and cares for nature, with warmth and commitment, in the areas that need it most.</p>
       <div class="hero-actions">
-        <a href="#programa" class="btn btn-primary"><span data-i18n="hero_btn1">Conoce el programa</span>
+        <a href="#programa" class="btn btn-primary"><span data-i18n="hero_btn1">Discover the program</span>
           <svg class="icn" width="20" height="20" aria-hidden="true"><use href="#icon-nav-arrow-right"/></svg>
         </a>
-        <a href="#contacto" class="btn btn-ghost" data-i18n="cta_contact">Contáctanos</a>
+        <a href="#contacto" class="btn btn-ghost" data-i18n="cta_contact">Contact us</a>
       </div>
       <div class="hero-trust">
-        <div><svg class="icn" width="20" height="20" aria-hidden="true"><use href="#icon-content-globe"/></svg> <span data-i18n="trust1">Presencia nacional</span></div>
-        <div><svg class="icn" width="20" height="20" aria-hidden="true"><use href="#icon-content-users"/></svg> <span data-i18n="trust2">Cerca de la gente</span></div>
-        <div><svg class="icn" width="20" height="20" aria-hidden="true"><use href="#icon-content-sprout"/></svg> <span data-i18n="trust3">Cuidamos la naturaleza</span></div>
+        <div><svg class="icn" width="20" height="20" aria-hidden="true"><use href="#icon-content-globe"/></svg> <span data-i18n="trust1">Nationwide presence</span></div>
+        <div><svg class="icn" width="20" height="20" aria-hidden="true"><use href="#icon-content-users"/></svg> <span data-i18n="trust2">Close to people</span></div>
+        <div><svg class="icn" width="20" height="20" aria-hidden="true"><use href="#icon-content-sprout"/></svg> <span data-i18n="trust3">We care for nature</span></div>
       </div>
     </div>
 
@@ -642,7 +623,7 @@
       <div class="stage">
         <div class="ph p-main"><img src="img/foto-bote-820.webp" srcset="img/foto-bote-520.webp 520w, img/foto-bote-820.webp 820w" sizes="(max-width:960px) 88vw, 560px" alt="Equipo de PBCM navegando el río hacia una comunidad" width="820" height="1093" decoding="async" /></div>
         <div class="ph p-sub"><img src="img/comunidad-1.webp" alt="Reunión comunitaria de PBCM" width="470" height="359" decoding="async" /></div>
-        <a href="#lineas" class="chip chip-top"><span class="n">6</span> <span data-i18n="chip_lineas">líneas de acción</span><svg class="icn" width="14" height="14" aria-hidden="true"><use href="#icon-nav-arrow-right"/></svg></a>
+        <a href="#lineas" class="chip chip-top"><span class="n">6</span> <span data-i18n="chip_lineas">focus areas</span><svg class="icn" width="14" height="14" aria-hidden="true"><use href="#icon-nav-arrow-right"/></svg></a>
       </div>
     </div>
   </div>
@@ -651,8 +632,8 @@
 <!-- ============ MARQUEE ============ -->
 <div class="marquee" aria-hidden="true">
   <div class="marquee-track">
-    <span data-i18n="m_edu">Educación</span><span data-i18n="m_viv">Vivienda</span><span data-i18n="m_dep">Deporte</span><span data-i18n="m_via">Vías</span><span data-i18n="m_agua">Agua y servicios</span><span data-i18n="m_refor">Reforestación</span><span data-i18n="m_rios">Nacimientos de ríos</span>
-    <span data-i18n="m_edu">Educación</span><span data-i18n="m_viv">Vivienda</span><span data-i18n="m_dep">Deporte</span><span data-i18n="m_via">Vías</span><span data-i18n="m_agua">Agua y servicios</span><span data-i18n="m_refor">Reforestación</span><span data-i18n="m_rios">Nacimientos de ríos</span>
+    <span data-i18n="m_edu">Education</span><span data-i18n="m_viv">Housing</span><span data-i18n="m_dep">Sports</span><span data-i18n="m_via">Roads</span><span data-i18n="m_agua">Water & services</span><span data-i18n="m_refor">Reforestation</span><span data-i18n="m_rios">River sources</span>
+    <span data-i18n="m_edu">Education</span><span data-i18n="m_viv">Housing</span><span data-i18n="m_dep">Sports</span><span data-i18n="m_via">Roads</span><span data-i18n="m_agua">Water & services</span><span data-i18n="m_refor">Reforestation</span><span data-i18n="m_rios">River sources</span>
   </div>
 </div>
 
@@ -660,20 +641,20 @@
 <section class="band" id="programa">
   <div class="wrap prog">
     <div class="prog-copy reveal">
-      <span class="eyebrow"><span class="dot"></span> <span data-i18n="prog_eyebrow">Quiénes somos</span></span>
-      <div class="sec-head" style="margin:1rem 0 1.4rem"><h2 data-i18n="prog_h2">Cerramos brechas, sembramos futuro</h2></div>
-      <p data-i18n="prog_p1">En muchas zonas rurales de Colombia persisten profundas brechas sociales. <strong>PBCM</strong> nace para cerrarlas con una inversión social que fortalece a las comunidades y cuida su entorno natural.</p>
-      <p data-i18n="prog_p2">Cada proyecto se concerta con la propia comunidad, generando empleo local y bienestar que perdura. Porque el desarrollo de las personas y la salud del planeta van de la mano.</p>
+      <span class="eyebrow"><span class="dot"></span> <span data-i18n="prog_eyebrow">About us</span></span>
+      <div class="sec-head" style="margin:1rem 0 1.4rem"><h2 data-i18n="prog_h2">Closing gaps, sowing the future</h2></div>
+      <p data-i18n="prog_p1">In many rural areas of Colombia, deep social gaps persist. <strong>PBCM</strong> was born to close them through social investment that strengthens communities and cares for their natural environment.</p>
+      <p data-i18n="prog_p2">Each project is agreed upon with the community itself, generating local jobs and lasting wellbeing. Because people's development and the planet's health go hand in hand.</p>
     </div>
     <div class="pillars reveal">
       <div class="pillar">
         <img class="badge-ic pill-ic" src="img/gpt-social.webp" alt="" width="168" height="187" loading="lazy" decoding="async" />
-        <div class="pill-txt"><h3 data-i18n="pillar1_h3">Comunidad</h3><p data-i18n="pillar1_p">Mejoramos la calidad de vida de las poblaciones en las áreas de influencia, con proyectos concertados y transparentes.</p></div>
+        <div class="pill-txt"><h3 data-i18n="pillar1_h3">Community</h3><p data-i18n="pillar1_p">We improve the quality of life of populations in the areas of influence, with agreed and transparent projects.</p></div>
         <img class="pill-photo" src="img/pilar-comunidad.webp" alt="" width="460" height="270" loading="lazy" decoding="async" />
       </div>
       <div class="pillar">
         <img class="badge-ic pill-ic" src="img/gpt-agua-suelos.webp" alt="" width="168" height="171" loading="lazy" decoding="async" />
-        <div class="pill-txt"><h3 data-i18n="pillar2_h3">Medio Ambiente</h3><p data-i18n="pillar2_p">Protegemos los recursos naturales —reforestación y conservación de los nacimientos de ríos— para un desarrollo sostenible.</p></div>
+        <div class="pill-txt"><h3 data-i18n="pillar2_h3">Environment</h3><p data-i18n="pillar2_p">We protect natural resources —reforestation and conservation of river sources— for sustainable development.</p></div>
         <img class="pill-photo" src="img/pilar-ambiente.webp" alt="" width="460" height="270" loading="lazy" decoding="async" />
       </div>
     </div>
@@ -684,17 +665,17 @@
 <section class="band tint" id="lineas">
   <div class="wrap">
     <div class="sec-head center reveal">
-      <span class="eyebrow" style="justify-content:center"><span class="dot"></span> <span data-i18n="lineas_eyebrow">Nuestras líneas de acción</span></span>
-      <h2 data-i18n="lineas_h2">Seis frentes para el desarrollo</h2>
-      <p data-i18n="lineas_p">Invertimos donde más se necesita, con proyectos que dejan huella en las comunidades y en el medio ambiente.</p>
+      <span class="eyebrow" style="justify-content:center"><span class="dot"></span> <span data-i18n="lineas_eyebrow">Our focus areas</span></span>
+      <h2 data-i18n="lineas_h2">Six fronts for development</h2>
+      <p data-i18n="lineas_p">We invest where it is needed most, with projects that leave a mark on communities and the environment.</p>
     </div>
     <div class="cards">
-      <article class="card reveal"><div class="top"><img class="badge-ic" src="img/gpt-social.webp" alt="" width="168" height="187" loading="lazy" decoding="async" /><span class="num">01</span></div><h3 data-i18n="card1_h3">Educación</h3><p data-i18n="card1_p">Apoyamos el acceso a la educación y el fortalecimiento de las instituciones educativas de la región.</p></article>
-      <article class="card reveal"><div class="top"><img class="badge-ic" src="img/gpt-vivienda.webp" alt="" width="168" height="171" loading="lazy" decoding="async" /><span class="num">02</span></div><h3 data-i18n="card2_h3">Vivienda y hogares</h3><p data-i18n="card2_p">Mejoramos y mantenemos las viviendas de las familias, por hogares más dignos y seguros.</p></article>
-      <article class="card reveal"><div class="top"><img class="badge-ic" src="img/gpt-deporte.webp" alt="" width="168" height="172" loading="lazy" decoding="async" /><span class="num">03</span></div><h3 data-i18n="card3_h3">Deporte y recreación</h3><p data-i18n="card3_p">Promovemos el deporte y la recreación como motor de unión y bienestar comunitario.</p></article>
-      <article class="card reveal"><div class="top"><img class="badge-ic" src="img/gpt-vias.webp" alt="" width="168" height="171" loading="lazy" decoding="async" /><span class="num">04</span></div><h3 data-i18n="card4_h3">Infraestructura vial</h3><p data-i18n="card4_p">Apoyamos el mejoramiento y mantenimiento de las vías terciarias que conectan al campo.</p></article>
-      <article class="card reveal"><div class="top"><img class="badge-ic" src="img/gpt-saneamiento.webp" alt="" width="168" height="178" loading="lazy" decoding="async" /><span class="num">05</span></div><h3 data-i18n="card5_h3">Agua y servicios básicos</h3><p data-i18n="card5_p">Llevamos agua, energía y alcantarillado a las comunidades más apartadas del país.</p></article>
-      <article class="card reveal"><div class="top"><img class="badge-ic" src="img/gpt-agua-suelos.webp" alt="" width="168" height="171" loading="lazy" decoding="async" /><span class="num">06</span></div><h3 data-i18n="card6_h3">Medio ambiente</h3><p data-i18n="card6_p">Reforestamos y conservamos los nacimientos de los ríos para proteger el agua y la vida.</p></article>
+      <article class="card reveal"><div class="top"><img class="badge-ic" src="img/gpt-social.webp" alt="" width="168" height="187" loading="lazy" decoding="async" /><span class="num">01</span></div><h3 data-i18n="card1_h3">Education</h3><p data-i18n="card1_p">We support access to education and the strengthening of the region's educational institutions.</p></article>
+      <article class="card reveal"><div class="top"><img class="badge-ic" src="img/gpt-vivienda.webp" alt="" width="168" height="171" loading="lazy" decoding="async" /><span class="num">02</span></div><h3 data-i18n="card2_h3">Housing & homes</h3><p data-i18n="card2_p">We improve and maintain families' homes, for more dignified and safe housing.</p></article>
+      <article class="card reveal"><div class="top"><img class="badge-ic" src="img/gpt-deporte.webp" alt="" width="168" height="172" loading="lazy" decoding="async" /><span class="num">03</span></div><h3 data-i18n="card3_h3">Sports & recreation</h3><p data-i18n="card3_p">We promote sports and recreation as an engine of unity and community wellbeing.</p></article>
+      <article class="card reveal"><div class="top"><img class="badge-ic" src="img/gpt-vias.webp" alt="" width="168" height="171" loading="lazy" decoding="async" /><span class="num">04</span></div><h3 data-i18n="card4_h3">Road infrastructure</h3><p data-i18n="card4_p">We support the improvement and maintenance of the tertiary roads that connect the countryside.</p></article>
+      <article class="card reveal"><div class="top"><img class="badge-ic" src="img/gpt-saneamiento.webp" alt="" width="168" height="178" loading="lazy" decoding="async" /><span class="num">05</span></div><h3 data-i18n="card5_h3">Water & basic services</h3><p data-i18n="card5_p">We bring water, electricity and sewerage to the most remote communities in the country.</p></article>
+      <article class="card reveal"><div class="top"><img class="badge-ic" src="img/gpt-agua-suelos.webp" alt="" width="168" height="171" loading="lazy" decoding="async" /><span class="num">06</span></div><h3 data-i18n="card6_h3">Environment</h3><p data-i18n="card6_p">We reforest and conserve river sources to protect water and life.</p></article>
     </div>
   </div>
 </section>
@@ -705,13 +686,13 @@
     <div class="env reveal">
       <div class="env-grid">
         <div class="env-copy">
-          <span class="eyebrow"><span class="dot"></span> <span data-i18n="amb_eyebrow">Compromiso ambiental</span></span>
-          <h2 data-i18n="amb_h2">Un desarrollo que cuida la vida</h2>
-          <p data-i18n="amb_p">La operación responsable y el cuidado del medio ambiente se complementan. En PBCM el componente ambiental es parte esencial de cada proyecto.</p>
+          <span class="eyebrow"><span class="dot"></span> <span data-i18n="amb_eyebrow">Environmental commitment</span></span>
+          <h2 data-i18n="amb_h2">Development that cares for life</h2>
+          <p data-i18n="amb_p">Responsible operation and environmental care complement each other. At PBCM, the environmental component is an essential part of every project.</p>
           <ul class="env-list">
-            <li><span class="ck"><svg class="icn" width="16" height="16" aria-hidden="true"><use href="#icon-status-check"/></svg></span> <span data-i18n="amb_li1">Reforestación con especies nativas</span></li>
-            <li><span class="ck"><svg class="icn" width="16" height="16" aria-hidden="true"><use href="#icon-status-check"/></svg></span> <span data-i18n="amb_li2">Conservación de los nacimientos de ríos</span></li>
-            <li><span class="ck"><svg class="icn" width="16" height="16" aria-hidden="true"><use href="#icon-status-check"/></svg></span> <span data-i18n="amb_li3">Protección de los recursos hídricos y naturales</span></li>
+            <li><span class="ck"><svg class="icn" width="16" height="16" aria-hidden="true"><use href="#icon-status-check"/></svg></span> <span data-i18n="amb_li1">Reforestation with native species</span></li>
+            <li><span class="ck"><svg class="icn" width="16" height="16" aria-hidden="true"><use href="#icon-status-check"/></svg></span> <span data-i18n="amb_li2">Conservation of river sources</span></li>
+            <li><span class="ck"><svg class="icn" width="16" height="16" aria-hidden="true"><use href="#icon-status-check"/></svg></span> <span data-i18n="amb_li3">Protection of water and natural resources</span></li>
           </ul>
         </div>
         <div class="env-art">
@@ -728,9 +709,9 @@
     <img class="proceso-bg" src="img/proceso-bg-1600.webp" srcset="img/proceso-bg-900.webp 900w, img/proceso-bg-1600.webp 1600w" sizes="100vw" alt="" width="1600" height="680" loading="lazy" decoding="async" />
     <div class="proceso-veil"></div>
     <div class="wrap proceso-head reveal">
-      <span class="eyebrow" style="justify-content:center"><span class="dot"></span> <span data-i18n="proc_eyebrow">Cómo trabajamos</span></span>
-      <h2 data-i18n="proc_h2">De la mano con la comunidad</h2>
-      <p data-i18n="proc_p">Nuestro trabajo se construye escuchando a las personas y llegando a acuerdos para el beneficio de todos.</p>
+      <span class="eyebrow" style="justify-content:center"><span class="dot"></span> <span data-i18n="proc_eyebrow">How we work</span></span>
+      <h2 data-i18n="proc_h2">Hand in hand with the community</h2>
+      <p data-i18n="proc_p">Our work is built by listening to people and reaching agreements for everyone's benefit.</p>
     </div>
   </div>
   <div class="wrap proceso-cards">
@@ -741,90 +722,31 @@
       <span class="riel-punto"></span>
     </div>
     <div class="timeline">
-      <div class="tstep reveal"><div class="tstep-body"><div class="tstep-top"><div class="node">01</div><h3 data-i18n="step1_h3">Socialización</h3></div><p data-i18n="step1_p">Damos a conocer a la población los trabajos a realizar y el personal requerido para cada actividad.</p></div><img class="tstep-img" src="img/paso-1.webp" alt="" width="476" height="294" loading="lazy" decoding="async" /></div>
-      <div class="tstep reveal"><div class="tstep-body"><div class="tstep-top"><div class="node">02</div><h3 data-i18n="step2_h3">Concertación</h3></div><p data-i18n="step2_p">Escuchamos a la comunidad y llegamos a consensos sobre los proyectos de inversión social.</p></div><img class="tstep-img" src="img/paso-2.webp" alt="" width="472" height="294" loading="lazy" decoding="async" /></div>
-      <div class="tstep reveal"><div class="tstep-body"><div class="tstep-top"><div class="node">03</div><h3 data-i18n="step3_h3">Ejecución</h3></div><p data-i18n="step3_p">Desarrollamos los proyectos generando empleo local y bienestar duradero.</p></div><img class="tstep-img" src="img/paso-3.webp" alt="" width="478" height="294" loading="lazy" decoding="async" /></div>
+      <div class="tstep reveal"><div class="tstep-body"><div class="tstep-top"><div class="node">01</div><h3 data-i18n="step1_h3">Outreach</h3></div><p data-i18n="step1_p">We inform the population about the work to be done and the personnel required for each activity.</p></div><img class="tstep-img" src="img/paso-1.webp" alt="" width="476" height="294" loading="lazy" decoding="async" /></div>
+      <div class="tstep reveal"><div class="tstep-body"><div class="tstep-top"><div class="node">02</div><h3 data-i18n="step2_h3">Agreement</h3></div><p data-i18n="step2_p">We listen to the community and reach consensus on the social investment projects.</p></div><img class="tstep-img" src="img/paso-2.webp" alt="" width="472" height="294" loading="lazy" decoding="async" /></div>
+      <div class="tstep reveal"><div class="tstep-body"><div class="tstep-top"><div class="node">03</div><h3 data-i18n="step3_h3">Execution</h3></div><p data-i18n="step3_p">We carry out the projects, generating local jobs and lasting wellbeing.</p></div><img class="tstep-img" src="img/paso-3.webp" alt="" width="478" height="294" loading="lazy" decoding="async" /></div>
     </div>
   </div>
 </section>
 
-<!-- ============ ENFOQUE / RESULTADO DE MESAS ============ -->
-<section class="band tint" id="enfoque">
+<!-- ============ ENFOQUE / INFOGRAFÍA ============ -->
+<section class="band" id="enfoque">
   <div class="wrap">
-    <div class="sec-head center reveal">
-      <span class="eyebrow" style="justify-content:center"><span class="dot"></span> <span data-i18n="info_eyebrow"></span></span>
-      <h2 data-i18n="info_h2"></h2>
-      <p data-i18n="info_p"></p>
-    </div>
-
-    <div class="reveal">
-      <h3 class="info-sub" data-i18n="info_prem_h"></h3>
-      <div class="premisas">
-        <div class="prem-card"><span class="ck" aria-hidden="true"><svg class="icn" width="16" height="16" aria-hidden="true"><use href="#icon-status-check"/></svg></span><span data-i18n="info_prem1"></span></div>
-        <div class="prem-card"><span class="ck" aria-hidden="true"><svg class="icn" width="16" height="16" aria-hidden="true"><use href="#icon-status-check"/></svg></span><span data-i18n="info_prem2"></span></div>
-        <div class="prem-card"><span class="ck" aria-hidden="true"><svg class="icn" width="16" height="16" aria-hidden="true"><use href="#icon-status-check"/></svg></span><span data-i18n="info_prem3"></span></div>
-      </div>
-    </div>
-
-    <div class="reveal">
-      <h3 class="info-sub" data-i18n="info_sec_h"></h3>
-      <div class="sec-cards">
-        <article class="sec-card">
-          <span class="snum" aria-hidden="true">1</span>
-          <img src="img/sec-ambiente.webp" alt="" width="184" height="184" loading="lazy" decoding="async" />
-          <b data-i18n="info_s1_t"></b>
-          <span class="sd" data-i18n="info_s1_d"></span>
-        </article>
-        <article class="sec-card">
-          <span class="snum" aria-hidden="true">2</span>
-          <img src="img/sec-vial.webp" alt="" width="184" height="184" loading="lazy" decoding="async" />
-          <b data-i18n="info_s2_t"></b>
-          <span class="sd" data-i18n="info_s2_d"></span>
-        </article>
-        <article class="sec-card">
-          <span class="snum" aria-hidden="true">3</span>
-          <img src="img/sec-agro.webp" alt="" width="184" height="184" loading="lazy" decoding="async" />
-          <b data-i18n="info_s3_t"></b>
-          <span class="sd" data-i18n="info_s3_d"></span>
-        </article>
-        <article class="sec-card">
-          <span class="snum" aria-hidden="true">4</span>
-          <img src="img/sec-comunidad.webp" alt="" width="184" height="184" loading="lazy" decoding="async" />
-          <b data-i18n="info_s4_t"></b>
-          <span class="sd" data-i18n="info_s4_d"></span>
-        </article>
-        <article class="sec-card">
-          <span class="snum" aria-hidden="true">5</span>
-          <img src="img/sec-salud.webp" alt="" width="184" height="184" loading="lazy" decoding="async" />
-          <b data-i18n="info_s5_t"></b>
-          <span class="sd" data-i18n="info_s5_d"></span>
-        </article>
-      </div>
-    </div>
-
-    <div class="info-inv reveal">
-      <div class="inv inv-plus">
-        <h3><span class="sign" aria-hidden="true"><svg class="icn" width="18" height="18" aria-hidden="true"><use href="#icon-status-plus"/></svg></span> <span data-i18n="info_may_h"></span></h3>
-        <ul>
-            <li data-i18n="info_may1"></li>
-            <li data-i18n="info_may2"></li>
-            <li data-i18n="info_may3"></li>
-            <li data-i18n="info_may4"></li>
-            <li data-i18n="info_may5"></li>
-            <li data-i18n="info_may6"></li>
-        </ul>
-      </div>
-      <div class="inv inv-minus">
-        <h3><span class="sign" aria-hidden="true"><svg class="icn" width="18" height="18" aria-hidden="true"><use href="#icon-status-minus"/></svg></span> <span data-i18n="info_men_h"></span></h3>
-        <ul>
-            <li data-i18n="info_men1"></li>
-            <li data-i18n="info_men2"></li>
-            <li data-i18n="info_men3"></li>
-            <li data-i18n="info_men4"></li>
-        </ul>
-      </div>
-    </div>
-
+    <figure class="infografia reveal">
+      <a class="infg infg-es" href="img/infografia.webp" target="_blank" rel="noopener">
+        <img src="img/infografia.webp" alt="Infografía «Resultado de mesas con las comunidades»: premisas para aplicar los programas, cinco sectores priorizados —medio ambiente, infraestructura vial, agropecuario, fortalecimiento comunitario y salud— e inversiones de mayor y menor impacto según las comunidades." width="1280" height="856" loading="lazy" decoding="async" />
+      </a>
+      <a class="infg infg-en" href="img/infografia-en.webp" target="_blank" rel="noopener">
+        <img src="img/infografia-en.webp" alt="Infographic “Results of the community roundtables”: guiding principles, five priority sectors — environment, road infrastructure, agriculture, community strengthening and health — and the higher and lower impact investments identified by the communities." width="1268" height="940" loading="lazy" decoding="async" />
+      </a>
+      <a class="infg infg-fr" href="img/infografia-fr.webp" target="_blank" rel="noopener">
+        <img src="img/infografia-fr.webp" alt="Infographie « Résultats des tables rondes communautaires » : principes directeurs, cinq secteurs prioritaires — environnement, infrastructure routière, agriculture, renforcement communautaire et santé — et les investissements à fort et faible impact identifiés par les communautés." width="1280" height="860" loading="lazy" decoding="async" />
+      </a>
+    </figure>
+    <p class="infog-pie">
+      <span class="infog-hint" data-i18n="infog_hint">Swipe to see the full infographic</span>
+      <span class="infog-zoom" data-i18n="infog_zoom">Tap the image to view it full size</span>
+    </p>
   </div>
 </section>
 
@@ -832,22 +754,22 @@
 <section class="band" id="comunidad">
   <div class="wrap">
     <div class="sec-head center reveal">
-      <span class="eyebrow" style="justify-content:center"><span class="dot"></span> <span data-i18n="gal_eyebrow">Nuestra gente</span></span>
-      <h2 data-i18n="gal_h2">Cerca de la gente</h2>
-      <p data-i18n="gal_p">Momentos del trabajo cercano con las comunidades de las zonas de influencia.</p>
+      <span class="eyebrow" style="justify-content:center"><span class="dot"></span> <span data-i18n="gal_eyebrow">Our people</span></span>
+      <h2 data-i18n="gal_h2">Close to people</h2>
+      <p data-i18n="gal_p">Moments of close work with the communities in the areas of influence.</p>
     </div>
     <div class="carousel reveal">
-      <button class="car-btn prev" type="button" data-i18n-aria="a11y_prev" aria-label="Anterior" aria-controls="carTrack">‹</button>
-      <div class="car-track" id="carTrack" tabindex="0" role="group" data-i18n-aria="a11y_gallery" aria-label="Galería de fotos">
-        <figure class="car-slide"><img src="img/foto-reunion.webp" alt="Reunión comunitaria de PBCM bajo enramada" width="760" height="570" loading="lazy" decoding="async"><figcaption data-i18n="cap1">Encuentro con la comunidad</figcaption></figure>
-        <figure class="car-slide"><img src="img/comunidad-2.webp" alt="Reunión rural con la comunidad" width="578" height="441" loading="lazy" decoding="async"><figcaption data-i18n="cap2">Diálogo social</figcaption></figure>
-        <figure class="car-slide"><img src="img/socializacion.webp" alt="Socialización en auditorio" width="746" height="559" loading="lazy" decoding="async"><figcaption data-i18n="cap3">Socialización</figcaption></figure>
-        <figure class="car-slide"><img src="img/comunidad-4.webp" alt="Reunión con habitantes rurales" width="623" height="473" loading="lazy" decoding="async"><figcaption data-i18n="cap4">Concertación</figcaption></figure>
-        <figure class="car-slide"><img src="img/comunidad-3.webp" alt="Reunión de la comunidad en zona rural" width="608" height="461" loading="lazy" decoding="async"><figcaption data-i18n="cap5">Compromiso</figcaption></figure>
-        <figure class="car-slide"><img src="img/foto-via.webp" alt="Vía rural inundada en zona de influencia de PBCM" width="760" height="570" loading="lazy" decoding="async"><figcaption data-i18n="cap6">En el territorio</figcaption></figure>
+      <button class="car-btn prev" type="button" data-i18n-aria="a11y_prev" aria-label="Previous photo" aria-controls="carTrack">‹</button>
+      <div class="car-track" id="carTrack" tabindex="0" role="group" data-i18n-aria="a11y_gallery" aria-label="Photo gallery">
+        <figure class="car-slide"><img src="img/foto-reunion.webp" alt="Reunión comunitaria de PBCM bajo enramada" width="760" height="570" loading="lazy" decoding="async"><figcaption data-i18n="cap1">Meeting with the community</figcaption></figure>
+        <figure class="car-slide"><img src="img/comunidad-2.webp" alt="Reunión rural con la comunidad" width="578" height="441" loading="lazy" decoding="async"><figcaption data-i18n="cap2">Social dialogue</figcaption></figure>
+        <figure class="car-slide"><img src="img/socializacion.webp" alt="Socialización en auditorio" width="746" height="559" loading="lazy" decoding="async"><figcaption data-i18n="cap3">Outreach</figcaption></figure>
+        <figure class="car-slide"><img src="img/comunidad-4.webp" alt="Reunión con habitantes rurales" width="623" height="473" loading="lazy" decoding="async"><figcaption data-i18n="cap4">Agreement</figcaption></figure>
+        <figure class="car-slide"><img src="img/comunidad-3.webp" alt="Reunión de la comunidad en zona rural" width="608" height="461" loading="lazy" decoding="async"><figcaption data-i18n="cap5">Commitment</figcaption></figure>
+        <figure class="car-slide"><img src="img/foto-via.webp" alt="Vía rural inundada en zona de influencia de PBCM" width="760" height="570" loading="lazy" decoding="async"><figcaption data-i18n="cap6">In the field</figcaption></figure>
       </div>
-      <button class="car-btn next" type="button" data-i18n-aria="a11y_next" aria-label="Siguiente" aria-controls="carTrack">›</button>
-      <div class="car-dots" role="group" data-i18n-aria="a11y_dots" aria-label="Ir a una foto"></div>
+      <button class="car-btn next" type="button" data-i18n-aria="a11y_next" aria-label="Next photo" aria-controls="carTrack">›</button>
+      <div class="car-dots" role="group" data-i18n-aria="a11y_dots" aria-label="Go to a photo"></div>
     </div>
   </div>
 </section>
@@ -856,9 +778,9 @@
 <section class="band">
   <div class="wrap">
     <div class="cta reveal">
-      <h2 data-i18n="cta_h2">Sumemos fuerzas por Colombia</h2>
-      <p data-i18n="cta_p">¿Quieres conocer el programa, proponer un proyecto o vincularte como aliado? Escríbenos y construyamos juntos comunidades más fuertes y un entorno más sano.</p>
-      <a href="#contacto" class="btn btn-peach"><span data-i18n="cta_btn">Contáctanos</span>
+      <h2 data-i18n="cta_h2">Let's join forces for Colombia</h2>
+      <p data-i18n="cta_p">Do you want to learn about the program, propose a project or get involved as a partner? Write to us and let's build stronger communities and a healthier environment together.</p>
+      <a href="#contacto" class="btn btn-peach"><span data-i18n="cta_btn">Contact us</span>
         <svg class="icn" width="20" height="20" aria-hidden="true"><use href="#icon-nav-arrow-right"/></svg>
       </a>
     </div>
@@ -870,20 +792,20 @@
   <div class="wrap">
     <div class="contact reveal">
       <div class="contact-info">
-        <span class="eyebrow"><span class="dot"></span> <span data-i18n="contact_eyebrow">Contacto</span></span>
-        <h2 data-i18n="contact_h2">Hablemos</h2>
-        <p data-i18n="contact_p">Estamos para escucharte. Escríbenos y con gusto te contamos más sobre el programa.</p>
-        <div class="cinfo"><span class="ic"><svg class="icn" width="20" height="20" aria-hidden="true"><use href="#icon-comm-mail"/></svg></span><div><small data-i18n="ci_correo">Correo</small><a href="mailto:administration@pbcmcolombia.com">administration@pbcmcolombia.com</a><button type="button" class="copiar" id="btnCopiar" data-correo="administration@pbcmcolombia.com" data-i18n-aria="a11y_copiar" aria-label="Copiar el correo"><svg class="icn" width="14" height="14" aria-hidden="true"><use href="#icon-action-copy"/></svg><span data-i18n="copiar">Copiar</span></button></div></div>
-        <div class="cinfo"><span class="ic"><svg class="icn" width="20" height="20" aria-hidden="true"><use href="#icon-comm-phone"/></svg></span><div><small data-i18n="ci_wa">WhatsApp / Teléfono</small><a href="tel:+18594627602">+1 859 462 7602</a><a href="https://wa.me/19109646805">+1 910 964 6805</a></div></div>
-        <div class="cinfo"><span class="ic"><svg class="icn" width="20" height="20" aria-hidden="true"><use href="#icon-content-map-pin"/></svg></span><div><small data-i18n="ci_ubi">Sede</small><span data-i18n="ci_ubi_val">Estados Unidos · inversión destinada a Colombia</span></div></div>
+        <span class="eyebrow"><span class="dot"></span> <span data-i18n="contact_eyebrow">Contact</span></span>
+        <h2 data-i18n="contact_h2">Let's talk</h2>
+        <p data-i18n="contact_p">We're here to listen. Write to us and we'll gladly tell you more about the program.</p>
+        <div class="cinfo"><span class="ic"><svg class="icn" width="20" height="20" aria-hidden="true"><use href="#icon-comm-mail"/></svg></span><div><small data-i18n="ci_correo">Email</small><a href="mailto:administration@pbcmcolombia.com">administration@pbcmcolombia.com</a><button type="button" class="copiar" id="btnCopiar" data-correo="administration@pbcmcolombia.com" data-i18n-aria="a11y_copiar" aria-label="Copy the email address"><svg class="icn" width="14" height="14" aria-hidden="true"><use href="#icon-action-copy"/></svg><span data-i18n="copiar">Copy</span></button></div></div>
+        <div class="cinfo"><span class="ic"><svg class="icn" width="20" height="20" aria-hidden="true"><use href="#icon-comm-phone"/></svg></span><div><small data-i18n="ci_wa">WhatsApp / Phone</small><a href="tel:+18594627602">+1 859 462 7602</a><a href="https://wa.me/19109646805">+1 910 964 6805</a></div></div>
+        <div class="cinfo"><span class="ic"><svg class="icn" width="20" height="20" aria-hidden="true"><use href="#icon-content-map-pin"/></svg></span><div><small data-i18n="ci_ubi">Headquarters</small><span data-i18n="ci_ubi_val">United States · investment directed to Colombia</span></div></div>
       </div>
       <form class="contact-form" id="contactForm" name="contacto" method="POST" action="/gracias.html" data-netlify="true" netlify-honeypot="bot-field">
         <p class="solo-robots" aria-hidden="true"><label>No llenar <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
-        <input type="hidden" name="idioma" id="formLang" value="es" />
-        <div class="field"><label for="nombre" data-i18n="lbl_nombre">Nombre</label><input id="nombre" name="nombre" type="text" autocomplete="name" aria-describedby="msg-nombre" data-i18n-ph="ph_nombre" placeholder="Tu nombre completo" required /><p class="field-msg" id="msg-nombre"></p></div>
-        <div class="field"><label for="correo" data-i18n="lbl_correo">Correo</label><input id="correo" name="correo" type="email" autocomplete="email" aria-describedby="msg-correo" data-i18n-ph="ph_correo" placeholder="tucorreo@ejemplo.com" required /><p class="field-msg" id="msg-correo"></p></div>
-        <div class="field"><label for="mensaje" data-i18n="lbl_mensaje">Mensaje</label><textarea id="mensaje" name="mensaje" aria-describedby="msg-mensaje" data-i18n-ph="ph_mensaje" placeholder="Cuéntanos en qué podemos ayudarte…" required></textarea><p class="field-msg" id="msg-mensaje"></p></div>
-        <button type="submit" class="btn btn-primary" id="formBtn" style="width:100%;justify-content:center" data-i18n="btn_enviar">Enviar mensaje</button>
+        <input type="hidden" name="idioma" id="formLang" value="en" />
+        <div class="field"><label for="nombre" data-i18n="lbl_nombre">Name</label><input id="nombre" name="nombre" type="text" autocomplete="name" aria-describedby="msg-nombre" data-i18n-ph="ph_nombre" placeholder="Your full name" required /><p class="field-msg" id="msg-nombre"></p></div>
+        <div class="field"><label for="correo" data-i18n="lbl_correo">Email</label><input id="correo" name="correo" type="email" autocomplete="email" aria-describedby="msg-correo" data-i18n-ph="ph_correo" placeholder="youremail@example.com" required /><p class="field-msg" id="msg-correo"></p></div>
+        <div class="field"><label for="mensaje" data-i18n="lbl_mensaje">Message</label><textarea id="mensaje" name="mensaje" aria-describedby="msg-mensaje" data-i18n-ph="ph_mensaje" placeholder="Tell us how we can help…" required></textarea><p class="field-msg" id="msg-mensaje"></p></div>
+        <button type="submit" class="btn btn-primary" id="formBtn" style="width:100%;justify-content:center" data-i18n="btn_enviar">Send message</button>
         <p id="formNote" class="form-note" role="status" aria-live="polite"></p>
       </form>
     </div>
@@ -898,16 +820,16 @@
     <div class="foot-top">
       <div class="foot-brand">
         <img class="foot-logo" src="img/logo-lockup.webp" alt="PBCM · Community Benefit Environment" width="472" height="407" loading="lazy" decoding="async" />
-        <p data-i18n="foot_desc">Programa de Beneficio a las Comunidades y Medio Ambiente.<br/><em>Juntos construimos un mejor mañana.</em></p>
+        <p data-i18n="foot_desc">Community Benefit and Environment Program.<br/><em>Together we build a better tomorrow.</em></p>
       </div>
       <div class="foot-cols">
-        <div class="foot-col"><h3 data-i18n="foot_col1">Programa</h3><a href="#programa" data-i18n="foot_l1">Quiénes somos</a><a href="#lineas" data-i18n="foot_l2">Líneas de acción</a><a href="#ambiente" data-i18n="foot_l3">Medio ambiente</a></div>
-        <div class="foot-col"><h3 data-i18n="foot_col2">Participa</h3><a href="#comunidad" data-i18n="foot_l4">Comunidad</a><a href="#proceso" data-i18n="foot_l5">Cómo trabajamos</a><a href="#contacto" data-i18n="foot_l6">Contacto</a></div>
+        <div class="foot-col"><h3 data-i18n="foot_col1">Program</h3><a href="#programa" data-i18n="foot_l1">About us</a><a href="#lineas" data-i18n="foot_l2">Focus areas</a><a href="#ambiente" data-i18n="foot_l3">Environment</a></div>
+        <div class="foot-col"><h3 data-i18n="foot_col2">Get involved</h3><a href="#comunidad" data-i18n="foot_l4">Community</a><a href="#proceso" data-i18n="foot_l5">How we work</a><a href="#contacto" data-i18n="foot_l6">Contact</a></div>
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© <span id="year"></span> <span data-i18n="foot_rights">PBCM · Todos los derechos reservados.</span></span>
-      <span data-i18n="foot_made">Hecho con <svg class="icn icn-heart" width="16" height="16" aria-hidden="true"><use href="#icon-content-heart"/></svg> para Colombia</span>
+      <span>© <span id="year"></span> <span data-i18n="foot_rights">PBCM · All rights reserved.</span></span>
+      <span data-i18n="foot_made">Made with <svg class="icn icn-heart" width="16" height="16" aria-hidden="true"><use href="#icon-content-heart"/></svg> for Colombia</span>
     </div>
   </div>
 </footer>
@@ -919,6 +841,7 @@
       nav_programa:"El programa", nav_lineas:"Líneas de acción", nav_ambiente:"Medio ambiente", nav_comunidad:"Comunidad", nav_contacto:"Contacto",
       cta_contact:"Contáctanos",
       skip:"Saltar al contenido",
+      infog_hint:"Desliza para ver la infografía completa", infog_zoom:"Toca la imagen para verla a tamaño completo",
       err_requerido:"Este campo hace falta.", err_correo:"Revisa el correo: parece que le falta algo.",
       copiar:"Copiar", copiado:"¡Copiado!", a11y_copiar:"Copiar el correo al portapapeles",
       meta_title:"PBCM · Beneficio a las Comunidades y Medio Ambiente", meta_desc:"PBCM, Programa de Beneficio a las Comunidades y Medio Ambiente: inversión social y ambiental concertada con las comunidades rurales de Colombia. Educación, vivienda, deporte, vías, agua y reforestación.",
@@ -952,17 +875,6 @@
       step3_h3:"Ejecución", step3_p:"Desarrollamos los proyectos generando empleo local y bienestar duradero.",
       gal_eyebrow:"Nuestra gente", gal_h2:"Cerca de la gente", gal_p:"Momentos del trabajo cercano con las comunidades de las zonas de influencia.",
       cap1:"Encuentro con la comunidad", cap2:"Diálogo social", cap3:"Socialización", cap4:"Concertación", cap5:"Compromiso", cap6:"En el territorio",
-      info_eyebrow:"Nuestro enfoque", info_h2:"Resultado de mesas con las comunidades",
-      info_p:"Resultados de los talleres realizados con líderes comunitarios, comunidades y juntas de acción comunal, para conocer su perspectiva sobre los Programas en Beneficio de las Comunidades (PBC).",
-      info_prem_h:"Premisas para la aplicación", info_prem1:"Verdadera inversión social que fortalezca a las comunidades.", info_prem2:"Comunidades capacitadas y fortalecidas.", info_prem3:"Información oportuna y procesos transparentes.",
-      info_sec_h:"Sectores priorizados",
-      info_s1_t:"Medio ambiente", info_s1_d:"Proteger el medio ambiente y conservar los recursos naturales.",
-      info_s2_t:"Infraestructura vial", info_s2_d:"Mejoramiento de vías terciarias.",
-      info_s3_t:"Agropecuario", info_s3_d:"Apoyar y fortalecer proyectos agropecuarios.",
-      info_s4_t:"Fortalecimiento comunitario", info_s4_d:"Fortalecimiento de las juntas de acción comunal.",
-      info_s5_t:"Salud", info_s5_d:"Construcción de más y mejores hospitales.",
-      info_may_h:"Inversiones de mayor impacto", info_may1:"Vivienda, escuelas y hospitales", info_may2:"Vías terciarias", info_may3:"Proyectos productivos", info_may4:"Servicios públicos", info_may5:"Dotaciones completas y funcionales", info_may6:"Becas estudiantiles",
-      info_men_h:"Inversiones de menor impacto", info_men1:"Dotaciones de bajo monto", info_men2:"Fiestas y celebraciones", info_men3:"Obras incompletas o inconclusas", info_men4:"Entrega de materiales sin acompañamiento",
       cta_h2:"Sumemos fuerzas por Colombia", cta_p:"¿Quieres conocer el programa, proponer un proyecto o vincularte como aliado? Escríbenos y construyamos juntos comunidades más fuertes y un entorno más sano.", cta_btn:"Contáctanos",
       contact_eyebrow:"Contacto", contact_h2:"Hablemos", contact_p:"Estamos para escucharte. Escríbenos y con gusto te contamos más sobre el programa.",
       ci_correo:"Correo", ci_wa:"WhatsApp / Teléfono", ci_ubi:"Sede",
@@ -980,6 +892,7 @@
       nav_programa:"The program", nav_lineas:"Focus areas", nav_ambiente:"Environment", nav_comunidad:"Community", nav_contacto:"Contact",
       cta_contact:"Contact us",
       skip:"Skip to content",
+      infog_hint:"Swipe to see the full infographic", infog_zoom:"Tap the image to view it full size",
       err_requerido:"This field is required.", err_correo:"Please check the email address: something looks missing.",
       copiar:"Copy", copiado:"Copied!", a11y_copiar:"Copy the email address",
       meta_title:"PBCM · Community Benefit and Environment Programme", meta_desc:"PBCM, the Community Benefit and Environment Programme: social and environmental investment agreed with rural communities in Colombia. Education, housing, sport, roads, water and reforestation.",
@@ -1013,17 +926,6 @@
       step3_h3:"Execution", step3_p:"We carry out the projects, generating local jobs and lasting wellbeing.",
       gal_eyebrow:"Our people", gal_h2:"Close to people", gal_p:"Moments of close work with the communities in the areas of influence.",
       cap1:"Meeting with the community", cap2:"Social dialogue", cap3:"Outreach", cap4:"Agreement", cap5:"Commitment", cap6:"In the field",
-      info_eyebrow:"Our approach", info_h2:"Community roundtable results",
-      info_p:"Results of the workshops held with community leaders, communities and community action boards, to understand their perspective on the Community Benefit Programs (PBC).",
-      info_prem_h:"Guiding principles", info_prem1:"Genuine social investment that strengthens communities.", info_prem2:"Trained and empowered communities.", info_prem3:"Timely information and transparent processes.",
-      info_sec_h:"Priority sectors",
-      info_s1_t:"Environment", info_s1_d:"Protect the environment and conserve natural resources.",
-      info_s2_t:"Road infrastructure", info_s2_d:"Improvement of tertiary roads.",
-      info_s3_t:"Agriculture", info_s3_d:"Support and strengthen agricultural projects.",
-      info_s4_t:"Community strengthening", info_s4_d:"Strengthening community action boards.",
-      info_s5_t:"Health", info_s5_d:"Building more and better hospitals.",
-      info_may_h:"Higher-impact investments", info_may1:"Housing, schools and hospitals", info_may2:"Tertiary roads", info_may3:"Productive projects", info_may4:"Public services", info_may5:"Complete, functional equipment", info_may6:"Student scholarships",
-      info_men_h:"Lower-impact investments", info_men1:"Low-value donations", info_men2:"Parties and celebrations", info_men3:"Incomplete or unfinished works", info_men4:"Handing out materials without support",
       cta_h2:"Let's join forces for Colombia", cta_p:"Do you want to learn about the program, propose a project or get involved as a partner? Write to us and let's build stronger communities and a healthier environment together.", cta_btn:"Contact us",
       contact_eyebrow:"Contact", contact_h2:"Let's talk", contact_p:"We're here to listen. Write to us and we'll gladly tell you more about the program.",
       ci_correo:"Email", ci_wa:"WhatsApp / Phone", ci_ubi:"Headquarters",
@@ -1041,6 +943,7 @@
       nav_programa:"Le programme", nav_lineas:"Domaines d'action", nav_ambiente:"Environnement", nav_comunidad:"Communauté", nav_contacto:"Contact",
       cta_contact:"Contactez-nous",
       skip:"Aller au contenu",
+      infog_hint:"Faites glisser pour voir l’infographie complète", infog_zoom:"Touchez l’image pour la voir en taille réelle",
       err_requerido:"Ce champ est obligatoire.", err_correo:"Vérifiez l’adresse e-mail : il semble manquer quelque chose.",
       copiar:"Copier", copiado:"Copié !", a11y_copiar:"Copier l’adresse e-mail",
       meta_title:"PBCM · Programme de Bénéfice aux Communautés et à l’Environnement", meta_desc:"PBCM, Programme de Bénéfice aux Communautés et à l’Environnement : investissement social et environnemental concerté avec les communautés rurales de Colombie. Éducation, logement, sport, routes, eau et reforestation.",
@@ -1074,17 +977,6 @@
       step3_h3:"Exécution", step3_p:"Nous réalisons les projets en créant des emplois locaux et un bien-être durable.",
       gal_eyebrow:"Nos gens", gal_h2:"Proches des gens", gal_p:"Des moments de travail proche avec les communautés des zones d'influence.",
       cap1:"Rencontre avec la communauté", cap2:"Dialogue social", cap3:"Sensibilisation", cap4:"Concertation", cap5:"Engagement", cap6:"Sur le terrain",
-      info_eyebrow:"Notre approche", info_h2:"Résultats des tables communautaires",
-      info_p:"Résultats des ateliers menés avec les leaders communautaires, les communautés et les conseils d'action communale, pour connaître leur point de vue sur les Programmes au Bénéfice des Communautés (PBC).",
-      info_prem_h:"Principes directeurs", info_prem1:"Un véritable investissement social qui renforce les communautés.", info_prem2:"Des communautés formées et renforcées.", info_prem3:"Information opportune et processus transparents.",
-      info_sec_h:"Secteurs prioritaires",
-      info_s1_t:"Environnement", info_s1_d:"Protéger l'environnement et conserver les ressources naturelles.",
-      info_s2_t:"Infrastructure routière", info_s2_d:"Amélioration des routes tertiaires.",
-      info_s3_t:"Agriculture", info_s3_d:"Soutenir et renforcer les projets agricoles.",
-      info_s4_t:"Renforcement communautaire", info_s4_d:"Renforcement des conseils d'action communale.",
-      info_s5_t:"Santé", info_s5_d:"Construction d'hôpitaux plus nombreux et de meilleure qualité.",
-      info_may_h:"Investissements à fort impact", info_may1:"Logements, écoles et hôpitaux", info_may2:"Routes tertiaires", info_may3:"Projets productifs", info_may4:"Services publics", info_may5:"Équipements complets et fonctionnels", info_may6:"Bourses étudiantes",
-      info_men_h:"Investissements à faible impact", info_men1:"Dotations de faible valeur", info_men2:"Fêtes et célébrations", info_men3:"Ouvrages incomplets ou inachevés", info_men4:"Distribution de matériaux sans accompagnement",
       cta_h2:"Unissons nos forces pour la Colombie", cta_p:"Vous souhaitez découvrir le programme, proposer un projet ou devenir partenaire ? Écrivez-nous et construisons ensemble des communautés plus fortes et un environnement plus sain.", cta_btn:"Contactez-nous",
       contact_eyebrow:"Contact", contact_h2:"Parlons-en", contact_p:"Nous sommes là pour vous écouter. Écrivez-nous et nous vous en dirons plus sur le programme avec plaisir.",
       ci_correo:"Courriel", ci_wa:"WhatsApp / Téléphone", ci_ubi:"Siège",
@@ -1110,7 +1002,7 @@
   let curLang = 'es';
   const langBtn = document.getElementById('langBtn'), langMenu = document.getElementById('langMenu'), langCur = document.getElementById('langCur');
   function applyLang(l, elegidoPorElVisitante){
-    if(!I18N[l]) l = 'es';
+    if(!I18N[l]) l = 'en';
     curLang = l;
     document.documentElement.lang = l;
     document.querySelectorAll('[data-i18n]').forEach(el => { const v = I18N[l][el.getAttribute('data-i18n')]; if(v != null) el.innerHTML = v; });
@@ -1122,6 +1014,8 @@
     if(I18N[l].meta_title) document.title = I18N[l].meta_title;
     const metaDesc = document.querySelector('meta[name="description"]');
     if(metaDesc && I18N[l].meta_desc) metaDesc.setAttribute('content', I18N[l].meta_desc);
+    const _infg = document.querySelector('.infg-' + l) || document.querySelector('.infg-es');
+    document.querySelectorAll('.infg').forEach(el => el.style.display = (el === _infg ? 'block' : 'none'));
     langCur.textContent = l.toUpperCase();
     const campoIdioma = document.getElementById('formLang');
     if(campoIdioma) campoIdioma.value = l;
@@ -1147,18 +1041,15 @@
     }
   });
 
-  // Idioma inicial: lo que el visitante eligio antes; si es su primera visita,
-  // el idioma de su navegador; y si no es ninguno de los tres, espanol.
-  let initLang = 'es';
+  // Idioma inicial: ingles para todo el mundo, salvo que el visitante haya
+  // elegido otro a mano en una visita anterior. No se mira el idioma del
+  // navegador a proposito: PBCM se presenta en ingles por defecto.
+  // El evento "Idioma cambiado" dice cuanta gente lo cambia; si son muchos,
+  // esta decision se puede revisar con datos.
+  let initLang = 'en';
   try{
     const guardado = localStorage.getItem(CLAVE_IDIOMA);
-    if(guardado && LANGS.includes(guardado)){
-      initLang = guardado;
-    } else {
-      const prefs = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || ''];
-      const coincide = prefs.map(x => String(x).slice(0,2).toLowerCase()).find(x => LANGS.includes(x));
-      if(coincide) initLang = coincide;
-    }
+    if(guardado && LANGS.includes(guardado)) initLang = guardado;
   }catch(e){}
 
   document.getElementById('year').textContent = new Date().getFullYear();
@@ -1180,7 +1071,7 @@
   const formNote = document.getElementById('formNote');
   const formBtn = document.getElementById('formBtn');
   function nota(clave, estado){
-    formNote.innerHTML = (I18N[curLang] || I18N.es)[clave] || '';
+    formNote.innerHTML = (I18N[curLang] || I18N.en)[clave] || '';
     if(estado) formNote.dataset.estado = estado; else delete formNote.dataset.estado;
   }
   contactForm.addEventListener('submit', e => {
@@ -1237,7 +1128,7 @@
     function revisar(campo){
       const caja = campo.closest('.field');
       const msg = caja.querySelector('.field-msg');
-      const dic = I18N[curLang] || I18N.es;
+      const dic = I18N[curLang] || I18N.en;
       caja.classList.remove('valido', 'invalido');
       campo.removeAttribute('aria-invalid');
       if(msg) msg.textContent = '';
@@ -1281,14 +1172,14 @@
     let reloj = null;
     boton.addEventListener('click', () => {
       navigator.clipboard.writeText(boton.dataset.correo).then(() => {
-        const dic = I18N[curLang] || I18N.es;
+        const dic = I18N[curLang] || I18N.en;
         boton.dataset.hecho = '1';
         etiqueta.textContent = dic.copiado;
         clearTimeout(reloj);
         // Vuelve solo: no deja al boton mintiendo "copiado" para siempre.
         reloj = setTimeout(() => {
           delete boton.dataset.hecho;
-          etiqueta.textContent = (I18N[curLang] || I18N.es).copiar;
+          etiqueta.textContent = (I18N[curLang] || I18N.en).copiar;
         }, 2200);
       }).catch(() => {});
     });
@@ -1459,7 +1350,7 @@
   "url": "https://pbcmcolombia.com/",
   "logo": "https://pbcmcolombia.com/img/og-pbcm.jpg",
   "image": "https://pbcmcolombia.com/img/og-pbcm.jpg",
-  "description": "Programa de inversión social y ambiental concertada con las comunidades rurales de Colombia: educación, vivienda, deporte, infraestructura vial, agua y servicios básicos, y protección del medio ambiente.",
+  "description": "Social and environmental investment agreed with rural communities in Colombia: education, housing, sport, road infrastructure, water and basic services, and protection of the environment.",
   "email": "administration@pbcmcolombia.com",
   "telephone": "+1-859-462-7602",
   "address": { "@type": "PostalAddress", "addressCountry": "US" },
