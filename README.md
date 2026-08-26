@@ -33,6 +33,7 @@ elige otro, se recuerda para sus próximas visitas.
 | `tools/optimize_images.py` | Genera los `.webp` a partir de `img/originales/`. |
 | `tools/build_standalone.py` | Genera una copia del sitio en **un solo archivo**, para enviar por correo o ver sin conexión. No es lo que se publica. |
 | `tools/recorta_infografia.py` | Genera las infografías que publica la página a partir de los originales de `_fuentes/`. |
+| `tools/prueba-navegador.js` | Abre un Chrome de verdad y comprueba la página entera (ver abajo). |
 | `tools/prueba-carrusel.js` | Comprueba los números del movimiento del carrusel (`node tools/prueba-carrusel.js`). |
 
 > No hay que "compilar" nada para publicar. Lo que está en el repositorio **es** el sitio.
@@ -102,6 +103,34 @@ python -m http.server 8000
 ```
 
 Y abrir http://localhost:8000
+
+---
+
+## 🧪 Comprobar que nada se rompió
+
+Antes de unir un cambio grande, con el servidor local levantado:
+
+```bash
+node tools/prueba-navegador.js http://localhost:8000/index.html 390 844
+```
+
+Abre un Chrome real sin ventana, emula un móvil, recorre la página como una
+persona y comprueba cinco cosas que **no se pueden ver leyendo el código**:
+
+1. que todas las animaciones de entrada se disparen
+2. que todas las imágenes que deben verse acaben cargando
+3. que las secciones no se muevan de sitio (si se mueven, los enlaces del
+   menú aterrizan donde no es)
+4. que no haya desplazamiento horizontal
+5. que ningún elemento que se toca sea menor de 24 px
+
+Cámbiale el ancho y el alto para probar otros tamaños: `320 720` es el móvil
+más estrecho que hay que soportar.
+
+> Ya sirvió para algo: detectó que `content-visibility:auto` desplazaba las
+> secciones hasta 1085 px de su sitio, lo que rompía todos los enlaces del
+> menú. Por eso ese ajuste está descartado, con la explicación escrita en el
+> CSS de `index.html`.
 
 ---
 
