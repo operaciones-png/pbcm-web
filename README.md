@@ -33,6 +33,7 @@ elige otro, se recuerda para sus próximas visitas.
 | `tools/optimize_images.py` | Genera los `.webp` a partir de `img/originales/`. |
 | `tools/build_standalone.py` | Genera una copia del sitio en **un solo archivo**, para enviar por correo o ver sin conexión. No es lo que se publica. |
 | `tools/recorta_infografia.py` | Genera las infografías que publica la página a partir de los originales de `_fuentes/`. |
+| `docs/prompt-investigacion.md` | Prompt listo para pegar en Perplexity o similar, para investigar el marco legal, los financiadores y los estándares del sector. |
 | `docs/cuando-llegue-el-contenido.md` | **Qué hacer cuando PBCM entregue las cifras, las fotos y los documentos.** Dónde va cada cosa en el código y cómo comprobarlo. |
 | `tools/prueba-navegador.js` | Abre un Chrome de verdad y comprueba la página entera (ver abajo). |
 | `tools/prueba-carrusel.js` | Comprueba los números del movimiento del carrusel (`node tools/prueba-carrusel.js`). |
