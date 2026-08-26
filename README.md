@@ -1,57 +1,158 @@
 # PBCM — Sitio web
 
-Sitio web de la fundación **PBCM · Programa de Beneficio a las Comunidades y Medio Ambiente** (Community Benefit Environment).
+Sitio de la fundación **PBCM · Programa de Beneficio a las Comunidades y Medio Ambiente**
+(Community Benefit Environment).
 
 🌐 **En vivo:** https://pbcmcolombia.com
 
-Sitio de una sola página, en **Español / Inglés / Francés** (selector de idioma arriba a la derecha).
+Una sola página, en **Español / Inglés / Francés** (selector arriba a la derecha).
+Abre en el idioma del navegador del visitante; si elige otro, se recuerda.
 
 ---
 
-## 📁 ¿Qué hay en este repositorio?
+## 📁 Qué hay en el repositorio
 
 | Archivo / carpeta | Qué es |
 |---|---|
-| **`index.html`** | La página final, lista para publicar. Se abre directo en el navegador. Las imágenes van **incrustadas** dentro del archivo (por eso pesa varios MB). |
-| **`template.html`** | El **archivo editable**: mismo diseño, pero con las imágenes enlazadas desde `img/`. **Aquí se edita el contenido, los textos y el diseño.** |
-| **`img/`** | Las imágenes del sitio (logo, fotos, iconos, infografías en 3 idiomas). |
-| **`build_site.py`** | Script que toma `template.html` + `img/` y genera el `index.html` final. |
+| **`index.html`** | **El sitio completo.** Textos, traducciones, diseño y comportamiento, todo aquí. Es el único archivo que se edita para cambiar la página. |
+| `img/` | Las imágenes que el sitio carga (`.webp`), el favicon y las infografías. |
+| `img/originales/` | Las fotos originales, sin tocar. De aquí salen los `.webp`. |
+| `img/originales/sin-usar/` | Material que hoy no aparece en la página, guardado por si se necesita. |
+| `gracias.html` | Página que ve quien envía el formulario. |
+| `404.html` | Página de "no encontrado". |
+| `netlify.toml` | Configuración de publicación: cabeceras de seguridad y caché. |
+| `robots.txt`, `sitemap.xml` | Para los buscadores. |
+| `tools/optimize_images.py` | Genera los `.webp` a partir de `img/originales/`. |
+| `tools/build_standalone.py` | Genera una copia del sitio en **un solo archivo**, para enviar por correo o ver sin conexión. No es lo que se publica. |
+
+> No hay que "compilar" nada para publicar. Lo que está en el repositorio **es** el sitio.
 
 ---
 
-## 💬 ¿Solo quieres dar recomendaciones? (sin editar)
+## 💬 ¿Solo quieres dar recomendaciones?
 
-Usa la pestaña **"Issues"** aquí en GitHub para dejar tus comentarios y sugerencias. Es la forma más fácil de aportar ideas. 👍
+Usa la pestaña **[Issues](../../issues)** para dejar comentarios y sugerencias.
+Es la forma más fácil de aportar. 👍
 
 ---
 
-## ✏️ ¿Cómo editar la página?
+## ✏️ Cambiar textos
 
-1. Edita **`template.html`** — ahí está todo: textos, colores, secciones y las traducciones (ES/EN/FR).
-   - Para cambiar una **imagen**, reemplaza el archivo dentro de `img/` (usando el mismo nombre) o agrega uno nuevo.
-2. Vuelve a generar el `index.html`:
+Todos los textos viven en `index.html`, en el bloque `const I18N = { ... }` cerca del final.
+Está dividido en tres partes: `es:`, `en:` y `fr:`.
+
+```js
+es: {
+  hero_h1:"Sembramos <em>bienestar</em> en las comunidades de Colombia",
+  ...
+}
+```
+
+**Regla de oro: si cambias un texto en `es:`, cámbialo también en `en:` y `fr:`.**
+Las tres listas deben tener exactamente las mismas claves; si a una le falta una,
+esa parte de la página se queda en blanco en ese idioma.
+
+El texto que está escrito directamente en el HTML (fuera de `I18N`) es solo el que
+se ve un instante antes de que cargue el idioma. Conviene mantenerlo igual al de `es:`.
+
+---
+
+## 🖼️ Cambiar una imagen
+
+1. Reemplaza el archivo en **`img/originales/`**, con el **mismo nombre**
+   (por ejemplo `foto-rio.jpg`).
+2. Ejecuta:
    ```bash
-   python build_site.py
+   python tools/optimize_images.py
    ```
-   (Necesitas [Python](https://www.python.org/downloads/) instalado.)
-3. Abre `index.html` para revisar cómo quedó.
+3. Listo. El script regenera el `.webp` que usa la página, al tamaño correcto.
 
-> 💡 Para un cambio pequeño de **texto** también puedes editar `index.html` directamente.
-> Pero para **imágenes** sí o sí edita `template.html` + `img/` y reconstruye.
+Necesitas [Python](https://www.python.org/downloads/) y Pillow:
+
+```bash
+pip install Pillow
+```
+
+**Para agregar una imagen nueva**, además de ponerla en `img/originales/`, añádela a la
+lista `PLAN` dentro de `tools/optimize_images.py` indicando a qué ancho se usa.
+El propio archivo explica cómo elegir ese ancho.
+
+> ⚠️ No edites los `.webp` a mano: se sobreescriben cada vez que corre el script.
 
 ---
 
-## 🔁 Trabajo en equipo (recomendado)
+## 👀 Ver el sitio en tu computador
 
-- Cada quien crea una **rama** (branch) con su cambio y abre un **Pull Request** para revisarlo entre todos antes de unirlo.
-- O deja tus ideas en **Issues** y alguien las implementa.
+Abrir `index.html` con doble clic funciona, pero algunas cosas (el formulario,
+las rutas absolutas) se comportan raro. Mejor levantar un servidor local:
+
+```bash
+python -m http.server 8000
+```
+
+Y abrir http://localhost:8000
 
 ---
 
-## 🚀 Publicar los cambios en el dominio
+## 🚀 Publicar
 
-El sitio está alojado en **Netlify** (dominio `pbcmcolombia.com`).
-Para publicar una versión nueva: entrar a Netlify → el sitio → **Deploys** → arrastrar el `index.html` actualizado.
+El sitio está en **Netlify**, con el dominio `pbcmcolombia.com`.
+
+**Cada cambio que entra a la rama `main` se publica automáticamente.** No hay que
+arrastrar archivos ni hacer nada manual.
+
+<details>
+<summary><b>Configuración inicial en Netlify</b> (una sola vez, requiere acceso al panel)</summary>
+
+1. Netlify → el sitio → **Site configuration → Build & deploy → Continuous deployment**
+2. **Link repository** → GitHub → `operaciones-png/pbcm-web`
+3. Rama a publicar: `main`. Build command: *vacío*. Publish directory: `.`
+   (`netlify.toml` ya lo declara, debería llenarse solo.)
+4. **Forms** → activar la detección de formularios si no está activa.
+5. **Forms → Form notifications → Add notification → Email notification**:
+   poner el correo que debe recibir los mensajes de contacto.
+
+Hasta que se haga el paso 5, los mensajes quedan guardados en el panel de
+Netlify (Forms → contacto) pero **nadie recibe aviso por correo**.
+
+</details>
+
+---
+
+## 🔁 Trabajo en equipo
+
+- Cada quien crea una **rama** con su cambio y abre un **Pull Request** para
+  revisarlo entre todos antes de unirlo a `main`.
+- O deja la idea en **Issues** y alguien la implementa.
+
+Como `main` se publica automáticamente, conviene que nada entre a `main` sin
+que otra persona lo haya mirado.
+
+---
+
+## 📤 Enviar el sitio por correo o verlo sin conexión
+
+```bash
+python tools/build_standalone.py
+```
+
+Genera `dist/pbcm-standalone.html`: un archivo único con todas las imágenes
+dentro. Sirve para adjuntarlo en un correo o abrirlo sin internet.
+**No es el archivo que se publica** y no se sube al repositorio.
+
+---
+
+## 📌 Pendientes por confirmar con PBCM
+
+- **Datos de contacto.** La sección Contacto dice *Ubicación: USA* y dos
+  teléfonos con prefijo +1, para una fundación que opera en Colombia.
+  Confirmar si es correcto o cambiarlo (`index.html`, sección `#contacto`;
+  si cambian, actualizar también el bloque `application/ld+json` al final).
+- **Fotos del carrusel.** Son imágenes de referencia de jornadas de
+  socialización, no fotos propias de PBCM. Conviene reemplazarlas.
+- **Infografía "Resultado de mesas".** El texto de la página y el JPG
+  original no coinciden en tres puntos (ver la sección Enfoque). Definir
+  cuál es la versión válida.
 
 ---
 
