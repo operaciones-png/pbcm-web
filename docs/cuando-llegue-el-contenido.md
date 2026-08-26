@@ -29,7 +29,7 @@ Se aprendieron rompiendo cosas. Saltárselas cuesta más tiempo del que ahorra.
 | **Cualquier servicio externo hay que añadirlo a la CSP de `netlify.toml`** | `script-src` **y** `connect-src`. Si falta uno, no funciona y **no da ningún error visible**. |
 | **Todo archivo versionado es una URL pública** | Aunque ninguna página lo enlace. Lo que no debe salir va en `_fuentes/`, que está en `.gitignore`. |
 | **Green Power no se vincula a la ONG en la web pública** | Decisión de PBCM. Sin logo, sin co-marca, sin contarlo de refilón en el relato de origen. |
-| **Nada de contadores automáticos** | Tres de las 28 organizaciones revisadas mostraban `0` el día que se visitaron porque el contador falló. Cifras escritas a mano, con su fecha al lado. |
+| **Una cifra sin fecha no vale** | Cinco de las 37 organizaciones revisadas mostraban `0` el día que se visitaron porque su contador automático falló. Lo más seguro es escribirlas a mano con su fecha. Si algún día se automatizan, hay que hacerlo como Direct Relief: «*Updated 2026-08-26 12:30:43. Totals are unaudited*». |
 | **`content-visibility:auto` está descartado** | Se probó y se midió: ahorra un 8% de render pero desplaza las secciones hasta 1085 px y rompe los enlaces del menú. La explicación está en el CSS de `index.html`. |
 
 ---
@@ -110,7 +110,7 @@ Esta no es contenido, es una decisión, y cambia la página entera.
 
 ## 6. Lo que se aprendió mirando 28 organizaciones
 
-Se revisaron 28 fundaciones y ONG comparables —de Colombia, de América Latina y
+Se revisaron fundaciones y ONG comparables —de Colombia, de América Latina y
 de EE.UU.— para ver qué publican y qué se puede adaptar. Esto es lo que salió de
 ahí y no estaba en la lista original.
 
@@ -241,6 +241,99 @@ formas, más fáciles de calcular:
 - **La promesa del 100% sigue sin aplicar.** charity: water y Thirst Project la
   usan, pero ambos tienen la operación financiada aparte. PBCM no. La vía honesta
   sigue siendo la de GiveDirectly: decir el porcentaje real y explicar qué compra.
+
+---
+
+## 7. Tercera ronda: nueve organizaciones más
+
+Se revisaron otras nueve —37 en total— buscando ángulos que no habían salido:
+reforestación, transparencia sobre los fracasos, y retroalimentación de las
+propias comunidades. Esto es lo nuevo.
+
+### Publicar lo que salió mal
+
+Ingenieros Sin Fronteras Canadá publica desde 2008 un **informe anual de
+fracasos**: testimonios de una o dos páginas que cuentan «la actividad, el
+error, por qué falló y qué se aprendió». Lo hacen para «celebrar públicamente
+estos fracasos» y que otros aprendan. Después abrieron *AdmittingFailure.com*
+para que otras organizaciones publiquen los suyos.
+
+Uno de los casos que citan es **casi exactamente el riesgo de PBCM**: un sistema
+de monitoreo de infraestructura de agua en Malaui «que el gobierno no pudo
+permitirse mantener cuando se acabó la financiación».
+
+**Por qué vale para PBCM:** cuesta dos páginas al año y compra algo que el
+dinero no compra. Una organización que cuenta lo que le salió mal es más creíble
+cuando cuenta lo que le salió bien. Y las comunidades ya señalaron «obras
+incompletas o inconclusas»: reconocerlo primero desarma la crítica.
+
+### El bucle que cierra la donación
+
+DonorsChoose funciona así: quien necesita algo publica el proyecto con su costo
+exacto y su plazo; cuando se financia y se ejecuta, el donante recibe **«cómo se
+gastó cada dólar, en qué cambió las cosas, y el agradecimiento»** de quien lo
+recibió.
+
+PBCM ya tiene las dos mitades sueltas: las actas de concertación son la
+solicitud, y las actas de entrega son el cierre. **Lo que falta es publicarlas
+como un ciclo.** Si algún día se abren convocatorias para que las comunidades
+postulen proyectos (como hace Fundación Santo Domingo), este es el modelo.
+
+### Mapas hechos con la comunidad, no sobre ella
+
+Amazon Conservation Team publica mapas narrados construidos junto a comunidades
+indígenas, y describe su gobernanza así: sus prioridades las han definido «los
+mayores» de las comunidades socias.
+
+PBCM hace justo eso —la concertación *es* eso— y no lo dice con esas palabras.
+Y Fundación Natura Colombia lo aterriza en **fichas por territorio**: hectáreas,
+ecosistemas, acciones concretas («24 pequeñas iniciativas comunitarias», «18
+viveros comunitarios») y los logos de los aliados de cada proyecto.
+
+**Aplicación directa:** una ficha por municipio o vereda, con lo que se hizo,
+con quién, y quién lo decidió. Es la versión territorial de la sección
+«dónde trabajamos» del bloque anterior.
+
+### Contar la coalición como si fuera una cifra de impacto
+
+Fundación Corona no dice «trabajamos con aliados»: dice **«5 fundaciones, 1
+cámara de comercio y 11 secretarías de educación»** y «36 congresistas de 10
+partidos políticos». El tamaño de la coalición es en sí mismo el dato.
+
+PBCM puede contar lo suyo igual: cuántas juntas de acción comunal, cuántas
+alcaldías, cuántas veredas, cuántas mesas. **Son cifras que ya existen en las
+actas y que nadie ha sumado.**
+
+### Certificaciones de proceso, no solo de transparencia
+
+Además de los sellos de Candid, hay reconocimientos sobre *cómo* se trabaja:
+
+- Oxfam exhibe estar **certificada en la Norma Humanitaria Esencial (CHS) por
+  HQAI** desde 2018, y tiene una página propia de «Nuestro compromiso con la
+  salvaguarda».
+- Trees for the Future es **«United Nations World Restoration Flagship»**, una
+  designación de Naciones Unidas para restauración de ecosistemas.
+
+PBCM hace reforestación y conservación de nacimientos de agua: esa segunda vía
+—registrarse en los mecanismos de la Década de la Restauración— es realista y
+no cuesta dinero, solo documentación.
+
+### Mecánicas de donación que se pueden copiar
+
+- **Fondos por causa.** One Tree Planted separa un «Wildfire Fund», un
+  «Women's Empowerment Fund» y otros. PBCM tiene seis líneas de acción: dejar
+  elegir a cuál va el aporte convierte una lista temática en seis destinos.
+- **Igualar los primeros meses del aporte mensual.** One Tree Planted: «tus
+  primeros tres meses se igualan dólar por dólar». Si algún financiador acepta
+  poner esa contrapartida, es el empujón más eficaz para convertir un aporte
+  único en uno recurrente.
+
+### Tercer precedente sobre la empresa madre
+
+A Fundación Alpina y Fundación FEMSA se suma **Fundación Corona**: su relación
+con la empresa «permanece implícita en las alianzas, no explícita». Tres de las
+fundaciones corporativas colombianas y latinoamericanas revisadas hacen lo
+mismo que PBCM decidió hacer. **No es una rareza: es la norma del sector.**
 
 ---
 
