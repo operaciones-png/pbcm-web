@@ -30,6 +30,7 @@ Se aprendieron rompiendo cosas. Saltárselas cuesta más tiempo del que ahorra.
 | **Todo archivo versionado es una URL pública** | Aunque ninguna página lo enlace. Lo que no debe salir va en `_fuentes/`, que está en `.gitignore`. |
 | **Green Power no se vincula a la ONG en la web pública** | Decisión de PBCM. Sin logo, sin co-marca, sin contarlo de refilón en el relato de origen. |
 | **Una cifra sin fecha no vale** | Cinco de las 37 organizaciones revisadas mostraban `0` el día que se visitaron porque su contador automático falló. Lo más seguro es escribirlas a mano con su fecha. Si algún día se automatizan, hay que hacerlo como Direct Relief: «*Updated 2026-08-26 12:30:43. Totals are unaudited*». |
+| **No se añade botón de donación hasta nuevo aviso** | Unos 41 estados de EE.UU. y el Distrito de Columbia exigen registro para solicitar donaciones. Un botón de donar, un formulario o un QR en un sitio visible desde todo el país puede activar esa obligación. Hasta que haya análisis legal, la web solo lleva «contáctanos». Ver el bloque 8. |
 | **`content-visibility:auto` está descartado** | Se probó y se midió: ahorra un 8% de render pero desplaza las secciones hasta 1085 px y rompe los enlaces del menú. La explicación está en el CSS de `index.html`. |
 
 ---
@@ -99,7 +100,7 @@ Esta no es contenido, es una decisión, y cambia la página entera.
 
 **Si es financiador institucional** (recomendado): el botón de la barra deja de decir «Contáctanos» y pasa a algo como «Trabaja con nosotros», con un dossier descargable. La sección de transparencia sube de importancia. La historia completa —el tope del 1%, la adicionalidad, el historial— **va en el dossier, no en la web**.
 
-**Si es donante individual:** hace falta una vía de pago. Es una decisión técnica aparte:
+**Si es donante individual:** hace falta una vía de pago — pero **antes hay un bloqueo legal**: ver 8.1. No se abre botón de donación sin análisis de registros estatales en EE.UU. Cuando se desbloquee, es una decisión técnica aparte:
 
 - El sitio es estático, así que el cobro lo hace un tercero. Empezar por una página alojada por el proveedor es lo más rápido y deja a PBCM fuera del alcance de los requisitos de tarjetas.
 - **La CSP de `netlify.toml` bloqueará la pasarela** si no se le añade el dominio del proveedor a `script-src` y `connect-src`. Fallará sin dar ningún error.
@@ -334,6 +335,188 @@ A Fundación Alpina y Fundación FEMSA se suma **Fundación Corona**: su relaci�
 con la empresa «permanece implícita en las alianzas, no explícita». Tres de las
 fundaciones corporativas colombianas y latinoamericanas revisadas hacen lo
 mismo que PBCM decidió hacer. **No es una rareza: es la norma del sector.**
+
+---
+
+## 8. Lo que devolvió la investigación legal, y qué cambia aquí
+
+Se ejecutó la investigación del prompt de `prompt-investigacion.md`. Diez cosas
+cambian o precisan lo que está escrito más arriba.
+
+> **Aviso:** lo que sigue es orientativo. Antes de abrir donaciones o firmar
+> convenios hay que validarlo con abogado en EE.UU. y con abogado y contador en
+> Colombia. Las reglas estatales de captación y los procedimientos de la DIAN
+> cambian con frecuencia.
+
+### 8.1 El botón de donar queda bloqueado
+
+Unos **41 estados y el Distrito de Columbia** tienen régimen de registro para
+organizaciones que solicitan donaciones. Un sitio visible desde todo el país no
+obliga automáticamente a registrarse en los 41, pero el riesgo sube si hay
+botón de donar, formulario, QR, campañas dirigidas a un estado, o donaciones
+repetidas desde uno.
+
+**Esto confirma el orden que ya estaba en el bloque 5** —empezar por
+financiadores institucionales— pero lo convierte en obligación, no en
+preferencia. La ruta recomendada es la limitada: **sin botón de donación, solo
+«contáctanos»**, hasta que exista análisis de registros estatales.
+
+### 8.2 Nunca prometer deducibilidad en la web
+
+Ni a donantes estadounidenses, ni colombianos, ni de otros países: depende de la
+jurisdicción del donante y de la entidad que reciba.
+
+**Esto corrige la solicitud de contenido.** Se pedía confirmar «si la figura
+legal permite ofrecer deducibilidad» para anunciarlo. La pregunta correcta es
+otra: **qué debe decir exactamente el recibo**. Lo que sí está definido:
+
+- Aportes de **USD 250 o más**: hace falta un reconocimiento escrito con nombre
+  legal de la organización, monto, fecha y una declaración de si se entregaron
+  bienes o servicios a cambio.
+- Aportes de **más de USD 75 con contraprestación**: divulgación *quid pro quo*
+  con lo pagado, el valor estimado de lo recibido y el monto potencialmente
+  deducible.
+
+### 8.3 Dos entidades son dos donaciones distintas
+
+No se pueden mezclar en un solo botón. Son tres flujos con reglas distintas:
+
+| Flujo | Recibo | Nota |
+|---|---|---|
+| USD a la 501(c)(3) | Estadounidense | El único con reglas del IRS claras |
+| COP a la ESAL colombiana | Colombiano | Requiere certificación bajo reglas de la DIAN |
+| Transfronteriza a un proyecto | Depende | **Tratamiento fiscal no garantizado** para el donante |
+
+Cuando llegue el momento, la web tiene que dejar claro cuál es cuál.
+
+### 8.4 El consentimiento de las fotos: reemplaza lo pedido antes
+
+En la solicitud se pedía «permiso escrito». **No basta.** Bajo la Ley 1581 de
+2012, la autorización debe ser un documento separado del consentimiento para
+participar en el proyecto, y contener:
+
+- Identidad del responsable del tratamiento
+- Finalidades específicas: archivo interno, informes a donantes, web, redes,
+  prensa, materiales de captación — y por cuánto tiempo
+- Qué contenidos cubre: foto, video, voz, testimonio, nombre, municipio
+- Que la publicación es digital e internacional
+- Si se cederá a financiadores, plataformas o aliados
+- Los derechos del titular, incluida la revocación
+- Canal de contacto para ejercerlos
+- Fecha, firma y **copia entregada a la persona**
+
+**Con menores** hace falta autorización verificable del padre, madre o
+representante legal, más el asentimiento del propio menor si tiene edad para
+entender. Y reglas de publicación que hay que aplicar aunque haya permiso:
+
+- Nunca el nombre completo, la escuela, la ruta ni coordenadas
+- Nunca imágenes en condiciones humillantes o de necesidad extrema
+- Guardar registro de la autorización, del contenido publicado y de la fecha
+- Tener procedimiento para retirar el contenido si se revoca
+
+En testimonios sensibles —salud, violencia, desplazamiento, etnia— aplicar
+minimización: seudónimos cuando se pueda y nunca geolocalización precisa.
+
+**Implicación técnica:** si hay que poder retirar una foto, conviene que cada
+una tenga su registro de autorización asociado. Un archivo simple en
+`_fuentes/` con el nombre del `.webp`, quién autorizó, cuándo y hasta cuándo.
+
+### 8.5 Ya sabemos qué indicadores pedir
+
+Para agua y saneamiento, usar las categorías del **JMP de OMS/UNICEF**, que un
+financiador reconoce sin explicación: fuente mejorada frente a no mejorada, agua
+gestionada de forma segura, saneamiento gestionado de forma segura, e higiene
+con lavado de manos disponible.
+
+Y por línea de acción:
+
+| Línea | Indicadores que se entienden solos |
+|---|---|
+| Vías terciarias | Km intervenidos · días de transitabilidad · tiempo a escuela, mercado o salud · % de tramo funcional tras las lluvias |
+| Vivienda | Hogares con solución habitable · reducción de riesgos · permanencia de uso |
+| Educación y deporte | Personas con acceso · tasa de uso · horas de actividad |
+| Reforestación | Hectáreas restauradas · **árboles vivos** · supervivencia a 12, 24 y 36 meses · especies nativas |
+| Nacimientos de agua | Hectáreas protegidas · acuerdos de conservación · cobertura vegetal · caudal estacional |
+
+Para agua, además del acceso: tiempo de recolección, continuidad del servicio,
+calidad, tarifa y recaudo, quién opera el sistema, y **qué porcentaje de hogares
+lo usa de verdad**.
+
+### 8.6 La durabilidad tiene metodología, no solo una cifra
+
+La idea que salió de mirar 37 organizaciones ahora tiene forma. Se mide en tres
+capas:
+
+1. **Entrega** — obra recibida, pruebas, expediente técnico, capacitación
+2. **Uso temprano** — a los 3, 6 y 12 meses: operación real, usuarios, fallas
+3. **Sostenibilidad** — anual a 3 y 5 años: funcionalidad, responsable local,
+   reservas para reposición, satisfacción
+
+La cifra publicable es la **tasa de funcionalidad**: infraestructuras plenamente
+operativas dividido entre infraestructuras verificadas. Y en reforestación, la
+tasa de supervivencia: individuos vivos entre individuos establecidos.
+
+**Regla de diseño para cada obra futura:** responsable de operación y
+mantenimiento, manual simple, inventario de repuestos, fondo para
+mantenimiento, teléfono de reporte y plan de transferencia a la comunidad.
+Reservar **entre el 5 y el 10% del presupuesto** para seguimiento y cierre.
+
+### 8.7 El gasto administrativo, con número
+
+**Entre 10 y 20% de costos indirectos es defendible** en propuestas pequeñas. La
+referencia popular de 65% en programas y 35% en administración se usa mucho pero
+no debe convertirse en objetivo de gestión: una organización nueva necesita
+invertir en controles, seguros, sistemas y evaluación.
+
+Lo que un financiador serio mira no es el porcentaje: es que los costos
+indirectos estén explícitos, sean trazables, se mantengan estables y estén
+explicados. Eso afina el texto de la sección de transparencia del bloque 4.
+
+### 8.8 Contrapartida: la línea que no se cruza
+
+**Nunca se puede contabilizar como contrapartida una obligación legal, ambiental
+o social que la empresa energética ya tiene que cumplir.** Ese es el punto
+central de la adicionalidad y es donde se cae una propuesta.
+
+La prueba documental que piden incluye una matriz de las obligaciones de la
+empresa —licencia ambiental, plan de manejo, compensaciones, inversión social,
+obras comprometidas, área y población cubiertas— frente a lo que se propone
+financiar. Y presupuesto separado, cuentas separadas y prohibición contractual
+de reembolso por parte de la empresa.
+
+Preparar poder demostrar **entre 20 y 30% de contrapartida** movilizada, sin dar
+por hecho que todos los financiadores aceptan trabajo comunitario como aporte.
+
+### 8.9 Un bloque legal en el pie del sitio
+
+Cuando exista la figura, el pie debe llevar: nombre legal, EIN, dirección
+postal, estatus 501(c)(3), cómo obtener la carta de determinación del IRS,
+estados financieros y Form 990 cuando existan, junta directiva y responsables,
+política de privacidad, términos de donación y canal de contacto.
+
+Para un financiador esto deja de ser buena práctica y se vuelve **requisito de
+debida diligencia**.
+
+### 8.10 Una tensión que hay que resolver, y no es de diseño
+
+La investigación es explícita en un punto: sobre el vínculo con la empresa,
+**«la respuesta no es ocultar la relación: es divulgarla y acotarla»**, y espera
+una declaración pública del vínculo, del rol y de sus límites.
+
+La instrucción de PBCM es que eso no aparezca en la web pública. **Las dos cosas
+se pueden sostener a la vez**, y es exactamente lo que hacen Fundación Alpina,
+Fundación FEMSA y Fundación Corona: el relato público no lo narra, y los
+documentos de gobierno, el informe anual y los materiales para financiadores sí
+lo declaran. Es la misma regla de los dos documentos que ya está en este plan.
+
+**Pero la decisión final no es de diseño.** Hay que tomarla con quien lleve la
+figura legal, porque de ella dependen el convenio con la empresa, el comité
+independiente de selección de proyectos y el registro de conflictos de interés.
+
+Un dato honesto de la investigación: **no encontró casos comparables
+suficientemente documentados** de fundaciones ligadas a industrias extractivas
+que obtuvieran financiación internacional bajo un modelo idéntico. Antes de usar
+precedentes en una propuesta, hay que buscarlos uno a uno.
 
 ---
 
