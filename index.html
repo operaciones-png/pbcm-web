@@ -411,7 +411,10 @@
   .foot-brand p{margin-top:1.1rem;font-size:.94rem;color:var(--ink-soft)}
   .foot-brand p em{color:var(--green);font-style:italic;font-weight:700}
   .foot-cols{display:flex;gap:4rem;flex-wrap:wrap}
-  .foot-col h4{font-family:'Baloo 2',sans-serif;color:var(--green-deep);font-size:.98rem;letter-spacing:.01em;margin-bottom:.9rem}
+  /* h3, no h4: venia despues del h2 de Contacto y se saltaba un nivel, que
+     para un lector de pantalla es un hueco en el indice de la pagina.
+     El line-height se fija para que se vea exactamente igual que antes. */
+  .foot-col h3{font-family:'Baloo 2',sans-serif;color:var(--green-deep);font-size:.98rem;line-height:1.3;letter-spacing:.01em;margin-bottom:.9rem}
   .foot-col a{display:block;color:var(--ink-soft);margin-bottom:.55rem;font-size:.94rem;transition:.2s}
   .foot-col a:hover{color:var(--green);padding-left:4px}
   .foot-bottom{padding-top:1.5rem;display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;font-size:.84rem;color:var(--ink-soft)}
@@ -600,9 +603,9 @@
           <svg class="icn" width="16" height="16" aria-hidden="true"><use href="#icon-nav-chevron-down"/></svg>
         </button>
         <div class="lang-menu" id="langMenu" role="menu" aria-label="Idioma / Language">
-          <button type="button" role="menuitemradio" aria-checked="false" data-lang="es"><span class="fl" aria-hidden="true">ES</span> Español</button>
-          <button type="button" role="menuitemradio" aria-checked="false" data-lang="en"><span class="fl" aria-hidden="true">EN</span> English</button>
-          <button type="button" role="menuitemradio" aria-checked="false" data-lang="fr"><span class="fl" aria-hidden="true">FR</span> Français</button>
+          <button type="button" role="menuitemradio" aria-checked="false" data-lang="es"><span class="fl" aria-hidden="true">ES</span> <span lang="es">Español</span></button>
+          <button type="button" role="menuitemradio" aria-checked="false" data-lang="en"><span class="fl" aria-hidden="true">EN</span> <span lang="en">English</span></button>
+          <button type="button" role="menuitemradio" aria-checked="false" data-lang="fr"><span class="fl" aria-hidden="true">FR</span> <span lang="fr">Français</span></button>
         </div>
       </div>
       <a href="#contacto" class="btn btn-primary" data-i18n="cta_contact">Contáctanos</a>
@@ -898,8 +901,8 @@
         <p data-i18n="foot_desc">Programa de Beneficio a las Comunidades y Medio Ambiente.<br/><em>Juntos construimos un mejor mañana.</em></p>
       </div>
       <div class="foot-cols">
-        <div class="foot-col"><h4 data-i18n="foot_col1">Programa</h4><a href="#programa" data-i18n="foot_l1">Quiénes somos</a><a href="#lineas" data-i18n="foot_l2">Líneas de acción</a><a href="#ambiente" data-i18n="foot_l3">Medio ambiente</a></div>
-        <div class="foot-col"><h4 data-i18n="foot_col2">Participa</h4><a href="#comunidad" data-i18n="foot_l4">Comunidad</a><a href="#proceso" data-i18n="foot_l5">Cómo trabajamos</a><a href="#contacto" data-i18n="foot_l6">Contacto</a></div>
+        <div class="foot-col"><h3 data-i18n="foot_col1">Programa</h3><a href="#programa" data-i18n="foot_l1">Quiénes somos</a><a href="#lineas" data-i18n="foot_l2">Líneas de acción</a><a href="#ambiente" data-i18n="foot_l3">Medio ambiente</a></div>
+        <div class="foot-col"><h3 data-i18n="foot_col2">Participa</h3><a href="#comunidad" data-i18n="foot_l4">Comunidad</a><a href="#proceso" data-i18n="foot_l5">Cómo trabajamos</a><a href="#contacto" data-i18n="foot_l6">Contacto</a></div>
       </div>
     </div>
     <div class="foot-bottom">

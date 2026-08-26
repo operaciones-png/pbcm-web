@@ -56,3 +56,16 @@
   to = "/"
   status = 301
   force = true
+
+# Las fotos originales tienen que seguir versionadas: de ellas salen los .webp
+# y sin ellas nadie puede regenerar las imagenes. Pero no hay razon para que
+# alguien pueda descargarlas: son 3,4 MB de los 4,7 MB del repositorio, la
+# pagina no las usa, y estar versionado es lo mismo que tener URL publica.
+# Esta regla las deja fuera de alcance sin sacarlas del repositorio.
+# OJO: el archivo se sigue subiendo al CDN, solo que la URL responde 404. Para
+# algo que de verdad no deba salir del repositorio, va en _fuentes/ (ver arriba).
+[[redirects]]
+  from = "/img/originales/*"
+  to = "/404.html"
+  status = 404
+  force = true
