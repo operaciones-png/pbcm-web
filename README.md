@@ -33,6 +33,7 @@ elige otro, se recuerda para sus próximas visitas.
 | `tools/optimize_images.py` | Genera los `.webp` a partir de `img/originales/`. |
 | `tools/build_standalone.py` | Genera una copia del sitio en **un solo archivo**, para enviar por correo o ver sin conexión. No es lo que se publica. |
 | `tools/recorta_infografia.py` | Genera las infografías que publica la página a partir de los originales de `_fuentes/`. |
+| `docs/cuando-llegue-el-contenido.md` | **Qué hacer cuando PBCM entregue las cifras, las fotos y los documentos.** Dónde va cada cosa en el código y cómo comprobarlo. |
 | `tools/prueba-navegador.js` | Abre un Chrome de verdad y comprueba la página entera (ver abajo). |
 | `tools/prueba-carrusel.js` | Comprueba los números del movimiento del carrusel (`node tools/prueba-carrusel.js`). |
 
@@ -214,6 +215,11 @@ dentro. Sirve para adjuntarlo en un correo o abrirlo sin internet.
 ---
 
 ## 📌 Pendientes por confirmar con PBCM
+
+> Lo que falta para la parte que capta fondos —cifras propias, fotos, historias
+> y documentos— y qué se hace con cada cosa cuando llegue, está en
+> [`docs/cuando-llegue-el-contenido.md`](docs/cuando-llegue-el-contenido.md).
+
 
 - **Fotos del carrusel.** Son imágenes de referencia de jornadas de
   socialización, no fotos propias de PBCM. Conviene reemplazarlas.
