@@ -191,14 +191,18 @@
   .ph::after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(134,194,154,.16),rgba(127,186,198,.12));transition:.4s}
   .ph:hover img{transform:scale(1.04)}
   .stage .p-main{aspect-ratio:4/5}
-  .stage .p-sub{position:absolute;bottom:-18px;left:-20px;width:46%;aspect-ratio:4/3;box-shadow:var(--shadow-sm);animation:floaty 6s ease-in-out infinite}
+  .stage .p-sub{position:absolute;bottom:-18px;left:-20px;width:46%;aspect-ratio:4/3;box-shadow:var(--shadow-sm);--flota:-7px;animation:floaty 7.5s ease-in-out infinite}
   .chip{position:absolute;display:flex;align-items:center;gap:.6rem;background:#fff;border:1px solid var(--line);border-radius:16px;padding:.7rem 1rem;font-family:'Baloo 2',sans-serif;font-weight:600;font-size:.86rem;color:var(--green-deep);box-shadow:var(--shadow-sm)}
   .chip .n{font-family:'Baloo 2',sans-serif;font-size:1.4rem;color:var(--peach);line-height:1}
-  .chip-top{top:22px;right:-14px;animation:floaty 5s ease-in-out infinite .5s}
-  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+  .chip-top{top:22px;right:-14px;--flota:-5px;animation:floaty 9s ease-in-out infinite .8s}
+  /* Amplitud reducida de 11px a 5-7px y periodos distintos entre si: dos
+     elementos flotando al unison con recorrido largo es justo el tipo de
+     oscilacion lenta que marea a quien es sensible al movimiento. */
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(var(--flota,-6px))}}
 
   .marquee{border-top:1.5px solid var(--line);border-bottom:1.5px solid var(--line);padding:1.1rem 0;overflow:hidden;background:var(--paper-3)}
   .marquee-track{display:flex;gap:2.4rem;width:max-content;animation:scroll 30s linear infinite}
+  .marquee:hover .marquee-track{animation-play-state:paused}
   .marquee span{font-family:'Baloo 2',sans-serif;font-weight:700;font-size:1.4rem;color:#6E9160;letter-spacing:.01em;display:flex;align-items:center;gap:2.4rem}
   .marquee span::after{content:"✿";color:var(--peach);font-size:.9rem}
   @keyframes scroll{to{transform:translateX(-50%)}}
@@ -264,7 +268,12 @@
   .tstep-img{width:100%;display:block;margin-top:auto}
 
   .carousel{position:relative}
-  .car-track{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;padding:6px 2px 8px;scrollbar-width:none;-ms-overflow-style:none}
+  .car-track{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;padding:6px 2px 8px;scrollbar-width:none;-ms-overflow-style:none;
+             cursor:grab;transition:transform .45s var(--spring)}
+  /* Mientras se arrastra, el snap y el scroll suave del navegador
+     pelearian contra el seguimiento 1:1, asi que se apagan. */
+  .car-track.arrastrando{cursor:grabbing;scroll-snap-type:none;scroll-behavior:auto;transition:none;user-select:none}
+  .car-slide img{-webkit-user-drag:none;user-select:none}
   .car-track::-webkit-scrollbar{display:none}
   .car-slide{flex:0 0 auto;width:clamp(270px,80vw,380px);scroll-snap-align:center;position:relative;margin:0;border-radius:20px;overflow:hidden;border:4px solid #fff;box-shadow:var(--shadow)}
   .car-slide img{width:100%;height:330px;object-fit:cover;display:block;transition:.5s}
@@ -357,8 +366,19 @@
 
   /* Las animaciones de entrada solo se aplican si el JS esta vivo: si falla,
      el contenido se ve igual en vez de quedarse invisible para siempre. */
-  .js .reveal{opacity:0;transform:translateY(-38px);transition:opacity .55s ease,transform .75s cubic-bezier(.22,.9,.28,1.08)}
+  /* Entraba desde ARRIBA (translateY negativo), o sea cayendo en contra del
+     scroll. El movimiento intermedio debe apuntar a donde va la cosa: si el
+     visitante baja, el contenido sube a su sitio. */
+  .js .reveal{opacity:0;transform:translateY(24px);transition:opacity .5s ease,transform .65s var(--spring)}
   .js .reveal.in{opacity:1;transform:none}
+
+  /* El chulo se dibuja al entrar la seccion, en vez de aparecer ya hecho:
+     lee como un compromiso que se cumple. */
+  .js .env-list li .icn,.js .prem-card .ck .icn{stroke-dasharray:23;stroke-dashoffset:23;
+        transition:stroke-dashoffset .5s var(--spring-suave)}
+  .js .reveal.in .env-list li .icn,.js .reveal.in .prem-card .ck .icn{stroke-dashoffset:0}
+  .js .env-list li:nth-child(2) .icn,.js .prem-card:nth-child(2) .ck .icn{transition-delay:.1s}
+  .js .env-list li:nth-child(3) .icn,.js .prem-card:nth-child(3) .ck .icn{transition-delay:.2s}
 
   @media(max-width:960px){
     .hero-grid,.prog,.env-grid{grid-template-columns:1fr}
@@ -385,7 +405,9 @@
     .chip-top{display:none}
     .brand .wm{font-size:1.25rem}
   }
-  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}.js .reveal{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}
+    .js .reveal{opacity:1;transform:none}
+    .js .env-list li .icn,.js .prem-card .ck .icn{stroke-dashoffset:0}}
 
   /* Quien pide menos transparencia recibe superficies solidas, no un
      desenfoque mas suave: el desenfoque es justo lo que le molesta. */
@@ -1078,21 +1100,143 @@
   });
 
   // ---- Carrusel de fotos ----
+  // Se arrastra con el raton siguiendo el puntero 1:1, y al soltar continua con
+  // la velocidad exacta que traia la mano: no hay costura entre arrastrar y
+  // animar. El punto de reposo NO es la foto mas cercana al soltar, sino la mas
+  // cercana a donde el gesto iba a parar, calculado con la misma curva de
+  // desaceleracion del scroll del sistema. Por eso un manotazo se siente como
+  // un lanzamiento y no como un salto a la foto de al lado.
   (function(){
     const track = document.querySelector('.car-track'); if(!track) return;
     const slides = [...track.querySelectorAll('.car-slide')];
     const dotsWrap = document.querySelector('.car-dots');
     const prevB = document.querySelector('.car-btn.prev'), nextB = document.querySelector('.car-btn.next');
-    const step = () => { const g = parseFloat(getComputedStyle(track).columnGap) || 16; return slides[0].getBoundingClientRect().width + g; };
-    if(prevB) prevB.addEventListener('click', () => track.scrollBy({left:-step(), behavior:'smooth'}));
-    if(nextB) nextB.addEventListener('click', () => track.scrollBy({left:step(), behavior:'smooth'}));
+    const menosMovimiento = matchMedia('(prefers-reduced-motion: reduce)');
+
+    const maxScroll = () => track.scrollWidth - track.clientWidth;
+    // Posicion de scroll en la que cada foto queda centrada
+    const anclas = () => slides.map(s => Math.max(0, Math.min(maxScroll(),
+      s.offsetLeft + s.offsetWidth / 2 - track.clientWidth / 2)));
+    const anclaMasCerca = x => anclas().reduce((a, b) => Math.abs(b - x) < Math.abs(a - x) ? b : a);
+
+    // Proyeccion de inercia: donde pararia el gesto si nadie lo frenara.
+    // Es la curva de decaimiento exponencial del scroll, no la formula de
+    // fisica de libro (v2/2a), que da un resultado distinto y peor.
+    const proyectar = (v, d) => (v / 1000) * (d || 0.998) / (1 - (d || 0.998));
+
+    // Resistencia elastica en los extremos: cuanto mas se estira, menos cede.
+    const elastico = (exceso, ancho, k) => {
+      k = k || 0.55;
+      return (exceso * ancho * k) / (ancho + k * Math.abs(exceso));
+    };
+
+    let rafResorte = null;
+    const parar = () => { if(rafResorte) cancelAnimationFrame(rafResorte); rafResorte = null; };
+
+    // Resorte criticamente amortiguado: llega y se queda, sin rebote. Arranca
+    // siempre del valor que hay EN PANTALLA, para poder agarrarlo a mitad de
+    // vuelo sin que de un salto.
+    function resorteHasta(destino, velocidad){
+      parar();
+      if(menosMovimiento.matches){ track.scrollLeft = destino; return; }
+      const rigidez = 320, amortiguacion = 2 * Math.sqrt(320); // response ~0.35s, sin rebote
+      let pos = track.scrollLeft, vel = velocidad || 0, t0 = performance.now();
+      track.style.scrollSnapType = 'none';
+      const paso = (t) => {
+        const dt = Math.min((t - t0) / 1000, 1 / 30); t0 = t;
+        vel += (-rigidez * (pos - destino) - amortiguacion * vel) * dt;
+        pos += vel * dt;
+        if(Math.abs(pos - destino) < 1 && Math.abs(vel) < 30){
+          track.scrollLeft = destino; rafResorte = null; track.style.scrollSnapType = ''; return;
+        }
+        track.scrollLeft = pos;
+        rafResorte = requestAnimationFrame(paso);
+      };
+      rafResorte = requestAnimationFrame(paso);
+    }
+
+    function irA(direccion){
+      const act = track.scrollLeft, lista = anclas();
+      let objetivo;
+      if(direccion > 0){
+        objetivo = lista.find(x => x > act + 2);
+        if(objetivo === undefined) objetivo = lista[lista.length - 1];
+      } else {
+        const alReves = lista.slice().reverse();
+        objetivo = alReves.find(x => x < act - 2);
+        if(objetivo === undefined) objetivo = lista[0];
+      }
+      resorteHasta(objetivo, 0);
+    }
+    if(prevB) prevB.addEventListener('click', () => irA(-1));
+    if(nextB) nextB.addEventListener('click', () => irA(1));
+
+    // ---- Arrastre con raton o lapiz ----
+    // En tactil no se toca nada: el sistema ya da inercia y rebote nativos,
+    // mejores que cualquier cosa reimplementada aqui.
+    let arrastrando = false, xInicial = 0, scrollInicial = 0, historia = [];
+    const UMBRAL = 8; // px antes de decidir que es un arrastre y no un clic
+
+    track.addEventListener('pointerdown', e => {
+      if(e.pointerType === 'touch' || e.button !== 0) return;
+      parar();                    // agarrar a mitad de vuelo cancela la inercia
+      arrastrando = false;
+      xInicial = e.clientX;
+      scrollInicial = track.scrollLeft;
+      historia = [{x: e.clientX, t: performance.now()}];
+      track.setPointerCapture(e.pointerId);
+    });
+
+    track.addEventListener('pointermove', e => {
+      if(!track.hasPointerCapture(e.pointerId)) return;
+      const dx = e.clientX - xInicial;
+      if(!arrastrando){
+        if(Math.abs(dx) < UMBRAL) return;
+        arrastrando = true;
+        track.classList.add('arrastrando');
+      }
+      historia.push({x: e.clientX, t: performance.now()});
+      if(historia.length > 6) historia.shift();
+
+      const objetivo = scrollInicial - dx, tope = maxScroll();
+      let exceso = 0;
+      if(objetivo < 0) exceso = -objetivo;
+      else if(objetivo > tope) exceso = -(objetivo - tope);
+      track.scrollLeft = Math.max(0, Math.min(tope, objetivo));
+      track.style.transform = exceso
+        ? 'translateX(' + elastico(exceso, track.clientWidth).toFixed(2) + 'px)'
+        : '';
+    });
+
+    function soltar(e){
+      if(!track.hasPointerCapture(e.pointerId)) return;
+      track.releasePointerCapture(e.pointerId);
+      track.style.transform = '';          // el elastico regresa por CSS
+      track.classList.remove('arrastrando');
+      if(!arrastrando) return;             // fue un clic, no un arrastre
+      arrastrando = false;
+
+      // Velocidad del puntero en los ultimos ~120 ms
+      const ahora = performance.now();
+      const recientes = historia.filter(pt => ahora - pt.t < 120);
+      const a = recientes[0], b = historia[historia.length - 1];
+      const dt = (a && b) ? (b.t - a.t) : 0;
+      const vPuntero = dt > 8 ? (b.x - a.x) / (dt / 1000) : 0;
+      const vScroll = -vPuntero;           // scrollLeft crece hacia la derecha
+
+      resorteHasta(anclaMasCerca(track.scrollLeft + proyectar(vScroll)), vScroll);
+    }
+    track.addEventListener('pointerup', soltar);
+    track.addEventListener('pointercancel', soltar);
+    // Arrastrar una foto no debe iniciar el arrastre nativo de imagenes
+    track.addEventListener('dragstart', e => e.preventDefault());
     slides.forEach((s,i) => {
       const b = document.createElement('button');
       b.type = 'button';
       b.dataset.n = i + 1;
       b.setAttribute('data-i18n-aria', 'a11y_dot');
       b.setAttribute('aria-label', 'Ir a la foto ' + (i+1));
-      b.addEventListener('click', () => s.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'}));
+      b.addEventListener('click', () => resorteHasta(anclas()[i], 0));
       dotsWrap.appendChild(b);
     });
     const dots = [...dotsWrap.children];

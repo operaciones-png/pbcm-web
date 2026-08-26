@@ -30,6 +30,7 @@ Abre en el idioma del navegador del visitante; si elige otro, se recuerda.
 | `robots.txt`, `sitemap.xml` | Para los buscadores. |
 | `tools/optimize_images.py` | Genera los `.webp` a partir de `img/originales/`. |
 | `tools/build_standalone.py` | Genera una copia del sitio en **un solo archivo**, para enviar por correo o ver sin conexión. No es lo que se publica. |
+| `tools/prueba-carrusel.js` | Comprueba los números del movimiento del carrusel (`node tools/prueba-carrusel.js`). |
 
 > No hay que "compilar" nada para publicar. Lo que está en el repositorio **es** el sitio.
 
