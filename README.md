@@ -127,6 +127,37 @@ Netlify (Forms → contacto) pero **nadie recibe aviso por correo**.
 
 ---
 
+## 📊 Medición de visitas
+
+El sitio mide visitas con **Plausible**: sin cookies, sin datos personales y sin
+seguir a nadie por otros sitios. Por eso **no necesita banner de consentimiento**
+(comprobado: la página no crea ninguna cookie).
+
+Además de las visitas, se registran tres cosas útiles:
+
+| Evento | Para qué sirve |
+|---|---|
+| `Contacto enviado` | Saber si alguien usa el formulario, y en qué idioma escribe |
+| `Contacto fallido` | Detectar que el envío se rompió, en vez de enterarse por el silencio |
+| `Idioma cambiado` | Si mucha gente lo cambia a mano, el idioma por defecto no está acertando |
+
+<details>
+<summary><b>Falta un paso: dar de alta el dominio</b></summary>
+
+Hay que crear la cuenta y añadir `pbcmcolombia.com` en el panel de Plausible.
+Hasta que se haga, el script carga pero no se registra nada — la página funciona
+igual, no se rompe.
+
+</details>
+
+> ⚠️ **Para cambiar de herramienta de medición hay que tocar DOS sitios:**
+> la etiqueta del script en `index.html` **y** `script-src` y `connect-src` en
+> la CSP de `netlify.toml`. Si se cambia solo uno, deja de medir **sin dar
+> ningún error visible**. Lo mismo aplica a cualquier servicio externo que se
+> añada después (una pasarela de pago, un mapa, un vídeo incrustado).
+
+---
+
 ## 🔁 Trabajo en equipo
 
 - Cada quien crea una **rama** con su cambio y abre un **Pull Request** para

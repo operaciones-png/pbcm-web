@@ -23,7 +23,11 @@
     # Los estilos y el script van dentro del propio index.html (de ahi
     # 'unsafe-inline'). Las tipografias vienen de Google Fonts. Nada mas
     # puede cargarse: bloquea scripts o imagenes inyectados de terceros.
-    Content-Security-Policy = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self'; img-src 'self' data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com"
+    # OJO: cualquier servicio externo (analitica, pasarela de pago, mapas) hay
+    # que anadirlo aqui O NO FUNCIONARA, y fallara en silencio, sin error
+    # visible en la pagina. connect-src es el que suele olvidarse: sin el,
+    # el script carga pero no puede enviar nada.
+    Content-Security-Policy = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self'; img-src 'self' data:; script-src 'self' 'unsafe-inline' https://plausible.io; connect-src 'self' https://plausible.io; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com"
 
 # ---------------------------------------------------------------------------
 # Cache

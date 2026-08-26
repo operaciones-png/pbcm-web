@@ -33,6 +33,17 @@
      Cada peso es un archivo aparte: pedir los que no se usan es peso regalado. -->
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
 
+<!-- ============ MEDICION DE VISITAS ============
+     Sin cookies y sin datos personales: por eso NO necesita banner de
+     consentimiento. Solo cuenta visitas, de donde vienen y que secciones se
+     ven; no identifica a nadie ni sigue a la gente por otros sitios.
+
+     PARA CAMBIAR DE HERRAMIENTA hay que tocar dos sitios, y los dos:
+       1. la etiqueta script de aqui abajo
+       2. script-src y connect-src en la CSP de netlify.toml
+     Si se cambia solo uno, deja de medir sin dar ningun error visible. -->
+<script defer data-domain="pbcmcolombia.com" src="https://plausible.io/js/script.outbound-links.js"></script>
+
 <!-- La imagen del hero es lo primero grande que se ve: se pide cuanto antes -->
 <link rel="preload" as="image" href="img/hero-bg-1280.webp" fetchpriority="high"
       imagesrcset="img/hero-bg-640.webp 640w, img/hero-bg-1024.webp 1024w, img/hero-bg-1280.webp 1280w"
@@ -1085,6 +1096,12 @@
     }
   };
 
+  // Registra un evento de medicion. Si la analitica no cargo (bloqueador,
+  // sin conexion, CSP mal puesta), no pasa absolutamente nada.
+  function medir(evento, datos){
+    try{ if(typeof window.plausible === 'function') window.plausible(evento, datos ? {props: datos} : undefined); }catch(e){}
+  }
+
   const LANGS = ['es','en','fr'];
   const CLAVE_IDIOMA = 'pbcm_idioma';
   let curLang = 'es';
@@ -1115,7 +1132,7 @@
     if(devolverFoco) langBtn.focus();
   }
   langBtn.addEventListener('click', e => { e.stopPropagation(); const o = langMenu.classList.toggle('open'); langBtn.setAttribute('aria-expanded', o); });
-  langMenu.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { applyLang(b.dataset.lang, true); closeLang(true); }));
+  langMenu.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { applyLang(b.dataset.lang, true); closeLang(true); medir('Idioma cambiado', {a: b.dataset.lang}); }));
   document.addEventListener('click', () => closeLang(false));
   document.addEventListener('keydown', e => {
     if(e.key !== 'Escape') return;
@@ -1177,8 +1194,9 @@
         if(!r.ok) throw new Error(r.status);
         contactForm.reset();
         nota('form_ok', 'ok');
+        medir('Contacto enviado', {idioma: curLang});
       })
-      .catch(() => nota('form_error', 'error'))
+      .catch(() => { nota('form_error', 'error'); medir('Contacto fallido'); })
       .finally(() => { formBtn.disabled = false; });
   });
 
