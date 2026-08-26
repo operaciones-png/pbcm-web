@@ -1,0 +1,51 @@
+# Configuracion de Netlify para pbcmcolombia.com
+# El sitio es HTML estatico: no hay nada que compilar, Netlify solo publica
+# los archivos del repositorio tal como estan.
+
+[build]
+  publish = "."
+  command = ""
+
+# ---------------------------------------------------------------------------
+# Cabeceras de seguridad (todas las rutas)
+# ---------------------------------------------------------------------------
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), payment=()"
+    Cross-Origin-Opener-Policy = "same-origin"
+    # Los estilos y el script van dentro del propio index.html (de ahi
+    # 'unsafe-inline'). Las tipografias vienen de Google Fonts. Nada mas
+    # puede cargarse: bloquea scripts o imagenes inyectados de terceros.
+    Content-Security-Policy = "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self'; img-src 'self' data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com"
+
+# ---------------------------------------------------------------------------
+# Cache
+# ---------------------------------------------------------------------------
+# El HTML siempre se revalida: al publicar un cambio de texto se ve al instante.
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Las imagenes se guardan 7 dias en el navegador. Si reemplazas una imagen
+# conservando el nombre, quien ya visito el sitio puede seguir viendo la vieja
+# hasta una semana: para forzar el cambio, sube el archivo con un nombre nuevo
+# (p. ej. foto-rio-2.jpg) y actualiza la referencia en index.html.
+[[headers]]
+  for = "/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+# ---------------------------------------------------------------------------
+# Redirecciones
+# ---------------------------------------------------------------------------
+# Antes de unificar el sitio en index.html existia template.html.
+[[redirects]]
+  from = "/template.html"
+  to = "/"
+  status = 301
+  force = true
