@@ -71,6 +71,14 @@
     --spring-suave:cubic-bezier(.22,1,.36,1);
     --spring-inv:cubic-bezier(1,0,.68,.28);
     --toque:80ms;
+    /* Separacion de la reja de los tres pasos, y el centro de la 1a y 3a
+       tarjeta: ancho de columna = (100% - 2 huecos) / 3, centro = mitad. */
+    /* El mismo trazado del icono status-check, para pintarlo como mascara
+       donde no se puede usar un <svg> (bullets de lista, ::after). */
+    --icono-check:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6.5L9.5 17 4 11.5'/%3E%3C/svg%3E");
+    --tgap:1.4rem;
+    --x1:calc((100% - 2 * var(--tgap)) / 6);
+    --x3:calc(100% - (100% - 2 * var(--tgap)) / 6);
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth;overflow-x:clip}
@@ -145,6 +153,16 @@
                 background:linear-gradient(rgba(246,248,243,.5),rgba(246,248,243,0));
                 opacity:0;transition:opacity .5s var(--spring-suave)}
   header.scrolled::after{opacity:1}
+  /* Avance de lectura. Es una animacion ligada al scroll: la resuelve el
+     compositor, sin listeners ni JavaScript. Donde no este soportada,
+     simplemente no aparece. */
+  @supports (animation-timeline: scroll()){
+    header::before{content:"";position:absolute;left:0;bottom:-1px;width:100%;height:2px;z-index:1;
+                   background:linear-gradient(90deg,var(--sage),var(--green));
+                   transform:scaleX(0);transform-origin:left center;
+                   animation:avance linear;animation-timeline:scroll(root block)}
+    @keyframes avance{to{transform:scaleX(1)}}
+  }
   header:has(.nav-links.open)::after{opacity:0}
 
   /* Los menus se materializan desde el boton que los abre (transform-origin),
@@ -156,6 +174,10 @@
   .nav-links a:hover{color:var(--green)}
   .nav-links a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:2px;background:var(--peach);border-radius:2px;transition:.28s}
   .nav-links a:hover::after{width:100%}
+  /* Wayfinding: "donde estoy". La navegacion tenia cinco enlaces y ninguno
+     indicaba en que seccion iba el visitante. */
+  .nav-links a[aria-current]{color:var(--green)}
+  .nav-links a[aria-current]::after{width:100%;background:var(--green)}
   .nav-cta{display:flex;align-items:center;gap:.8rem}
   .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px}
   .burger span{width:26px;height:2.6px;background:var(--green-deep);border-radius:2px;transition:.3s}
@@ -195,6 +217,12 @@
   .chip{position:absolute;display:flex;align-items:center;gap:.6rem;background:#fff;border:1px solid var(--line);border-radius:16px;padding:.7rem 1rem;font-family:'Baloo 2',sans-serif;font-weight:600;font-size:.86rem;color:var(--green-deep);box-shadow:var(--shadow-sm)}
   .chip .n{font-family:'Baloo 2',sans-serif;font-size:1.4rem;color:var(--peach);line-height:1}
   .chip-top{top:22px;right:-14px;--flota:-5px;animation:floaty 9s ease-in-out infinite .8s}
+  /* El chip anunciaba las seis lineas de accion y no llevaba a ellas.
+     No se le pone transform en :hover porque pelearia con el flotado. */
+  a.chip{transition:box-shadow .3s var(--spring),color .2s var(--spring)}
+  a.chip:hover{color:var(--green);box-shadow:0 16px 32px -18px rgba(18,58,94,.42)}
+  a.chip .icn{color:var(--green);opacity:.55;transition:opacity .2s var(--spring)}
+  a.chip:hover .icn{opacity:1}
   /* Amplitud reducida de 11px a 5-7px y periodos distintos entre si: dos
      elementos flotando al unison con recorrido largo es justo el tipo de
      oscilacion lenta que marea a quien es sensible al movimiento. */
@@ -257,7 +285,36 @@
   .proceso-head h2{color:var(--green-deep);font-size:clamp(2rem,4.2vw,3.1rem);margin:.9rem 0 .8rem}
   .proceso-head p{color:var(--ink-soft);font-size:1.08rem}
   .proceso-cards{position:relative;z-index:3;margin-top:clamp(-5rem,-8vw,-3.5rem);padding-bottom:clamp(3.4rem,8vw,6rem)}
-  .timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+  .timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--tgap)}
+
+  /* Riel que une los tres pasos. Se dibuja de izquierda a derecha y cada punto
+     aparece cuando la linea le llega: la secuencia se VE, no hay que leer los
+     numeros para entender que 01 va antes de 02.
+     Los puntos se alinean al centro exacto de cada tarjeta, calculado con la
+     misma formula de la reja (no a 1/6 y 5/6, que se corre unos pixeles).
+     El halo color papel es lo que lo mantiene legible sobre la foto de fondo. */
+  .riel{display:none}
+  @media(min-width:961px){
+    .riel{display:block;position:relative;height:34px;margin-top:-34px}
+    .riel-linea,.riel-punto{position:absolute}
+    .riel-linea{top:16px;left:var(--x1);width:calc(var(--x3) - var(--x1));height:3px;border-radius:3px;
+                background:linear-gradient(90deg,var(--sage),var(--green));
+                box-shadow:0 0 0 4px rgba(246,248,243,.72);
+                transform:scaleX(0);transform-origin:left center;
+                transition:transform .95s var(--spring-suave)}
+    .riel-punto{top:9px;width:17px;height:17px;margin-left:-8.5px;border-radius:50%;
+                background:var(--paper);border:3px solid var(--green);
+                box-shadow:0 0 0 4px rgba(246,248,243,.72);
+                transform:scale(0);transition:transform .45s var(--spring)}
+    .riel-punto:nth-of-type(1){left:var(--x1)}
+    .riel-punto:nth-of-type(2){left:50%}
+    .riel-punto:nth-of-type(3){left:var(--x3)}
+    .js .riel.reveal{transform:none}
+    .js .riel.in .riel-linea{transform:scaleX(1)}
+    .js .riel.in .riel-punto{transform:scale(1)}
+    .js .riel.in .riel-punto:nth-of-type(2){transition-delay:.42s}
+    .js .riel.in .riel-punto:nth-of-type(3){transition-delay:.85s}
+  }
   .tstep{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);overflow:hidden;display:flex;flex-direction:column;transition:transform .45s var(--spring),box-shadow .45s var(--spring)}
   .tstep:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
   .tstep-body{padding:1.7rem 1.6rem 1.1rem}
@@ -303,6 +360,26 @@
   .cinfo>div{min-width:0}
   .cinfo a{display:block;overflow-wrap:anywhere;word-break:break-word;margin-top:.15rem}
   .field{margin-bottom:1.1rem}
+  /* Validacion mientras se escribe, no al enviar: el error aparece junto al
+     campo que lo causa y el chulo confirma que ese campo ya esta bien. */
+  .field-msg{min-height:1.15rem;margin-top:.3rem;font-size:.82rem;font-weight:700;color:#9E2B16;line-height:1.4}
+  .field.valido label::after{content:"";display:inline-block;margin-left:.45rem;width:15px;height:15px;
+        vertical-align:-2px;background:var(--green);
+        -webkit-mask:var(--icono-check) center/contain no-repeat;mask:var(--icono-check) center/contain no-repeat;
+        animation:check-in .35s var(--spring)}
+  .field.valido input,.field.valido textarea{border-color:var(--sage)}
+  .field.invalido input,.field.invalido textarea{border-color:#C97A67}
+  .field.invalido input:focus,.field.invalido textarea:focus{box-shadow:0 0 0 4px rgba(158,43,22,.14)}
+  @keyframes check-in{from{transform:scale(.4);opacity:0}to{transform:none;opacity:1}}
+
+  /* Copiar el correo: un clic en vez de seleccionar a mano en un movil. */
+  .cinfo .copiar{margin-top:.35rem;display:inline-flex;align-items:center;gap:.4rem;
+        background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);color:#EAF5EC;
+        border-radius:100px;padding:.3rem .7rem;font-family:'Nunito',sans-serif;font-weight:700;
+        font-size:.76rem;cursor:pointer;transition:background .2s var(--spring)}
+  .cinfo .copiar:hover{background:rgba(255,255,255,.26)}
+  .cinfo .copiar:active{transform:scale(.94);transition-duration:var(--toque)}
+  .cinfo .copiar[data-hecho]{background:var(--green);border-color:var(--green);color:#fff}
   .field label{display:block;font-weight:700;font-size:.9rem;margin-bottom:.4rem;color:var(--green-deep)}
   .field input,.field textarea{width:100%;padding:.9rem 1.1rem;border:1.5px solid var(--line);border-radius:14px;font-family:inherit;font-size:1rem;background:var(--paper);color:var(--ink);transition:.2s}
   .field input::placeholder,.field textarea::placeholder{color:#66756A}
@@ -356,7 +433,7 @@
   .inv-plus{background:var(--sage-soft);border:1px solid #cfe6d5}
   .inv-plus h3{color:var(--green-deep)}.inv-plus .sign{background:var(--green)}
   .inv-plus li{color:#3f6b4e}
-  .inv-plus li::before{--bullet:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6.5L9.5 17 4 11.5'/%3E%3C/svg%3E");color:var(--green)}
+  .inv-plus li::before{--bullet:var(--icono-check);color:var(--green)}
   .inv-minus{background:#eef1ee;border:1px solid #e1e6e1}
   .inv-minus h3{color:#5c6b62}.inv-minus .sign{background:#9aa89f}
   .inv-minus li{color:#78867e}
@@ -407,7 +484,9 @@
   }
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:.01ms!important}
     .js .reveal{opacity:1;transform:none}
-    .js .env-list li .icn,.js .prem-card .ck .icn{stroke-dashoffset:0}}
+    .js .env-list li .icn,.js .prem-card .ck .icn{stroke-dashoffset:0}
+    .js .riel .riel-linea{transform:scaleX(1)}
+    .js .riel .riel-punto{transform:scale(1)}}
 
   /* Quien pide menos transparencia recibe superficies solidas, no un
      desenfoque mas suave: el desenfoque es justo lo que le molesta. */
@@ -452,6 +531,11 @@
   </symbol>
   <symbol id="icon-status-minus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
     <path d="M5.5 12h13"/>
+  </symbol>
+
+  <symbol id="icon-action-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="9" y="9" width="11.5" height="11.5" rx="2.5"/>
+    <path d="M15 6.5A2.5 2.5 0 0 0 12.5 4h-6A2.5 2.5 0 0 0 4 6.5v6A2.5 2.5 0 0 0 6.5 15"/>
   </symbol>
 
   <symbol id="icon-comm-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
@@ -550,7 +634,7 @@
       <div class="stage">
         <div class="ph p-main"><img src="img/foto-bote-820.webp" srcset="img/foto-bote-520.webp 520w, img/foto-bote-820.webp 820w" sizes="(max-width:960px) 88vw, 560px" alt="Equipo de PBCM navegando el río hacia una comunidad" width="820" height="1093" decoding="async" /></div>
         <div class="ph p-sub"><img src="img/comunidad-1.webp" alt="Reunión comunitaria de PBCM" width="470" height="359" decoding="async" /></div>
-        <div class="chip chip-top"><span class="n">6</span> <span data-i18n="chip_lineas">líneas de acción</span></div>
+        <a href="#lineas" class="chip chip-top"><span class="n">6</span> <span data-i18n="chip_lineas">líneas de acción</span><svg class="icn" width="14" height="14" aria-hidden="true"><use href="#icon-nav-arrow-right"/></svg></a>
       </div>
     </div>
   </div>
@@ -642,6 +726,12 @@
     </div>
   </div>
   <div class="wrap proceso-cards">
+    <div class="riel reveal" aria-hidden="true">
+      <span class="riel-linea"></span>
+      <span class="riel-punto"></span>
+      <span class="riel-punto"></span>
+      <span class="riel-punto"></span>
+    </div>
     <div class="timeline">
       <div class="tstep reveal"><div class="tstep-body"><div class="tstep-top"><div class="node">01</div><h3 data-i18n="step1_h3">Socialización</h3></div><p data-i18n="step1_p">Damos a conocer a la población los trabajos a realizar y el personal requerido para cada actividad.</p></div><img class="tstep-img" src="img/paso-1.webp" alt="" width="476" height="294" loading="lazy" decoding="async" /></div>
       <div class="tstep reveal"><div class="tstep-body"><div class="tstep-top"><div class="node">02</div><h3 data-i18n="step2_h3">Concertación</h3></div><p data-i18n="step2_p">Escuchamos a la comunidad y llegamos a consensos sobre los proyectos de inversión social.</p></div><img class="tstep-img" src="img/paso-2.webp" alt="" width="472" height="294" loading="lazy" decoding="async" /></div>
@@ -780,16 +870,16 @@
         <span class="eyebrow"><span class="dot"></span> <span data-i18n="contact_eyebrow">Contacto</span></span>
         <h2 data-i18n="contact_h2">Hablemos</h2>
         <p data-i18n="contact_p">Estamos para escucharte. Escríbenos y con gusto te contamos más sobre el programa.</p>
-        <div class="cinfo"><span class="ic"><svg class="icn" width="20" height="20" aria-hidden="true"><use href="#icon-comm-mail"/></svg></span><div><small data-i18n="ci_correo">Correo</small><a href="mailto:administration@pbcmcolombia.com">administration@pbcmcolombia.com</a></div></div>
+        <div class="cinfo"><span class="ic"><svg class="icn" width="20" height="20" aria-hidden="true"><use href="#icon-comm-mail"/></svg></span><div><small data-i18n="ci_correo">Correo</small><a href="mailto:administration@pbcmcolombia.com">administration@pbcmcolombia.com</a><button type="button" class="copiar" id="btnCopiar" data-correo="administration@pbcmcolombia.com" data-i18n-aria="a11y_copiar" aria-label="Copiar el correo"><svg class="icn" width="14" height="14" aria-hidden="true"><use href="#icon-action-copy"/></svg><span data-i18n="copiar">Copiar</span></button></div></div>
         <div class="cinfo"><span class="ic"><svg class="icn" width="20" height="20" aria-hidden="true"><use href="#icon-comm-phone"/></svg></span><div><small data-i18n="ci_wa">WhatsApp / Teléfono</small><a href="tel:+18594627602">+1 859 462 7602</a><a href="https://wa.me/19109646805">+1 910 964 6805</a></div></div>
         <div class="cinfo"><span class="ic"><svg class="icn" width="20" height="20" aria-hidden="true"><use href="#icon-content-map-pin"/></svg></span><div><small data-i18n="ci_ubi">Sede</small><span data-i18n="ci_ubi_val">Estados Unidos · inversión destinada a Colombia</span></div></div>
       </div>
       <form class="contact-form" id="contactForm" name="contacto" method="POST" action="/gracias.html" data-netlify="true" netlify-honeypot="bot-field">
         <p class="solo-robots" aria-hidden="true"><label>No llenar <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
         <input type="hidden" name="idioma" id="formLang" value="es" />
-        <div class="field"><label for="nombre" data-i18n="lbl_nombre">Nombre</label><input id="nombre" name="nombre" type="text" autocomplete="name" data-i18n-ph="ph_nombre" placeholder="Tu nombre completo" required /></div>
-        <div class="field"><label for="correo" data-i18n="lbl_correo">Correo</label><input id="correo" name="correo" type="email" autocomplete="email" data-i18n-ph="ph_correo" placeholder="tucorreo@ejemplo.com" required /></div>
-        <div class="field"><label for="mensaje" data-i18n="lbl_mensaje">Mensaje</label><textarea id="mensaje" name="mensaje" data-i18n-ph="ph_mensaje" placeholder="Cuéntanos en qué podemos ayudarte…" required></textarea></div>
+        <div class="field"><label for="nombre" data-i18n="lbl_nombre">Nombre</label><input id="nombre" name="nombre" type="text" autocomplete="name" aria-describedby="msg-nombre" data-i18n-ph="ph_nombre" placeholder="Tu nombre completo" required /><p class="field-msg" id="msg-nombre"></p></div>
+        <div class="field"><label for="correo" data-i18n="lbl_correo">Correo</label><input id="correo" name="correo" type="email" autocomplete="email" aria-describedby="msg-correo" data-i18n-ph="ph_correo" placeholder="tucorreo@ejemplo.com" required /><p class="field-msg" id="msg-correo"></p></div>
+        <div class="field"><label for="mensaje" data-i18n="lbl_mensaje">Mensaje</label><textarea id="mensaje" name="mensaje" aria-describedby="msg-mensaje" data-i18n-ph="ph_mensaje" placeholder="Cuéntanos en qué podemos ayudarte…" required></textarea><p class="field-msg" id="msg-mensaje"></p></div>
         <button type="submit" class="btn btn-primary" id="formBtn" style="width:100%;justify-content:center" data-i18n="btn_enviar">Enviar mensaje</button>
         <p id="formNote" class="form-note" role="status" aria-live="polite"></p>
       </form>
@@ -826,6 +916,8 @@
       nav_programa:"El programa", nav_lineas:"Líneas de acción", nav_ambiente:"Medio ambiente", nav_comunidad:"Comunidad", nav_contacto:"Contacto",
       cta_contact:"Contáctanos",
       skip:"Saltar al contenido",
+      err_requerido:"Este campo hace falta.", err_correo:"Revisa el correo: parece que le falta algo.",
+      copiar:"Copiar", copiado:"¡Copiado!", a11y_copiar:"Copiar el correo al portapapeles",
       meta_title:"PBCM · Beneficio a las Comunidades y Medio Ambiente", meta_desc:"PBCM, Programa de Beneficio a las Comunidades y Medio Ambiente: inversión social y ambiental concertada con las comunidades rurales de Colombia. Educación, vivienda, deporte, vías, agua y reforestación.",
       a11y_menu:"Abrir el menú", a11y_prev:"Foto anterior", a11y_next:"Foto siguiente",
       a11y_gallery:"Galería de fotos", a11y_dots:"Ir a una foto", a11y_dot:"Ir a la foto %n",
@@ -885,6 +977,8 @@
       nav_programa:"The program", nav_lineas:"Focus areas", nav_ambiente:"Environment", nav_comunidad:"Community", nav_contacto:"Contact",
       cta_contact:"Contact us",
       skip:"Skip to content",
+      err_requerido:"This field is required.", err_correo:"Please check the email address: something looks missing.",
+      copiar:"Copy", copiado:"Copied!", a11y_copiar:"Copy the email address",
       meta_title:"PBCM · Community Benefit and Environment Programme", meta_desc:"PBCM, the Community Benefit and Environment Programme: social and environmental investment agreed with rural communities in Colombia. Education, housing, sport, roads, water and reforestation.",
       a11y_menu:"Open menu", a11y_prev:"Previous photo", a11y_next:"Next photo",
       a11y_gallery:"Photo gallery", a11y_dots:"Go to a photo", a11y_dot:"Go to photo %n",
@@ -944,6 +1038,8 @@
       nav_programa:"Le programme", nav_lineas:"Domaines d'action", nav_ambiente:"Environnement", nav_comunidad:"Communauté", nav_contacto:"Contact",
       cta_contact:"Contactez-nous",
       skip:"Aller au contenu",
+      err_requerido:"Ce champ est obligatoire.", err_correo:"Vérifiez l’adresse e-mail : il semble manquer quelque chose.",
+      copiar:"Copier", copiado:"Copié !", a11y_copiar:"Copier l’adresse e-mail",
       meta_title:"PBCM · Programme de Bénéfice aux Communautés et à l’Environnement", meta_desc:"PBCM, Programme de Bénéfice aux Communautés et à l’Environnement : investissement social et environnemental concerté avec les communautés rurales de Colombie. Éducation, logement, sport, routes, eau et reforestation.",
       a11y_menu:"Ouvrir le menu", a11y_prev:"Photo précédente", a11y_next:"Photo suivante",
       a11y_gallery:"Galerie de photos", a11y_dots:"Aller à une photo", a11y_dot:"Aller à la photo %n",
@@ -1098,6 +1194,97 @@
       .catch(() => nota('form_error', 'error'))
       .finally(() => { formBtn.disabled = false; });
   });
+
+  // ---- Wayfinding: la navegacion marca la seccion en la que va el visitante ----
+  (function(){
+    const enlaces = [...document.querySelectorAll('.nav-links a[href^="#"]')];
+    const deSeccion = new Map();
+    enlaces.forEach(a => {
+      const s = document.querySelector(a.getAttribute('href'));
+      if(s) deSeccion.set(s, a);
+    });
+    if(!deSeccion.size) return;
+    // Una banda delgada en el centro de la pantalla: la seccion que la cruza
+    // es la que el visitante esta mirando.
+    const obs = new IntersectionObserver(entradas => {
+      entradas.forEach(e => {
+        if(!e.isIntersecting) return;
+        enlaces.forEach(a => a.removeAttribute('aria-current'));
+        const a = deSeccion.get(e.target);
+        if(a) a.setAttribute('aria-current', 'true');
+      });
+    }, {rootMargin: '-45% 0px -50% 0px'});
+    deSeccion.forEach((_, s) => obs.observe(s));
+  })();
+
+  // ---- Validacion en linea ----
+  // Se valida mientras se escribe, no al enviar, y solo despues de que el
+  // visitante haya salido del campo una vez: marcar en rojo lo que todavia
+  // se esta escribiendo es hostil.
+  (function(){
+    if(!contactForm) return;
+    const campos = [...contactForm.querySelectorAll('input[required],textarea[required]')];
+    const tocado = new WeakSet();
+
+    function revisar(campo){
+      const caja = campo.closest('.field');
+      const msg = caja.querySelector('.field-msg');
+      const dic = I18N[curLang] || I18N.es;
+      caja.classList.remove('valido', 'invalido');
+      campo.removeAttribute('aria-invalid');
+      if(msg) msg.textContent = '';
+      if(!campo.value.trim()){
+        if(!tocado.has(campo)) return;
+        caja.classList.add('invalido');
+        campo.setAttribute('aria-invalid', 'true');
+        if(msg) msg.textContent = dic.err_requerido;
+        return;
+      }
+      if(!campo.checkValidity()){
+        if(!tocado.has(campo)) return;
+        caja.classList.add('invalido');
+        campo.setAttribute('aria-invalid', 'true');
+        if(msg) msg.textContent = campo.type === 'email' ? dic.err_correo : dic.err_requerido;
+        return;
+      }
+      caja.classList.add('valido');
+    }
+
+    campos.forEach(campo => {
+      campo.addEventListener('blur', () => { tocado.add(campo); revisar(campo); });
+      campo.addEventListener('input', () => revisar(campo));
+    });
+    contactForm.addEventListener('reset', () => {
+      campos.forEach(c => {
+        const caja = c.closest('.field');
+        caja.classList.remove('valido', 'invalido');
+        c.removeAttribute('aria-invalid');
+        const m = caja.querySelector('.field-msg');
+        if(m) m.textContent = '';
+      });
+    });
+  })();
+
+  // ---- Copiar el correo ----
+  (function(){
+    const boton = document.getElementById('btnCopiar');
+    if(!boton || !navigator.clipboard) return;
+    const etiqueta = boton.querySelector('[data-i18n]');
+    let reloj = null;
+    boton.addEventListener('click', () => {
+      navigator.clipboard.writeText(boton.dataset.correo).then(() => {
+        const dic = I18N[curLang] || I18N.es;
+        boton.dataset.hecho = '1';
+        etiqueta.textContent = dic.copiado;
+        clearTimeout(reloj);
+        // Vuelve solo: no deja al boton mintiendo "copiado" para siempre.
+        reloj = setTimeout(() => {
+          delete boton.dataset.hecho;
+          etiqueta.textContent = (I18N[curLang] || I18N.es).copiar;
+        }, 2200);
+      }).catch(() => {});
+    });
+  })();
 
   // ---- Carrusel de fotos ----
   // Se arrastra con el raton siguiendo el puntero 1:1, y al soltar continua con
