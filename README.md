@@ -21,9 +21,10 @@ Abre en el idioma del navegador del visitante; si elige otro, se recuerda.
 | Archivo / carpeta | Qué es |
 |---|---|
 | **`index.html`** | **El sitio completo.** Textos, traducciones, diseño y comportamiento, todo aquí. Es el único archivo que se edita para cambiar la página. |
-| `img/` | Las imágenes que el sitio carga (`.webp`), el favicon y las infografías. |
+| `img/` | Las imágenes que el sitio carga (`.webp`) y el favicon. |
 | `img/originales/` | Las fotos originales, sin tocar. De aquí salen los `.webp`. |
 | `img/originales/sin-usar/` | Material que hoy no aparece en la página, guardado por si se necesita. |
+| `_fuentes/` | **No se publica.** Documentos internos que no deben salir en el sitio. Está en `.gitignore`, así que Netlify nunca los ve. |
 | `gracias.html` | Página que ve quien envía el formulario. |
 | `404.html` | Página de "no encontrado". |
 | `netlify.toml` | Configuración de publicación: cabeceras de seguridad y caché. |
@@ -153,9 +154,11 @@ dentro. Sirve para adjuntarlo en un correo o abrirlo sin internet.
 
 - **Fotos del carrusel.** Son imágenes de referencia de jornadas de
   socialización, no fotos propias de PBCM. Conviene reemplazarlas.
-- **Infografía "Resultado de mesas".** El texto de la página y el JPG
-  original no coinciden en tres puntos (ver la sección Enfoque). Definir
-  cuál es la versión válida.
+- **Sección "Resultado de mesas".** El texto que muestra la página y el
+  documento original de las mesas (en `_fuentes/`, fuera del sitio) no
+  coinciden en tres puntos. Definir cuál es la versión válida. El documento
+  original **no se publica**: la página cuenta el resultado con sus propias
+  palabras.
 
 ---
 

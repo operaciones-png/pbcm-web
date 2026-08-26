@@ -2,6 +2,9 @@
 # El sitio es HTML estatico: no hay nada que compilar, Netlify solo publica
 # los archivos del repositorio tal como estan.
 
+# OJO: se publica TODO lo que este versionado en el repositorio, aunque
+# ninguna pagina lo enlace. Un archivo en el repo es una URL publica.
+# Los documentos que no deben salir van en _fuentes/, que esta en .gitignore.
 [build]
   publish = "."
   command = ""

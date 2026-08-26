@@ -83,9 +83,8 @@ PLAN = {
     "logo-lockup.png": [472],
 }
 
-# Las infografias (img/infografia*.jpg) no pasan por aqui a proposito: son el
-# documento original que se abre desde la seccion "Enfoque", no imagenes que
-# la pagina cargue. Viven directamente en img/.
+# Lo que no aparezca en este PLAN no se genera, y lo que no este en img/ no se
+# publica. Los documentos internos van en _fuentes/, que esta en .gitignore.
 
 
 def target_name(src, width, multiple):
