@@ -4,3 +4,10 @@ Thumbs.db
 desktop.ini
 *.tmp
 *.bak
+
+# Copia portatil generada por tools/build_standalone.py
+dist/
+
+# Documentos internos que NO deben publicarse en el sitio.
+# Netlify despliega lo que esta en git: si no esta versionado, no se sube.
+_fuentes/
