@@ -39,10 +39,7 @@
      consentimiento. Solo cuenta visitas, de donde vienen y que secciones se
      ven; no identifica a nadie ni sigue a la gente por otros sitios.
 
-     PARA CAMBIAR DE HERRAMIENTA hay que tocar dos sitios, y los dos:
-       1. la etiqueta script de aqui abajo
-       2. script-src y connect-src en la CSP de netlify.toml
-     Si se cambia solo uno, deja de medir sin dar ningun error visible. -->
+     PARA CAMBIAR DE HERRAMIENTA basta con cambiar la etiqueta script de aqui abajo. -->
 <script defer data-domain="pbcmcolombia.com" src="https://plausible.io/js/script.outbound-links.js"></script>
 
 <!-- La imagen del hero es lo primero grande que se ve: se pide cuanto antes -->
@@ -862,9 +859,13 @@
         <div class="cinfo"><span class="ic"><svg class="icn" width="20" height="20" aria-hidden="true"><use href="#icon-comm-phone"/></svg></span><div><small data-i18n="ci_wa">WhatsApp / Phone</small><a href="tel:+18594627602">+1 859 462 7602</a><a href="https://wa.me/19109646805">+1 910 964 6805</a></div></div>
         <div class="cinfo"><span class="ic"><svg class="icn" width="20" height="20" aria-hidden="true"><use href="#icon-content-map-pin"/></svg></span><div><small data-i18n="ci_ubi">Headquarters</small><span data-i18n="ci_ubi_val">United States · investment directed to Colombia</span></div></div>
       </div>
-      <form class="contact-form" id="contactForm" name="contacto" method="POST" action="/gracias.html" data-netlify="true" netlify-honeypot="bot-field">
-        <p class="solo-robots" aria-hidden="true"><label>No llenar <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+      <form class="contact-form" id="contactForm" name="contacto" method="POST" action="https://formsubmit.co/administration@pbcmcolombia.com">
+        <p class="solo-robots" aria-hidden="true"><label>No llenar <input name="_honey" tabindex="-1" autocomplete="off" /></label></p>
         <input type="hidden" name="idioma" id="formLang" value="en" />
+        <input type="hidden" name="_subject" value="Contacto desde pbcmcolombia.com" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_next" value="https://pbcmcolombia.com/gracias.html" />
         <div class="field"><label for="nombre" data-i18n="lbl_nombre">Name</label><input id="nombre" name="nombre" type="text" autocomplete="name" aria-describedby="msg-nombre" data-i18n-ph="ph_nombre" placeholder="Your full name" required /><p class="field-msg" id="msg-nombre"></p></div>
         <div class="field"><label for="correo" data-i18n="lbl_correo">Email</label><input id="correo" name="correo" type="email" autocomplete="email" aria-describedby="msg-correo" data-i18n-ph="ph_correo" placeholder="youremail@example.com" required /><p class="field-msg" id="msg-correo"></p></div>
         <div class="field"><label for="mensaje" data-i18n="lbl_mensaje">Message</label><textarea id="mensaje" name="mensaje" aria-describedby="msg-mensaje" data-i18n-ph="ph_mensaje" placeholder="Tell us how we can help…" required></textarea><p class="field-msg" id="msg-mensaje"></p></div>
@@ -1139,10 +1140,12 @@
   }));
   const io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: .1 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-  // Envio del formulario. El POST lo recibe Netlify Forms (data-netlify="true")
-  // y llega al correo configurado en el panel de Netlify. Se envia sin recargar
-  // para que el visitante no pierda la pagina; si el JS falla, el submit normal
-  // del formulario lleva a /gracias.html y el mensaje se registra igual.
+  // Envio del formulario. El POST lo recibe FormSubmit (formsubmit.co) y llega
+  // al correo que aparece en el action del <form>. Con JS se envia por AJAX sin
+  // recargar la pagina; si el JS falla, el submit normal del formulario lo envia
+  // igual y FormSubmit redirige a gracias.html (campo oculto _next).
+  // OJO: la primera vez, FormSubmit manda un correo de ACTIVACION a ese buzon;
+  // hasta confirmarlo, los mensajes no se entregan.
   const contactForm = document.getElementById('contactForm');
   const formNote = document.getElementById('formNote');
   const formBtn = document.getElementById('formBtn');
@@ -1155,9 +1158,9 @@
     if(!contactForm.reportValidity()) return;
     formBtn.disabled = true;
     nota('form_sending', '');
-    fetch(contactForm.getAttribute('action'), {
+    fetch(contactForm.getAttribute('action').replace('formsubmit.co/', 'formsubmit.co/ajax/'), {
       method: 'POST',
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      headers: {'Content-Type': 'application/x-www-form-urlencoded', 'Accept': 'application/json'},
       body: new URLSearchParams(new FormData(contactForm)).toString()
     })
       .then(r => {

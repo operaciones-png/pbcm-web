@@ -25,10 +25,10 @@ elige otro, se recuerda para sus próximas visitas.
 | `img/` | Las imágenes que el sitio carga (`.webp`) y el favicon. |
 | `img/originales/` | Las fotos originales, sin tocar. De aquí salen los `.webp`. |
 | `img/originales/sin-usar/` | Material que hoy no aparece en la página, guardado por si se necesita. |
-| `_fuentes/` | **No se publica.** Documentos internos que no deben salir en el sitio. Está en `.gitignore`, así que Netlify nunca los ve. |
+| `_fuentes/` | **No se publica.** Documentos internos que no deben salir en el sitio. Está en `.gitignore`, así que nunca sale del computador. |
 | `gracias.html` | Página que ve quien envía el formulario. |
 | `404.html` | Página de "no encontrado". |
-| `netlify.toml` | Configuración de publicación: cabeceras de seguridad y caché. |
+| `.github/workflows/deploy.yml` | El robot que publica la página en GitHub Pages cada vez que hay un cambio en `main`. |
 | `robots.txt`, `sitemap.xml` | Para los buscadores. |
 | `tools/optimize_images.py` | Genera los `.webp` a partir de `img/originales/`. |
 | `tools/build_standalone.py` | Genera una copia del sitio en **un solo archivo**, para enviar por correo o ver sin conexión. No es lo que se publica. |
@@ -69,6 +69,21 @@ esa parte de la página se queda en blanco en ese idioma.
 El texto que está escrito directamente en el HTML (fuera de `I18N`) es el que se ve
 mientras carga el JavaScript, el que lee un buscador que no ejecuta scripts, y el
 único que queda si el JavaScript falla. **Mantenlo siempre igual al de `en:`.**
+
+---
+
+## 📩 Formulario de contacto
+
+Los mensajes llegan a **administration@pbcmcolombia.com** a través de
+[FormSubmit](https://formsubmit.co) (gratis, sin cuenta, funciona en GitHub Pages).
+Tiene filtro anti-spam (campo oculto) y, al enviar, muestra `gracias.html`.
+
+> ⚠️ **La primera vez** que alguien envíe el formulario, FormSubmit manda un correo de
+> **activación** a administration@pbcmcolombia.com. Hay que abrirlo y confirmar; hasta
+> entonces los mensajes no se entregan.
+
+Para cambiar el correo de destino: buscar `formsubmit.co/` en `index.html` y poner el
+correo nuevo (habrá que activarlo de nuevo).
 
 ---
 
@@ -139,24 +154,22 @@ más estrecho que hay que soportar.
 
 ## 🚀 Publicar
 
-El sitio está en **Netlify**, con el dominio `pbcmcolombia.com`.
+El sitio se publica en **GitHub Pages** (el repositorio es público), con el dominio `pbcmcolombia.com`.
 
-**Cada cambio que entra a la rama `main` se publica automáticamente.** No hay que
-arrastrar archivos ni hacer nada manual.
+**Cada cambio que entra a la rama `main` se publica automáticamente** (1–2 minutos). No hay
+que arrastrar archivos ni hacer nada manual. El robot es `.github/workflows/deploy.yml`:
+copia **solo lo que la página necesita** (`index.html`, `gracias.html`, `404.html`, `img/`
+sin los originales, `robots.txt`, `sitemap.xml`) y lo publica. `docs/`, `tools/`, el README
+y `img/originales/` **no se publican** en el sitio.
+
+Para ver cómo va una publicación: pestaña **Actions** del repositorio (✅ verde = publicado).
 
 <details>
-<summary><b>Configuración inicial en Netlify</b> (una sola vez, requiere acceso al panel)</summary>
+<summary><b>Dominio</b> (configurado una sola vez)</summary>
 
-1. Netlify → el sitio → **Site configuration → Build & deploy → Continuous deployment**
-2. **Link repository** → GitHub → `operaciones-png/pbcm-web`
-3. Rama a publicar: `main`. Build command: *vacío*. Publish directory: `.`
-   (`netlify.toml` ya lo declara, debería llenarse solo.)
-4. **Forms** → activar la detección de formularios si no está activa.
-5. **Forms → Form notifications → Add notification → Email notification**:
-   poner el correo que debe recibir los mensajes de contacto.
-
-Hasta que se haga el paso 5, los mensajes quedan guardados en el panel de
-Netlify (Forms → contacto) pero **nadie recibe aviso por correo**.
+- En GitHub: *Settings → Pages → Custom domain* = `pbcmcolombia.com`, con **Enforce HTTPS**.
+- En Hostinger (DNS de `pbcmcolombia.com`): cuatro registros `A @` → `185.199.108.153`,
+  `185.199.109.153`, `185.199.110.153`, `185.199.111.153`, y `CNAME www` → `operaciones-png.github.io`.
 
 </details>
 
@@ -185,11 +198,8 @@ igual, no se rompe.
 
 </details>
 
-> ⚠️ **Para cambiar de herramienta de medición hay que tocar DOS sitios:**
-> la etiqueta del script en `index.html` **y** `script-src` y `connect-src` en
-> la CSP de `netlify.toml`. Si se cambia solo uno, deja de medir **sin dar
-> ningún error visible**. Lo mismo aplica a cualquier servicio externo que se
-> añada después (una pasarela de pago, un mapa, un vídeo incrustado).
+> Si algún día se cambia de herramienta de medición, basta con cambiar la etiqueta
+> `<script>` de Plausible en `index.html`.
 
 ---
 

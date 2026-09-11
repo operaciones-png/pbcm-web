@@ -1,0 +1,50 @@
+name: Publicar sitio (GitHub Pages)
+
+# Cada cambio que entra a main se publica solo en GitHub Pages (pbcmcolombia.com).
+# Se publica SOLO lo que la pagina necesita: index.html, gracias.html, 404.html,
+# img/ (sin los originales), robots.txt y sitemap.xml. docs/, tools/, el README
+# y img/originales/ no salen al sitio.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Preparar solo lo que la pagina necesita
+        run: |
+          mkdir -p _site/img
+          cp index.html gracias.html 404.html robots.txt sitemap.xml _site/
+          find img -maxdepth 1 -type f -exec cp {} _site/img/ \;
+          touch _site/.nojekyll
+          echo "Archivos a publicar: $(find _site -type f | wc -l)"
+
+      - name: Configurar Pages
+        uses: actions/configure-pages@v5
+
+      - name: Empaquetar
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Publicar
+        id: deploy
+        uses: actions/deploy-pages@v4
